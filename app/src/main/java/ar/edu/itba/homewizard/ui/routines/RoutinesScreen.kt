@@ -1,4 +1,4 @@
-package ar.edu.itba.homewizard
+package ar.edu.itba.homewizard.ui.routines
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,9 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
+import ar.edu.itba.homewizard.R
 
 @Composable
-fun SecondScreen() {
+fun RoutinesScreen() {
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

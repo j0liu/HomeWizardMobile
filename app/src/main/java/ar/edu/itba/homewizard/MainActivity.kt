@@ -13,6 +13,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ar.edu.itba.homewizard.ui.theme.HomeWizardMobileTheme
+import ar.edu.itba.homewizard.ui.Screen
+
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -34,9 +36,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BottomBar(navController: NavController) {
     val items = listOf(
-        Screen.FirstScreen,
-        Screen.SecondScreen,
-        Screen.ThirdScreen
+        Screen.DevicesScreen,
+        Screen.RoutinesScreen,
+        Screen.SettingsScreen
     )
 
     BottomNavigation {

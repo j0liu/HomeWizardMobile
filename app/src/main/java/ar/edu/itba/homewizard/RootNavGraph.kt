@@ -3,21 +3,25 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ar.edu.itba.homewizard.ui.devices.DevicesScreen
+import ar.edu.itba.homewizard.ui.routines.RoutinesScreen
+import ar.edu.itba.homewizard.ui.Screen
+import ar.edu.itba.homewizard.ui.settings.SettingsScreen
 
 @Composable
 fun RootNavGraph(navController: NavHostController) {
     NavHost(
         navController = navController,
-        startDestination = Screen.FirstScreen.route
+        startDestination = Screen.DevicesScreen.route
     ) {
-        composable(Screen.FirstScreen.route) {
-            FirstScreen()
+        composable(Screen.DevicesScreen.route) {
+            DevicesScreen()
         }
-        composable(Screen.SecondScreen.route) {
-            SecondScreen()
+        composable(Screen.RoutinesScreen.route) {
+            RoutinesScreen()
         }
-        composable(Screen.ThirdScreen.route) {
-            ThirdScreen()
+        composable(Screen.SettingsScreen.route) {
+            SettingsScreen()
         }
     }
 }
