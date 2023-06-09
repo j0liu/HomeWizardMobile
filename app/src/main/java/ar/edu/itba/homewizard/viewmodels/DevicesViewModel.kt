@@ -21,4 +21,8 @@ class DevicesViewModel : ViewModel() {
         testSet.add(Device("1", "horno garage", DeviceType("1", "horno"), {}))
         _uiState.value = DevicesUiState(devices = testSet)
     }
+
+    fun setCurrentDevice(device : Device) {
+        _uiState.value = DevicesUiState(devices = testSet, currentDevice = device)
+    }
 }
