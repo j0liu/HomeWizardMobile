@@ -13,6 +13,9 @@ import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.material.BottomSheetScaffold
 import ar.edu.itba.homewizard.ui.theme.*
+import ar.edu.itba.homewizard.ui.devices.refrigerator.RefrigeratorInfo
+import ar.edu.itba.homewizard.ui.theme.Background
+import ar.edu.itba.homewizard.ui.theme.Terciary
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -36,7 +39,8 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     devicesUiState.currentDevice?.let { Text(it.name) }
-                    ACInfo()
+//                    LampInfo()
+                    RefrigeratorInfo()
                 }
             }) {
             // app UI
