@@ -21,6 +21,7 @@ import ar.edu.itba.homewizard.ui.theme.lightSurface
 
 @Composable
 fun CustomSlider(
+    modifier: Modifier = Modifier,
     title: String,
     value: Float,
     onValueChange: (Float) -> Unit,
@@ -29,12 +30,10 @@ fun CustomSlider(
     onValueChangeFinished: () -> Unit = {},
     unit: String,
 ) {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
+    Column(modifier = modifier) {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.height(20.dp)
+            modifier = Modifier.height(20.dp).fillMaxWidth()
         ) {
             Text(
                 text = title,
@@ -47,32 +46,28 @@ fun CustomSlider(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Slider(
-                    modifier = Modifier
-                        .width(280.dp)
-                        .padding(end = 4.dp),
-                    value = value,
-                    onValueChange = onValueChange,
-                    valueRange = valueRange,
-                    steps = steps,
-                    onValueChangeFinished = onValueChangeFinished,
-                    colors = SliderDefaults.colors(
-                        thumbColor = lightSurface,
-                        activeTrackColor = lightSurface,
-                        inactiveTrackColor = Terciary,
-                    )
+            Slider(
+                modifier = Modifier
+                    .width(315.dp),
+                value = value,
+                onValueChange = onValueChange,
+                valueRange = valueRange,
+                steps = steps,
+                onValueChangeFinished = onValueChangeFinished,
+                colors = SliderDefaults.colors(
+                    thumbColor = lightSurface,
+                    activeTrackColor = lightSurface,
+                    inactiveTrackColor = Terciary,
                 )
-                Icon(
-                    modifier = Modifier
-                        .padding(end = 12.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.baseline_thermostat_24),
-                    contentDescription = "content description",
-                    tint = lightSurface
-                )
-            }
+            )
+            Icon(
+                modifier = Modifier,
+                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_thermostat_24),
+                contentDescription = "content description",
+                tint = lightSurface
+            )
             Text(
-                modifier = Modifier.width(40.dp),
+                modifier = Modifier.fillMaxWidth(),
                 text = "${value.toInt()}${unit}",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
