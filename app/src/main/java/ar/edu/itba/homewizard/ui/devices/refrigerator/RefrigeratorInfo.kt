@@ -36,7 +36,7 @@ fun RefrigeratorInfo() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Row(modifier = Modifier.padding(20.dp)) {
+        Row(modifier = Modifier.padding(20.dp), horizontalArrangement = Arrangement.Center) {
             CustomSlider(
                 value = fridgeTemperature,
                 onValueChange = { fridgeTemperature = it },
@@ -47,7 +47,7 @@ fun RefrigeratorInfo() {
                 unit = "°"
             )
         }
-        Row(modifier = Modifier.padding(bottom = 20.dp)){
+        Row(modifier = Modifier.padding(bottom = 20.dp), horizontalArrangement = Arrangement.Center){
             CustomSlider(
                 value = freezerTemperature,
                 onValueChange = { freezerTemperature = it },

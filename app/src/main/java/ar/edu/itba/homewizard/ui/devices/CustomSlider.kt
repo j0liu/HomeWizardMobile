@@ -31,25 +31,30 @@ fun CustomSlider(
         ) {
             Text(text = title) // (1)
         }
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            Slider(
-                modifier = Modifier
-                    .width(280.dp)
-                    .padding(end = 4.dp),
-                value = value,
-                onValueChange = onValueChange,
-                valueRange = valueRange,
-                steps = steps,
-                onValueChangeFinished = onValueChangeFinished
-            )
-            Icon(
-                modifier = Modifier
-                    .padding(end = 12.dp),
-                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_thermostat_24),
-                contentDescription = "content description"
-            )
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Slider(
+                    modifier = Modifier
+                        .width(280.dp)
+                        .padding(end = 4.dp),
+                    value = value,
+                    onValueChange = onValueChange,
+                    valueRange = valueRange,
+                    steps = steps,
+                    onValueChangeFinished = onValueChangeFinished
+                )
+                Icon(
+                    modifier = Modifier
+                        .padding(end = 12.dp),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.baseline_thermostat_24),
+                    contentDescription = "content description"
+                )
+            }
             Text(
-                modifier = Modifier,
+                modifier = Modifier.width(40.dp),
                 text = "${value.toInt()}${unit}"
             )
         }
