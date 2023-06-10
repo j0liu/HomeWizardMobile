@@ -1,4 +1,4 @@
-package ar.edu.itba.homewizard.ui.devices
+package ar.edu.itba.homewizard.ui.devices.lamp
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectDragGestures
