@@ -1,6 +1,7 @@
 package ar.edu.itba.homewizard.ui.devices
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -11,10 +12,11 @@ import ar.edu.itba.homewizard.data.Device
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.material.BottomSheetScaffold
+import ar.edu.itba.homewizard.ui.theme.Background
+import ar.edu.itba.homewizard.ui.theme.Terciary
 
 
 @OptIn(ExperimentalMaterialApi::class)
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
 //    var devices = listOf(Device("1", "horno garage", DeviceType("1", "horno"), {}),Device("2", "aire patio", DeviceType("1", "ac"), {}))
@@ -30,9 +32,12 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
             scaffoldState = scaffoldState,
             sheetContent = {
                 Column (
-                    modifier = Modifier.fillMaxSize()
+                    modifier = Modifier.fillMaxSize().background(Background),
+                    verticalArrangement = Arrangement.Top,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     devicesUiState.currentDevice?.let { Text(it.name) }
+                    LampInfo()
                 }
             }) {
             // app UI
@@ -52,7 +57,6 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
                         }
                     )
                 }
-
                 Button(
                     content = { Text("Add Device") },
                     onClick = { devicesViewModel.addDevice()}
