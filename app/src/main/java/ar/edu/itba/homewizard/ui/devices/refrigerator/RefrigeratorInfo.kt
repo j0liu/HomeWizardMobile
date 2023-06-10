@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.ui.devices.CustomSlider
+import ar.edu.itba.homewizard.ui.devices.CustomToggle
 import ar.edu.itba.homewizard.ui.theme.Background
 import ar.edu.itba.homewizard.ui.theme.Primary
 import ar.edu.itba.homewizard.ui.theme.Surface
@@ -41,7 +42,6 @@ fun RefrigeratorInfo() {
                 value = fridgeTemperature,
                 onValueChange = { fridgeTemperature = it },
                 valueRange = 2f..8f,
-                steps = 6,
                 onValueChangeFinished = { /*TODO*/ },
                 title = "Temperatura heladera",
                 unit = "°"
@@ -52,7 +52,6 @@ fun RefrigeratorInfo() {
                 value = freezerTemperature,
                 onValueChange = { freezerTemperature = it },
                 valueRange = -20f..-8f,
-                steps = 12,
                 onValueChangeFinished = { /*TODO*/ },
                 title = "Temperatura freezer",
                 unit = "°"
@@ -60,35 +59,12 @@ fun RefrigeratorInfo() {
         }
         Row (
             modifier = Modifier
-                .padding(20.dp)
-                .clip(RoundedCornerShape(50.dp))
+                .padding(8.dp)
         ){
             //Toggle button of three states
             var selected by remember { mutableStateOf(0) }
             val options = listOf(R.drawable.mdi_fridge, R.drawable.mdi_beach, R.drawable.mdi_party_popper)
-            options.forEachIndexed { index, icon ->
-                Row(
-                    modifier = Modifier
-                        .width(120.dp)
-                        .height(70.dp)
-                        .background(
-                            color = if (selected == index) Primary else Surface,
-                        )
-                        .pointerInput(Unit) {
-                            detectTapGestures { change ->
-                                selected = index
-                            }
-                        },
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Icon(
-                        modifier = Modifier.size(50.dp),
-                        imageVector = ImageVector.vectorResource(id = icon),
-                        contentDescription = "content description"
-                    )
-                }
-            }
+            CustomToggle(options = options, selected = selected, onSelectedChange = {  selected = it })
 
         }
     }

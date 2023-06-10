@@ -1,4 +1,4 @@
-package ar.edu.itba.homewizard.ui.devices
+package ar.edu.itba.homewizard.ui.devices.ac
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -13,21 +13,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ar.edu.itba.homewizard.viewmodels.LampViewModel
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.ui.devices.CustomToggle
+import ar.edu.itba.homewizard.ui.devices.DropdownButton
 import ar.edu.itba.homewizard.ui.theme.*
 import ar.edu.itba.homewizard.viewmodels.ACViewModel
-import io.mhssn.colorpicker.ColorPicker
-import io.mhssn.colorpicker.ColorPickerType
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -94,38 +91,10 @@ fun ACInfo(acViewModel: ACViewModel = viewModel()) {
                 )
             }
         }
-        Row (
-            modifier = Modifier
-                .padding(14.dp)
-                .clip(RoundedCornerShape(50.dp))
-        ){
-            //Toggle button of three states
-            var selected by remember { mutableStateOf(0) }
-            val options = listOf(R.drawable.baseline_wb_sunny_24, R.drawable.baseline_ac_unit_24, R.drawable.baseline_air_24)
-            options.forEachIndexed { index, icon ->
-                Row(
-                    modifier = Modifier
-                        .background(color = if (selected == index) Background else Surface,)
-                        .height(70.dp)
-                        .width(120.dp)
-                        .pointerInput(Unit) {
-                            detectTapGestures {
-                                selected = index
-                            }
-                        },
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Icon(
-                        modifier = Modifier
-                            .size(50.dp),
-                        imageVector = ImageVector.vectorResource(id = icon),
-//                        tint = if (selected == index) lightSurface else Background,
-                        contentDescription = "content description"
-                    )
-                }
-            }
-        }
+        // TODO: Move to state
+        val options = listOf(R.drawable.baseline_wb_sunny_24, R.drawable.baseline_ac_unit_24, R.drawable.baseline_air_24)
+        var selected by remember { mutableStateOf(0) }
+       CustomToggle(options = options, selected = selected, onSelectedChange = {  selected = it })
         Row(
             Modifier.padding(8.dp)
         ) {
