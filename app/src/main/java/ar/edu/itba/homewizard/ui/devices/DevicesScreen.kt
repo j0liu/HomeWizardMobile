@@ -13,7 +13,7 @@ import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.material.BottomSheetScaffold
 import ar.edu.itba.homewizard.ui.devices.ac.ACInfo
-import ar.edu.itba.homewizard.ui.devices.alarm.AlarmInfo
+import ar.edu.itba.homewizard.ui.devices.oven.OvenInfo
 import ar.edu.itba.homewizard.ui.theme.*
 import ar.edu.itba.homewizard.ui.devices.refrigerator.RefrigeratorInfo
 import ar.edu.itba.homewizard.ui.theme.Background
@@ -36,15 +36,17 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
             scaffoldState = scaffoldState,
             sheetContent = {
                 Column (
-                    modifier = Modifier.fillMaxSize().background(Primary),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Primary),
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     devicesUiState.currentDevice?.let { Text(it.name) }
 //                    LampInfo()
 //                    RefrigeratorInfo()
-//                    ACInfo()
-                    AlarmInfo()
+                    ACInfo()
+//                    AlarmInfo()
                 }
             }) {
             // app UI

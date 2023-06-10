@@ -29,6 +29,7 @@ fun DropdownButton (
     modifier : Modifier = Modifier,
     title : String,
     options : List<String>,
+    heightDropdown : Int = 160,
 ){
     Column (
         verticalArrangement = Arrangement.Center,
@@ -50,18 +51,18 @@ fun DropdownButton (
                 .clip(RoundedCornerShape(50.dp))
                 .background(color = Surface)
                 .height(50.dp)
-                .width(100.dp)
                 .pointerInput(Unit) {
                     detectTapGestures {
                         expanded = true
                     }
                 },
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.SpaceBetween,
+
         ) {
             Text(
                 text = options[selectedIndex.value],
-                fontSize = 20.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.Black,
                 modifier = Modifier
@@ -72,14 +73,14 @@ fun DropdownButton (
                 onDismissRequest = { expanded = false },
                 modifier = Modifier
                     .background(color = Surface)
-                    .height(122.dp)
+                    .height(heightDropdown.dp)
             ) {
                 options.forEachIndexed { index, s ->
                     DropdownMenuItem(onClick = {
                         selectedIndex.value = index
                         expanded = false
                     }) {
-                        Text(text = s)
+                        Text(text = s, textAlign = TextAlign.Center)
                     }
                 }
             }

@@ -30,8 +30,6 @@ import ar.edu.itba.homewizard.viewmodels.ACViewModel
 @Composable
 fun ACInfo(acViewModel: ACViewModel = viewModel()) {
     Column (
-        modifier = Modifier
-            .padding(4.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
@@ -81,26 +79,30 @@ fun ACInfo(acViewModel: ACViewModel = viewModel()) {
             IconButton(
                 onClick = { },
                 modifier = Modifier
-                    .size(110.dp)
+                    .size(100.dp)
                     .background(Surface, shape = CircleShape)
             ) {
                 Icon(
-                    modifier = Modifier.size(70.dp),
+                    modifier = Modifier.size(60.dp),
                     imageVector = ImageVector.vectorResource(id = R.drawable.baseline_power_settings_new_24),
                     contentDescription = "content description"
                 )
             }
         }
         // TODO: Move to state
-        val options = listOf(R.drawable.baseline_wb_sunny_24, R.drawable.baseline_ac_unit_24, R.drawable.baseline_air_24)
+        val options = listOf(R.drawable.white_balance_sunny, R.drawable.snowflake, R.drawable.weather_windy)
         var selected by remember { mutableStateOf(0) }
        CustomToggle(options = options, selected = selected, onSelectedChange = {  selected = it })
         Row(
-            Modifier.padding(8.dp)
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier
+                .padding(10.dp)
+                .fillMaxWidth(),
         ) {
-            DropdownButton(modifier = Modifier, "Velocidad\nventilador", listOf("25", "50", "75", "100"))
-            DropdownButton(modifier = Modifier, "Aspas\nverticales", listOf("Auto", "22", "45", "67", "90"))
-            DropdownButton(modifier = Modifier, "Aspas\nhorizontales", listOf("Auto", "-90", "-45", "0", "45", "90"))
+            DropdownButton(modifier = Modifier, "Velocidad\nventilador", listOf("25", "50", "75", "100"), 118)
+            DropdownButton(modifier = Modifier, "Aspas\nverticales", listOf("Auto", "22", "45", "67", "90"), 118)
+            DropdownButton(modifier = Modifier, "Aspas\nhorizontales", listOf("Auto", "-90", "-45", "0", "45", "90"), 118)
         }
 
     }
