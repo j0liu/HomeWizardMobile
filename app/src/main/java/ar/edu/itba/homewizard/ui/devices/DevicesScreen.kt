@@ -12,8 +12,7 @@ import ar.edu.itba.homewizard.data.Device
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.material.BottomSheetScaffold
-import ar.edu.itba.homewizard.ui.theme.Background
-import ar.edu.itba.homewizard.ui.theme.Terciary
+import ar.edu.itba.homewizard.ui.theme.*
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -32,12 +31,12 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
             scaffoldState = scaffoldState,
             sheetContent = {
                 Column (
-                    modifier = Modifier.fillMaxSize().background(Background),
+                    modifier = Modifier.fillMaxSize().background(Primary),
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     devicesUiState.currentDevice?.let { Text(it.name) }
-                    LampInfo()
+                    ACInfo()
                 }
             }) {
             // app UI
