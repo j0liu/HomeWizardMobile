@@ -1,7 +1,6 @@
 package ar.edu.itba.homewizard.ui.devices.blinds
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
@@ -17,9 +16,7 @@ import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.ui.theme.Primary
 import ar.edu.itba.homewizard.ui.theme.Secondary
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.devices.CustomSlider
-import ar.edu.itba.homewizard.ui.theme.Content
-import ar.edu.itba.homewizard.ui.theme.lightSurface
+import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 
 @Composable
 fun BlindInfo() {

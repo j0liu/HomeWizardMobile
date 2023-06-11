@@ -1,4 +1,4 @@
-package ar.edu.itba.homewizard.ui.devices.alarm
+package ar.edu.itba.homewizard.ui.inputs
 
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.padding

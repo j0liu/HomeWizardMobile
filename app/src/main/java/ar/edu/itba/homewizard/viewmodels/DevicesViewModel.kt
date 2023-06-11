@@ -18,7 +18,13 @@ class DevicesViewModel : ViewModel() {
     //Aca se arma la logica que pide a la api, este llamado actualiza Devices (esta en uiState)
 
     fun addDevice(){ //example
-        testSet.add(Device("1", "horno garage", DeviceType("1", "horno"), {}))
+        testSet.add(Device("1", "horno garage", DeviceType("oven", "horno"), {}))
+        testSet.add(Device("2", "aire", DeviceType("ac", "ho"), {}))
+        testSet.add(Device("3", "persiana", DeviceType("blinds", "ho"), {}))
+        testSet.add(Device("3", "heladera", DeviceType("refrigerator", "ho"), {}))
+        testSet.add(Device("3", "luz", DeviceType("lamp", "ho"), {}))
+        testSet.add(Device("3", "alarma", DeviceType("alarm", "ho"), {}))
+
         _uiState.value = DevicesUiState(devices = testSet)
     }
 

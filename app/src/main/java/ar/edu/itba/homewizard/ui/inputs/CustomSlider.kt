@@ -1,4 +1,4 @@
-package ar.edu.itba.homewizard.ui.devices
+package ar.edu.itba.homewizard.ui.inputs
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon

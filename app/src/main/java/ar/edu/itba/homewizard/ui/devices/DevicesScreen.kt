@@ -1,8 +1,11 @@
 package ar.edu.itba.homewizard.ui.devices
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -12,15 +15,10 @@ import ar.edu.itba.homewizard.data.Device
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.material.BottomSheetScaffold
-import ar.edu.itba.homewizard.ui.devices.ac.ACInfo
-import ar.edu.itba.homewizard.ui.devices.alarm.AlarmInfo
-import ar.edu.itba.homewizard.ui.devices.oven.OvenInfo
-import ar.edu.itba.homewizard.ui.devices.blinds.BlindInfo
+import androidx.compose.ui.unit.dp
+import ar.edu.itba.homewizard.data.DeviceType
 import ar.edu.itba.homewizard.ui.devices.lamp.LampInfo
 import ar.edu.itba.homewizard.ui.theme.*
-import ar.edu.itba.homewizard.ui.devices.refrigerator.RefrigeratorInfo
-import ar.edu.itba.homewizard.ui.theme.Background
-import ar.edu.itba.homewizard.ui.theme.Terciary
 
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -40,23 +38,23 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
             sheetContent = {
                 Column (
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize()  
                         .background(Primary),
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
-                    devicesUiState.currentDevice?.let { Text(it.name) }
-                    LampInfo()
-//                    RefrigeratorInfo()
-//                    ACInfo()
-//                    OvenInfo()
-//                    AlarmInfo()
-//                    BlindInfo()
+                    devicesUiState.currentDevice?.let {
+                        Text(it.name)
+                        DeviceType.infoCards[it.type.id]?.invoke()
+                    }
                 }
             }) {
             // app UI
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .weight(1f)
+                    .padding(bottom = 10.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -65,9 +63,11 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
                     DeviceCard(
                         device = device,
                         onClick = { deviceSelected ->
-                            println("CACACACACA: " + deviceSelected.name)
                             devicesViewModel.setCurrentDevice(deviceSelected)
-                            scope.launch { scaffoldState.bottomSheetState.expand() }
+                            scope.launch {
+                                scaffoldState.bottomSheetState.expand()
+
+                            }
                         }
                     )
                 }

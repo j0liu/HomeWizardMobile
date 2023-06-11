@@ -1,7 +1,6 @@
 package ar.edu.itba.homewizard.ui.devices.oven
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
@@ -14,10 +13,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.devices.CustomSlider
-import ar.edu.itba.homewizard.ui.devices.DropdownButton
+import ar.edu.itba.homewizard.ui.inputs.CustomSlider
+import ar.edu.itba.homewizard.ui.inputs.DropdownButton
 import ar.edu.itba.homewizard.ui.theme.Surface
-import ar.edu.itba.homewizard.viewmodels.ACViewModel
 import ar.edu.itba.homewizard.viewmodels.OvenViewModel
 
 @Composable

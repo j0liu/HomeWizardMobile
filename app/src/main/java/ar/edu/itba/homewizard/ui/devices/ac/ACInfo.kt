@@ -1,10 +1,8 @@
 package ar.edu.itba.homewizard.ui.devices.ac
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -12,17 +10,15 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.devices.CustomToggle
-import ar.edu.itba.homewizard.ui.devices.DropdownButton
+import ar.edu.itba.homewizard.ui.inputs.CustomToggle
+import ar.edu.itba.homewizard.ui.inputs.DropdownButton
 import ar.edu.itba.homewizard.ui.theme.*
 import ar.edu.itba.homewizard.viewmodels.ACViewModel
 

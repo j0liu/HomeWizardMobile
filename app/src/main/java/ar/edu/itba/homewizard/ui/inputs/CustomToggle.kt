@@ -1,4 +1,4 @@
-package ar.edu.itba.homewizard.ui.devices
+package ar.edu.itba.homewizard.ui.inputs
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -14,8 +14,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.theme.Background
 import ar.edu.itba.homewizard.ui.theme.Primary
 import ar.edu.itba.homewizard.ui.theme.Surface
 import ar.edu.itba.homewizard.ui.theme.Terciary

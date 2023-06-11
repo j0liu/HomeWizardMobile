@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.viewmodels.LampViewModel
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.devices.CustomSlider
+import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.ui.theme.Surface
 import io.mhssn.colorpicker.ColorPicker
 import io.mhssn.colorpicker.ColorPickerType

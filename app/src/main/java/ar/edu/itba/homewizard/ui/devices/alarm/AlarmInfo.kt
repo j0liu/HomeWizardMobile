@@ -14,7 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.devices.CustomToggle
+import ar.edu.itba.homewizard.ui.inputs.CustomToggle
+import ar.edu.itba.homewizard.ui.inputs.PasswordInput
 import ar.edu.itba.homewizard.ui.theme.*
 import ar.edu.itba.homewizard.viewmodels.AlarmViewModel
 
