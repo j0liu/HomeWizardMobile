@@ -1,13 +1,13 @@
 package ar.edu.itba.homewizard.data
 
 import androidx.compose.runtime.Composable
+import ar.edu.itba.homewizard.ui.devices.door.DoorInfo
 import ar.edu.itba.homewizard.ui.devices.ac.ACInfo
 import ar.edu.itba.homewizard.ui.devices.alarm.AlarmInfo
 import ar.edu.itba.homewizard.ui.devices.blinds.BlindInfo
 import ar.edu.itba.homewizard.ui.devices.lamp.LampInfo
 import ar.edu.itba.homewizard.ui.devices.oven.OvenInfo
 import ar.edu.itba.homewizard.ui.devices.refrigerator.RefrigeratorInfo
-import java.util.Dictionary
 
 class Device(
     val id: String,
@@ -26,7 +26,8 @@ class DeviceType(var id: String, var name: String){
             "alarm" to { AlarmInfo() },
             "oven" to { OvenInfo() },
             "ac" to { ACInfo() },
-            "blinds" to { BlindInfo() }
+            "blinds" to { BlindInfo() },
+            "door" to { DoorInfo() },
         )
     }
 }

@@ -1,8 +1,7 @@
 package ar.edu.itba.homewizard.viewmodels
 
 import androidx.lifecycle.ViewModel
-import ar.edu.itba.homewizard.ui.devices.DevicesUiState
-import ar.edu.itba.homewizard.ui.devices.DoorUiState
+import ar.edu.itba.homewizard.ui.devices.door.DoorUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

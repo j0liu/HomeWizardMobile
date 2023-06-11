@@ -24,6 +24,7 @@ class DevicesViewModel : ViewModel() {
         testSet.add(Device("3", "heladera", DeviceType("refrigerator", "ho"), {}))
         testSet.add(Device("3", "luz", DeviceType("lamp", "ho"), {}))
         testSet.add(Device("3", "alarma", DeviceType("alarm", "ho"), {}))
+        testSet.add(Device("3", "puerta", DeviceType("door", "ho"), {}))
 
         _uiState.value = DevicesUiState(devices = testSet)
     }
