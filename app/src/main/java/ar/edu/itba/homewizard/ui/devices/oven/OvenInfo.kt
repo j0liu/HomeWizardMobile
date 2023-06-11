@@ -56,7 +56,8 @@ fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
                 valueRange = 90f..230f,
                 onValueChangeFinished = { /*TODO*/ },
                 title = "Temperatura",
-                unit = "°"
+                unit = "°",
+                icon = R.drawable.baseline_thermostat_24
             )
         }
         Row(

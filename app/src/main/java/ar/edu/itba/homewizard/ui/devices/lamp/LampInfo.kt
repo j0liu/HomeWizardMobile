@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.viewmodels.LampViewModel
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.ui.devices.CustomSlider
 import ar.edu.itba.homewizard.ui.theme.Surface
 import io.mhssn.colorpicker.ColorPicker
 import io.mhssn.colorpicker.ColorPickerType
@@ -26,6 +27,7 @@ import io.mhssn.colorpicker.ColorPickerType
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun LampInfo(lampViewModel: LampViewModel = viewModel()) {
+    var lampBrightness by remember { mutableStateOf(2f) }
     Column (
         modifier = Modifier
             .padding(10.dp),
@@ -45,19 +47,14 @@ fun LampInfo(lampViewModel: LampViewModel = viewModel()) {
                 contentDescription = "content description"
             )
         }
-        Slider(
-            value = 0f,
-            onValueChange = { /*TODO*/ },
+        CustomSlider(
+            value = lampBrightness,
+            onValueChange = { lampBrightness = it },
             valueRange = 0f..100f,
-            steps = 100,
-            onValueChangeFinished = { /*TODO*/ }
-        )
-        Slider(
-            value = 0f,
-            onValueChange = { /*TODO*/ },
-            valueRange = 0f..100f,
-            steps = 100,
-            onValueChangeFinished = { /*TODO*/ }
+            onValueChangeFinished = { /*TODO*/ },
+            title = "Intensidad",
+            unit = "",
+            icon = R.drawable.lightbulb_on_10
         )
         ColorPicker (
             type = ColorPickerType.Circle(

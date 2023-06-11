@@ -82,6 +82,7 @@ fun BlindInfo() {
             onValueChangeFinished = { /*TODO*/ },
             title = "Nivel de la persiana",
             unit = "",
+            icon = R.drawable.blinds,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 10.dp)

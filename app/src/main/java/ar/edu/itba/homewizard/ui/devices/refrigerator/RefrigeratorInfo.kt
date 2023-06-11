@@ -34,29 +34,27 @@ fun RefrigeratorInfo() {
 
     Column (
         modifier = Modifier.padding(10.dp).fillMaxHeight(),
-        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Row(modifier = Modifier.padding(20.dp), horizontalArrangement = Arrangement.Center) {
-            CustomSlider(
-                value = fridgeTemperature,
-                onValueChange = { fridgeTemperature = it },
-                valueRange = 2f..8f,
-                onValueChangeFinished = { /*TODO*/ },
-                title = "Temperatura heladera",
-                unit = "°"
-            )
-        }
-        Row(modifier = Modifier.padding(bottom = 20.dp), horizontalArrangement = Arrangement.Center){
-            CustomSlider(
-                value = freezerTemperature,
-                onValueChange = { freezerTemperature = it },
-                valueRange = -20f..-8f,
-                onValueChangeFinished = { /*TODO*/ },
-                title = "Temperatura freezer",
-                unit = "°"
-            )
-        }
+
+        CustomSlider(
+            value = fridgeTemperature,
+            onValueChange = { fridgeTemperature = it },
+            valueRange = 2f..8f,
+            onValueChangeFinished = { /*TODO*/ },
+            title = "Temperatura heladera",
+            unit = "°",
+            icon = R.drawable.thermometer_low
+        )
+        CustomSlider(
+            value = freezerTemperature,
+            onValueChange = { freezerTemperature = it },
+            valueRange = -20f..-8f,
+            onValueChangeFinished = { /*TODO*/ },
+            title = "Temperatura freezer",
+            unit = "°",
+            icon = R.drawable.snowflake_thermometer
+        )
         Row (
             modifier = Modifier
                 .padding(8.dp)

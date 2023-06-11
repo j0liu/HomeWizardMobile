@@ -29,8 +29,10 @@ fun CustomSlider(
     steps: Int = 0,
     onValueChangeFinished: () -> Unit = {},
     unit: String,
+    icon: Int,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier
+        .padding(12.dp)) {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.height(20.dp).fillMaxWidth()
@@ -62,7 +64,7 @@ fun CustomSlider(
             )
             Icon(
                 modifier = Modifier,
-                imageVector = ImageVector.vectorResource(id = R.drawable.baseline_thermostat_24),
+                imageVector = ImageVector.vectorResource(id = icon),
                 contentDescription = "content description",
                 tint = lightSurface
             )
