@@ -46,7 +46,7 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ){
                     devicesUiState.currentDevice?.let { Text(it.name) }
-//                    LampInfo()
+                    LampInfo()
 //                    RefrigeratorInfo()
 //                    ACInfo()
 //                    OvenInfo()

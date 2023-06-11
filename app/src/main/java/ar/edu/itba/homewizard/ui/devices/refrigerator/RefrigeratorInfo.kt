@@ -33,7 +33,7 @@ fun RefrigeratorInfo() {
     var freezerTemperature by remember { mutableStateOf(-8f) }
 
     Column (
-        modifier = Modifier.padding(10.dp).fillMaxHeight(),
+        modifier = Modifier.fillMaxHeight(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
 

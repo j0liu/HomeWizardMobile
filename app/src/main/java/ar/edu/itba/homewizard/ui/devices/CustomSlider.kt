@@ -31,8 +31,11 @@ fun CustomSlider(
     unit: String,
     icon: Int,
 ) {
-    Column(modifier = modifier
-        .padding(12.dp)) {
+    Column(
+        modifier = Modifier
+            .padding(start = 10.dp)
+    )
+    {
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier.height(20.dp).fillMaxWidth()
@@ -46,11 +49,15 @@ fun CustomSlider(
         }
         Row(
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxWidth()
         ) {
             Slider(
                 modifier = Modifier
-                    .width(315.dp),
+//                    .width(315.dp)
+//                    .fillMaxWidth(),
+                    .weight(0.8f),
                 value = value,
                 onValueChange = onValueChange,
                 valueRange = valueRange,
@@ -63,13 +70,16 @@ fun CustomSlider(
                 )
             )
             Icon(
-                modifier = Modifier,
+                modifier = Modifier
+                    .weight(0.1f),
                 imageVector = ImageVector.vectorResource(id = icon),
                 contentDescription = "content description",
                 tint = lightSurface
             )
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .weight(0.1f),
+                maxLines = 1,
                 text = "${value.toInt()}${unit}",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
