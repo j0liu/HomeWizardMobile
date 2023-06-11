@@ -8,6 +8,7 @@ import ar.edu.itba.homewizard.ui.devices.blinds.BlindInfo
 import ar.edu.itba.homewizard.ui.devices.lamp.LampInfo
 import ar.edu.itba.homewizard.ui.devices.oven.OvenInfo
 import ar.edu.itba.homewizard.ui.devices.refrigerator.RefrigeratorInfo
+import ar.edu.itba.homewizard.ui.devices.speaker.SpeakerInfo
 
 class Device(
     val id: String,
@@ -28,6 +29,7 @@ class DeviceType(var id: String, var name: String){
             "ac" to { ACInfo() },
             "blinds" to { BlindInfo() },
             "door" to { DoorInfo() },
+            "speaker" to { SpeakerInfo() },
         )
     }
 }

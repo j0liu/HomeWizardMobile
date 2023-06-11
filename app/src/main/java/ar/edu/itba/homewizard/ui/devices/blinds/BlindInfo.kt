@@ -37,10 +37,7 @@ fun BlindInfo() {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
 
-            // Creating an Outlined Button and setting
-            // the shape attribute to CircleShape
-            // When the Button is clicked, a Toast
-            // message would be displayed
+            // TODO: Componentizar
             OutlinedButton(onClick = {},
                 modifier= Modifier.size(100.dp),
                 shape = RoundedCornerShape(25),

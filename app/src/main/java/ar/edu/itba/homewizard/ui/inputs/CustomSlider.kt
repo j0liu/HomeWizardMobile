@@ -33,6 +33,7 @@ fun CustomSlider(
 ) {
     Column(
         modifier = Modifier
+            .then(modifier)
             .padding(start = 10.dp)
     )
     {
@@ -43,7 +44,6 @@ fun CustomSlider(
             Text(
                 text = title,
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
                 color = lightSurface,
             )
         }
@@ -82,7 +82,6 @@ fun CustomSlider(
                 maxLines = 1,
                 text = "${value.toInt()}${unit}",
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
                 color = lightSurface,
             )
         }
