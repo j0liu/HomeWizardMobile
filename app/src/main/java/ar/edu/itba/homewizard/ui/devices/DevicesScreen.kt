@@ -45,7 +45,7 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
                 ){
                     devicesUiState.currentDevice?.let {
                         Text(it.name)
-                        DeviceType.infoCards[it.type.id]?.invoke()
+                        it.type.infoScreen.invoke()
                     }
                 }
             }) {

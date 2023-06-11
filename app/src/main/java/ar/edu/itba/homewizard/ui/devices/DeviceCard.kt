@@ -13,6 +13,8 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.data.Device
 import ar.edu.itba.homewizard.ui.theme.*
@@ -50,7 +52,7 @@ fun DeviceCard (
                 Icon(
                     modifier = modifier
                         .padding(8.dp),
-                    imageVector = Icons.Filled.Favorite,
+                    imageVector = ImageVector.vectorResource(device.type.icon),
                     contentDescription = null,
                 )
             }
