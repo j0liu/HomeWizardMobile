@@ -33,7 +33,7 @@ class DeviceType(var id: String, var name: String, val infoScreen: ComposableFun
             "ac" to DeviceType("ac", "ac", { ACInfo() }, R.drawable.air_conditioner),
             "blinds" to DeviceType("blinds", "blinds", { BlindInfo() }, R.drawable.blinds ),
             "door" to DeviceType("door", "door", { DoorInfo() }, R.drawable.door_closed),
-            "speaker" to DeviceType("speaker", "speaker", {SpeakerInfo()}, R.drawable.drawable.door_closed)
+            "speaker" to DeviceType("speaker", "speaker", {SpeakerInfo()}, R.drawable.volume_high)
         )
     }
 }
