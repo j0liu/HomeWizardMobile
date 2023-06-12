@@ -22,9 +22,6 @@ import ar.edu.itba.homewizard.data.Routine
 import ar.edu.itba.homewizard.ui.theme.Content
 import ar.edu.itba.homewizard.ui.theme.Surface
 import ar.edu.itba.homewizard.ui.theme.Terciary
-import com.google.android.filament.Box
-
-
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

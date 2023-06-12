@@ -24,7 +24,7 @@ class RoutinesViewModel : ViewModel() {
         testSet.add(Routine("1", "a dormir", arrayOf(
             Action("1", Device("3", "luz",DeviceType.deviceTypes["lamp"]!!, {}), emptyArray(), "a"),
             Action("1", Device("3", "luz", DeviceType.deviceTypes["oven"]!!, {}), emptyArray(), "a")
-        ), "a"),)
+        ), "a"))
         _uiState.value = RoutinesUiState(routines = testSet)
     }
 

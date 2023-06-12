@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.ui.routines
 
+import android.view.Window
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,9 +15,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.zIndex
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.Routine
@@ -31,22 +39,26 @@ fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
 
+
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BottomSheetScaffold(
+            modifier = Modifier.zIndex(10f),
             scaffoldState = scaffoldState,
             sheetContent = {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Primary),
+                        .background(Primary)
+                        .zIndex(10f),
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     routinesUiState.currentRoutine?.let { Text(it.name) }
+                    RoutineInfo()
                 }
             }) {
             // app UI
@@ -65,7 +77,6 @@ fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
                             routinesViewModel.setCurrentRoutine(routineSelected)
                             scope.launch {
                                 scaffoldState.bottomSheetState.expand()
-
                             }
                         }
                     )
