@@ -1,15 +1,18 @@
 package ar.edu.itba.homewizard.data.network
 
-import ar.edu.itba.homewizard.data.network.models.NetworkDeviceList
-import ar.edu.itba.homewizard.data.network.models.NetworkRoutine
-import ar.edu.itba.homewizard.data.network.models.NetworkRoutineList
+import ar.edu.itba.homewizard.data.network.models.*
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface ApiService {
     @GET("/api/devices")
-    suspend fun getDevices(): Response<NetworkDeviceList>
+    suspend fun getDevices(): Response<NetworkResponse<List<NetworkDevice>>>
+
+    //get device by id parameter
+    @GET("/api/devices/{deviceId}")
+    suspend fun getDevice(@Path("deviceId") deviceId: String): Response<NetworkResponse<NetworkDevice>>
 
     @GET("/api/routines")
-    suspend fun getRoutines(): Response<NetworkRoutineList>
+    suspend fun getRoutines(): Response<NetworkResponse<List<NetworkRoutine>>>
 }

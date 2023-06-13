@@ -27,7 +27,6 @@ fun toDevice(): Device {
             meta = this.meta!!
         )
     }
-
 }
 
 data class NetworkDeviceType (
@@ -42,4 +41,3 @@ data class NetworkDeviceType (
         return DeviceType.deviceTypes[this.id]!!
     }
 }
-

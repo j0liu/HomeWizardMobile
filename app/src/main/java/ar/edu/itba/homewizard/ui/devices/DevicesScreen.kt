@@ -23,8 +23,7 @@ import ar.edu.itba.homewizard.ui.theme.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
-//    var devices = listOf(Device("1", "horno garage", DeviceType("1", "horno"), {}),Device("2", "aire patio", DeviceType("1", "ac"), {}))
+fun DevicesScreen(devicesViewModel: DevicesViewModel) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberBottomSheetScaffoldState()
@@ -49,7 +48,6 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
                     }
                 }
             }) {
-            // app UI
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
@@ -58,7 +56,6 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                //                devices.forEach { device -> DeviceCard(device = device )
                 devicesUiState.devices.forEach { device : Device ->
                     DeviceCard(
                         device = device,
@@ -71,10 +68,6 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel = viewModel()) {
                         }
                     )
                 }
-                Button(
-                    content = { Text("Add Device") },
-                    onClick = { devicesViewModel.addDevice()}
-                )
             }
         }
     }
