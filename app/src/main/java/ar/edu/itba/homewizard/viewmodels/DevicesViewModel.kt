@@ -18,7 +18,7 @@ class DevicesViewModel(private val deviceRepository : DeviceRepository ) : ViewM
     private val _uiState = MutableStateFlow(DevicesUiState())
     val uiState : StateFlow<DevicesUiState> = _uiState.asStateFlow()
 
-    var devices : MutableSet<Device> = mutableSetOf<Device>()
+    var devices : MutableSet<Device> = mutableSetOf()
     init {
         viewModelScope.launch {
             runCatching {

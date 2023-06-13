@@ -81,10 +81,7 @@ fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
                         }
                     )
                 }
-                Button(
-                    content = { Text("Add Routine") },
-                    onClick = { routinesViewModel.addRoutine() }
-                )
+                
             }
         }
     }

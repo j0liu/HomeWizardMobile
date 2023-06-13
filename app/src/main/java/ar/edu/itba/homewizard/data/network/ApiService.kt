@@ -15,4 +15,7 @@ interface ApiService {
 
     @GET("/api/routines")
     suspend fun getRoutines(): Response<NetworkResponse<List<NetworkRoutine>>>
+
+    @GET("/api/routines/{routineId}")
+    suspend fun getRoutine(@Path("routineId") routineId: String): Response<NetworkResponse<NetworkRoutine>>
 }

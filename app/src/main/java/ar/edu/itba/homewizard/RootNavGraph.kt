@@ -9,6 +9,7 @@ import ar.edu.itba.homewizard.ui.routines.RoutinesScreen
 import ar.edu.itba.homewizard.ui.Screen
 import ar.edu.itba.homewizard.ui.settings.SettingsScreen
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
+import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 
 @Composable
 fun RootNavGraph(navController: NavHostController) {
@@ -20,7 +21,7 @@ fun RootNavGraph(navController: NavHostController) {
             DevicesScreen(DevicesViewModel((LocalContext.current.applicationContext as HomeWizardApplication).deviceRepository))
         }
         composable(Screen.RoutinesScreen.route) {
-            RoutinesScreen()
+            RoutinesScreen(RoutinesViewModel((LocalContext.current.applicationContext as HomeWizardApplication).routineRepository))
         }
         composable(Screen.SettingsScreen.route) {
             SettingsScreen()
