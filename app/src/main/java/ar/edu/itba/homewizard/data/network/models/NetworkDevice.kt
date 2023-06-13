@@ -1,6 +1,9 @@
 package ar.edu.itba.homewizard.data.network.models
 
+import ar.edu.itba.homewizard.data.Device
+import ar.edu.itba.homewizard.data.DeviceType
 import com.google.gson.annotations.SerializedName
+
 
 data class NetworkDevice (
     @SerializedName("id")
@@ -9,9 +12,23 @@ data class NetworkDevice (
     var name: String? = null,
     @SerializedName("type")
     var type: NetworkDeviceType? = null,
+    @SerializedName("state")
+    var state: Any? = null,
     @SerializedName("meta")
     var meta: Any? = null
-)
+){
+    //cast networkdevice to device
+fun toDevice(): Device {
+        return Device(
+            id = this.id!!,
+            name = this.name!!,
+            type = this.type!!.toDeviceType(),
+            state = this.state,
+            meta = this.meta!!
+        )
+    }
+
+}
 
 data class NetworkDeviceType (
     @SerializedName("id")
@@ -20,4 +37,9 @@ data class NetworkDeviceType (
     var name: String? = null,
     @SerializedName("power_usage")
     var powerUsage: Int? = null
-)
+){
+    fun toDeviceType() : DeviceType {
+        return DeviceType.deviceTypes[this.id]!!
+    }
+}
+

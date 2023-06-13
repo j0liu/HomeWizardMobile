@@ -17,8 +17,9 @@ import ar.edu.itba.homewizard.ui.devices.speaker.SpeakerInfo
 class Device(
     val id: String,
     val name: String,
+    val state: Any?,
     val type: DeviceType,
-    meta: Any,
+    val meta: Any,
 ) {
 //    protected abstract val state: Any
 }

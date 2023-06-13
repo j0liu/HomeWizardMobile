@@ -2,7 +2,8 @@ package ar.edu.itba.homewizard.ui.routines
 
 import ar.edu.itba.homewizard.data.Routine
 
-class RoutinesUiState (
+data class RoutinesUiState (
     val routines : MutableSet<Routine> = mutableSetOf(),
-    var currentRoutine : Routine? = null
+    var currentRoutine : Routine? = null,
+    val isLoading: Boolean = false
 )

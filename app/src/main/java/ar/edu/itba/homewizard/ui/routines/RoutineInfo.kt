@@ -24,10 +24,10 @@ import ar.edu.itba.homewizard.viewmodels.RoutineInfoViewModel
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun RoutineInfo(routineInfoViewModel: RoutineInfoViewModel = viewModel()) {
-    val routine = Routine("1", "a dormir", arrayOf(
-        Action("turnoff", Device("3", "luz", DeviceType.deviceTypes["lamp"]!!, {}), arrayOf(1, 2, 3), "a"),
-        Action("turnon", Device("3", "luz", DeviceType.deviceTypes["oven"]!!, {}), emptyArray(), "a"),
-        Action("setBrightness", Device("3", "luz", DeviceType.deviceTypes["oven"]!!, {}), emptyArray(), "a")
+    val routine = Routine("1", "a dormir", listOf(
+//        Action("turnoff", Device("3", "luz", DeviceType.deviceTypes["lamp"]!!, {}), listOf(1, 2, 3)),
+//        Action("turnon", Device("3", "luz", DeviceType.deviceTypes["oven"]!!, {}), emptyList()),
+//        Action("setBrightness", Device("3", "luz", DeviceType.deviceTypes["oven"]!!, {}), emptyList())
     ), "a")
     Scaffold(
         floatingActionButton = {

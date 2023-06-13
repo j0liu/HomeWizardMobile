@@ -53,7 +53,7 @@ class DevicesViewModel : ViewModel() {
                 val set = mutableSetOf<Device>()
 //                print(response.body()?.result)
                 response.body()?.result?.forEach { device ->
-                    set.add(Device(device.id!!, device.name!!, DeviceType.deviceTypes[device.type!!.id]!!, {}))
+                    set.add(Device(device.id!!, device.name!!, device.state, DeviceType.deviceTypes[device.type!!.id]!!, {}))
                 }
                 _uiState.update { it.copy(
                     devices = set,
