@@ -2,6 +2,8 @@ package ar.edu.itba.homewizard.ui.devices
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -35,15 +37,14 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel) {
                 DeviceInfo(devicesViewModel = devicesViewModel)
             }
         ) {
-            Column(
+            LazyColumn (
                 modifier = Modifier
-                    .verticalScroll(rememberScrollState())
                     .weight(1f)
                     .padding(bottom = 10.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                devicesUiState.devices.forEach { device : Device ->
+                items(items = devicesUiState.devices.toMutableList(), key = { device: Device -> device.id }) { device : Device ->
                     DeviceCard(
                         device = device,
                         onClick = { deviceSelected ->
@@ -58,4 +59,5 @@ fun DevicesScreen(devicesViewModel: DevicesViewModel) {
         }
     }
 }
+
 
