@@ -1,7 +1,7 @@
 package ar.edu.itba.homewizard.data.network.models
 
-import ar.edu.itba.homewizard.data.Action
-import ar.edu.itba.homewizard.data.Routine
+import ar.edu.itba.homewizard.data.models.Action
+import ar.edu.itba.homewizard.data.models.Routine
 import com.google.gson.annotations.SerializedName
 
 data class NetworkRoutine(

@@ -1,7 +1,7 @@
 package ar.edu.itba.homewizard.data.network.models
 
-import ar.edu.itba.homewizard.data.Device
-import ar.edu.itba.homewizard.data.DeviceType
+import ar.edu.itba.homewizard.data.models.Device
+import ar.edu.itba.homewizard.data.models.DeviceType
 import com.google.gson.annotations.SerializedName
 
 
@@ -18,7 +18,7 @@ data class NetworkDevice (
     var meta: Any? = null
 ){
     //cast networkdevice to device
-fun toDevice(): Device {
+    fun toDevice(): Device {
         return Device(
             id = this.id!!,
             name = this.name!!,

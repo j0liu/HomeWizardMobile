@@ -1,4 +1,4 @@
-package ar.edu.itba.homewizard.data
+package ar.edu.itba.homewizard.data.models
 
 class Routine(
     val id: String,

@@ -1,12 +1,9 @@
 package ar.edu.itba.homewizard.viewmodels
 
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.itba.homewizard.data.Device
-import ar.edu.itba.homewizard.data.DeviceType
-import ar.edu.itba.homewizard.data.network.RetrofitClient
+import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
 import kotlinx.coroutines.Job

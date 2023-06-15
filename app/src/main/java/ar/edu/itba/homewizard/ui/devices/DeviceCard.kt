@@ -1,21 +1,17 @@
 package ar.edu.itba.homewizard.ui.devices
 
-import android.content.res.Resources
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import ar.edu.itba.homewizard.data.Device
-import ar.edu.itba.homewizard.ui.theme.*
+import ar.edu.itba.homewizard.data.models.Device
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

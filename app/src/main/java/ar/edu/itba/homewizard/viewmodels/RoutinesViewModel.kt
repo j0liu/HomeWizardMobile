@@ -2,7 +2,7 @@ package ar.edu.itba.homewizard.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.itba.homewizard.data.Routine
+import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.data.repository.RoutineRepository
 import ar.edu.itba.homewizard.ui.routines.RoutinesUiState
 import kotlinx.coroutines.flow.MutableStateFlow

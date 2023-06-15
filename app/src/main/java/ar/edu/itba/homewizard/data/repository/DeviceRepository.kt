@@ -1,6 +1,6 @@
 package ar.edu.itba.homewizard.data.repository
 
-import ar.edu.itba.homewizard.data.Device
+import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.network.DeviceRemoteDataSource
 
 class DeviceRepository (

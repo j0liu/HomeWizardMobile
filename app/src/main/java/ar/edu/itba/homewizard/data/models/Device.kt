@@ -1,9 +1,6 @@
-package ar.edu.itba.homewizard.data
+package ar.edu.itba.homewizard.data.models
 
-import android.graphics.drawable.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.ui.devices.door.DoorInfo
 import ar.edu.itba.homewizard.ui.devices.ac.ACInfo

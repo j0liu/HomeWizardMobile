@@ -1,6 +1,6 @@
 package ar.edu.itba.homewizard.data.repository
 
-import ar.edu.itba.homewizard.data.Routine
+import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.data.network.RoutineRemoteDataSource
 
 class RoutineRepository (
