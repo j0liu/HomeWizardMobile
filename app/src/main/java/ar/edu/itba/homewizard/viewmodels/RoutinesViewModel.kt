@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.viewmodels
 
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.data.models.Routine
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 class RoutinesViewModel(private val routineRepository : RoutineRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow(RoutinesUiState())

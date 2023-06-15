@@ -1,11 +1,8 @@
 package ar.edu.itba.homewizard.ui.routines
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -26,8 +23,6 @@ import kotlinx.coroutines.launch
 fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
     val routinesUiState by routinesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
-    val scaffoldState = rememberBottomSheetScaffoldState()
-
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -36,21 +31,11 @@ fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
     ) {
         BottomSheetScaffold(
             modifier = Modifier.zIndex(10f),
-            scaffoldState = scaffoldState,
+            sheetShape = RoundedCornerShape(15.dp),
+            scaffoldState = routinesUiState.scaffoldState,
             sheetContent = {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(MaterialTheme.colors.primary)
-                        .zIndex(10f),
-                    verticalArrangement = Arrangement.Top,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    routinesUiState.currentRoutine?.let { Text(it.name) }
-                    RoutineInfo()
-                }
+                RoutineInfo(routinesViewModel = routinesViewModel)
             }) {
-            // app UI
             Column(
                 modifier = Modifier
                     .verticalScroll(rememberScrollState())
@@ -65,12 +50,11 @@ fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
                         onClick = { routineSelected ->
                             routinesViewModel.setCurrentRoutine(routineSelected)
                             scope.launch {
-                                scaffoldState.bottomSheetState.expand()
+                                routinesUiState.scaffoldState.bottomSheetState.expand()
                             }
                         }
                     )
                 }
-
             }
         }
     }

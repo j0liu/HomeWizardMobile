@@ -1,36 +1,70 @@
 package ar.edu.itba.homewizard.ui.routines
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.viewmodel.compose.viewModel
-import ar.edu.itba.homewizard.data.models.Routine
-import ar.edu.itba.homewizard.viewmodels.RoutineInfoViewModel
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
+import kotlinx.coroutines.launch
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun RoutineInfo(routineInfoViewModel: RoutineInfoViewModel = viewModel()) {
-    val routine = Routine("1", "a dormir", listOf(
-//        Action("turnoff", Device("3", "luz", DeviceType.deviceTypes["lamp"]!!, {}), listOf(1, 2, 3)),
-//        Action("turnon", Device("3", "luz", DeviceType.deviceTypes["oven"]!!, {}), emptyList()),
-//        Action("setBrightness", Device("3", "luz", DeviceType.deviceTypes["oven"]!!, {}), emptyList())
-    ), "a")
+fun RoutineInfo(routinesViewModel: RoutinesViewModel) {
+    val routineUiState by routinesViewModel.uiState.collectAsState()
+    val routine = routineUiState.currentRoutine
+    val scope = rememberCoroutineScope()
+
     Scaffold(
-        floatingActionButton = {
-            FloatingActionButton(onClick = { /* ... */ }) {
-                /* FAB content */
-            }
+        modifier = Modifier.fillMaxHeight(0.97f),
+        topBar = {
+            TopAppBar(
+                elevation = 0.dp,
+                modifier = Modifier.fillMaxWidth().height(32.dp),
+                navigationIcon = {
+                    IconButton(onClick = {
+                        scope.launch {
+                            routineUiState.scaffoldState.bottomSheetState.collapse()
+                        }
+                    }) {
+                        Icon(
+                            modifier = Modifier.size(30.dp, 30.dp),
+                            imageVector = ImageVector.vectorResource(R.drawable.chevron_down),
+                            contentDescription = "Back"
+                        )
+                    }
+                },
+                title = {}
+            )
         }
     ) {
         Column(
-            //modifier = Modifier.align(Alignment.Center)
+            modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primary),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            routine.actions.forEach { action ->
+            Text(
+                text = routineUiState.currentRoutine?.name ?: "",
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+                fontSize = 20.sp,
+                color = MaterialTheme.colors.onPrimary
+            )
+            routine?.actions?.forEach { action ->
                 ActionCard(action = action)
-//                showAsBottomSheet
-
             }
         }
     }

@@ -3,7 +3,6 @@ package ar.edu.itba.homewizard.ui.devices
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -16,7 +15,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.theme.Primary
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.launch
 
@@ -28,8 +26,7 @@ fun DeviceInfo(devicesViewModel: DevicesViewModel) {
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        modifier = Modifier
-            .fillMaxHeight(0.95f),
+        modifier = Modifier.fillMaxHeight(0.95f),
         topBar = {
             TopAppBar (
                 elevation = 0.dp,
@@ -82,7 +79,7 @@ fun DeviceInfo(devicesViewModel: DevicesViewModel) {
         Column (
             modifier = Modifier
                 .fillMaxSize()
-                .background(Primary),
+                .background(MaterialTheme.colors.primary),
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ){

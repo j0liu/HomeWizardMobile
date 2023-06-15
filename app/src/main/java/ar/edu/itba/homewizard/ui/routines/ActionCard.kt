@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.ui.routines
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -48,19 +49,22 @@ fun ActionCard(
                         .padding(8.dp),
                     imageVector = ImageVector.vectorResource(action.device.type.icon),
                     contentDescription = null,
+                    tint = MaterialTheme.colors.onSurface
                 )
             }
             Column {
-                Text(text = action.device.name)
+                Text(text = action.device.name, color = MaterialTheme.colors.onSurface)
                 Row {
-                    Text(text = action.actionName)
+                    Text(text = action.actionName, color = MaterialTheme.colors.onSurface)
                     action.params.forEach {x ->
-                        Text(modifier = Modifier.padding(start = 10.dp),
-                            text = x.toString())
+                        Text(
+                            modifier = Modifier.padding(start = 10.dp),
+                            text = x.toString(),
+                            color = MaterialTheme.colors.onSurface
+                        )
                     }
                 }
             }
-            //Spacer(modifier = Modifier.padding(4.dp).size(50.dp))
         }
     }
 }
