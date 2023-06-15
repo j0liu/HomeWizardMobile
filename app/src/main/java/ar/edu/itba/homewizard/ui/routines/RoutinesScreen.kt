@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.ui.routines
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,6 +24,13 @@ import kotlinx.coroutines.launch
 fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
     val routinesUiState by routinesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
+
+    // TODO: Modularizar?
+    BackHandler(enabled = routinesUiState.scaffoldState.bottomSheetState.isExpanded) {
+        scope.launch {
+            routinesUiState.scaffoldState.bottomSheetState.collapse()
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),

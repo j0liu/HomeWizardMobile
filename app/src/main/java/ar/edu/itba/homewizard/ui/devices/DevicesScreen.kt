@@ -1,6 +1,7 @@
 package ar.edu.itba.homewizard.ui.devices
 
 import android.annotation.SuppressLint
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -25,6 +26,13 @@ import ar.edu.itba.homewizard.ui.theme.*
 fun DevicesScreen(devicesViewModel: DevicesViewModel) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
+
+    // TODO: Modularizar?
+    BackHandler(enabled = devicesUiState.scaffoldState.bottomSheetState.isExpanded) {
+        scope.launch {
+            devicesUiState.scaffoldState.bottomSheetState.collapse()
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
