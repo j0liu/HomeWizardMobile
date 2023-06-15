@@ -1,10 +1,17 @@
 package ar.edu.itba.homewizard.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
+import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
+
+
+val Colors.successContainer: Color @Composable
+    get() = if (!isSystemInDarkTheme()) Color(0xFFd6ffe0) else Color(0xFF269300)
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -17,10 +24,12 @@ private val LightColorPalette = lightColors(
     primaryVariant = Terciary,
     secondary = Secondary,
     background = Background,
+    surface = lightSurface,
+
 
     /* Other default colors to override
     background = Color.White,
-    surface = Color.White,
+
     onPrimary = Color.White,
     onSecondary = Color.Black,
     onBackground = Color.Black,

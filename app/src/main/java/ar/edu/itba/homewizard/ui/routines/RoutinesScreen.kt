@@ -81,7 +81,7 @@ fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
                         }
                     )
                 }
-                
+
             }
         }
     }

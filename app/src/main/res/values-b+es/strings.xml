@@ -1,0 +1,55 @@
+<resources>
+    <string name="app_name">HomeWizardMobile</string>
+    <string name="first_screen">Primera</string>
+    <string name="second_screen">Segunda Screen</string>
+    <string name="third_screen">Tercera pantalla</string>
+    <string name="devices">Dispositivos</string>
+    <string name="routines">Rutinas</string>
+    <string name="settings">Ajustes</string>
+    <string name="lamp">Lampara</string>
+    <string name="fridge">Heladera</string>
+    <string name="alarm">Alarma</string>
+    <string name="speaker">Parlante</string>
+    <string name="door">Puerta</string>
+    <string name="oven">Horno</string>
+    <string name="air_conditioner">Aire Acondicionado</string>
+
+    <string name="country">Country</string>
+    <string name="classical">Clásica</string>
+    <string name="dance">Baile</string>
+    <string name="latina">Latina</string>
+    <string name="pop">Pop</string>
+    <string name="rock">Rock</string>
+
+    <string name="setVolume">Establecer volumen</string>
+    <string name="play">Reproducir</string>
+    <string name="pause">Pausar</string>
+    <string name="stop">Detener</string>
+    <string name="resume">Reanudar</string>
+    <string name="nextSong">Cancion siguiente</string>
+    <string name="previousSong">Cancion anterior</string>
+    <string name="setGenre">Establecer género</string>
+    <string name="getPlaylist">Obtener lista de reproducción</string>
+    <string name="volume">Volumen</string>
+    <string name="genre">Género</string>
+
+    <string name="open">Abrir</string>
+    <string name="close">Cerrar</string>
+    <string name="setLevel">Establecer nivel</string>
+    <string name="level">Nivel</string>
+
+    <string name="turnOn">Encender</string>
+    <string name="turnOff">Apagar</string>
+    <string name="setColor">Establecer color</string>
+    <string name="setBrightness">Establecer brillo</string>
+    <string name="color">Color</string>
+    <string name="brightness">Brillo</string>
+
+    //Lampara
+    turnOn: 'Encender',
+    turnOff: 'Apagar',
+    setColor: 'Establecer color',
+    setBrightness: 'Establecer brillo',
+    color : 'Color',
+    brightness : 'Brillo',
+</resources>

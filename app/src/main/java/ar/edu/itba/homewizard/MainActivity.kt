@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -55,8 +56,8 @@ fun BottomBar(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
-                icon = { Icon(modifier = Modifier.height(25.dp), imageVector = ImageVector.vectorResource(id = item.icon), contentDescription = item.title) },
-                label = { Text(text = item.title) },
+                icon = { Icon(modifier = Modifier.height(25.dp), imageVector = ImageVector.vectorResource(id = item.icon), contentDescription = stringResource(item.title)) },
+                label = { Text(text = stringResource(item.title)) },
                 alwaysShowLabel = true,
                 selected = currentRoute == item.route,
                 onClick = {

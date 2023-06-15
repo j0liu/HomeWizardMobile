@@ -1,6 +1,112 @@
 <resources>
     <string name="app_name">HomeWizardMobile</string>
-<string name="first_screen">First Screen</string>
-<string name="second_screen">Second Screen</string>
-<string name="third_screen">Third Screen</string>
+    <string name="first_screen">First Screen</string>
+    <string name="second_screen">Second Screen</string>
+    <string name="third_screen">Third Screen</string>
+    <string name="devices">Devices</string>
+    <string name="routines">Routines</string>
+    <string name="settings">Settings</string>
+    <string name="lamp">Lamp</string>
+    <string name="fridge">Fridge</string>
+    <string name="alarm">Alarm</string>
+    <string name="speaker">Speaker</string>
+    <string name="door">Door</string>
+    <string name="oven">Oven</string>
+    <string name="air_conditioner">Air Conditioner</string>
+    <string name="country">Country</string>
+    <string name="classical">Classical</string>
+    <string name="dance">Baile</string>
+    <string name="latina">Latina</string>
+    <string name="pop">Pop</string>
+    <string name="rock">Rock</string>
+
+    <string name="setVolume">Set volume</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="resume">Resume</string>
+    <string name="nextSong">Next song</string>
+    <string name="previousSong">Previous song</string>
+    <string name="setGenre">Set genre</string>
+    <string name="getPlaylist">Get playlist</string>
+    <string name="volume">Volume</string>
+    <string name="genre">Genre</string>
+
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="setLevel">Set level</string>
+    <string name="level">Level</string>
+
+    <string name="turnOn">Turn on</string>
+    <string name="turnOff">Turn off</string>
+    <string name="setColor">Set color</string>
+    <string name="setBrightness">Set brightness</string>
+    <string name="color">Color</string>
+    <string name="brightness">Brightness</string>
+
+    //Horno
+    // turnOn: 'encender',
+    // turnOff: 'apagar',
+    setTemperature: 'Establecer temperatura',
+    setHeat: 'Establecer calor',
+    setGrill: 'Establecer parrilla',
+    setConvection: 'Establecer convección',
+
+    //Parametros
+    temperature: 'Temperatura',
+    heat: 'Calor',
+    grill: 'Parrilla',
+    convection: 'Convección',
+    conventional: 'Convencional',
+    bottom: 'Inferior',
+    top: 'Superior',
+    large: 'Grande',
+    eco: 'Eco',
+    off: 'Apagado',
+    normal: 'Normal',
+
+    //Aire acondicionado
+    // turnOn: 'encender',
+    // turnOff: 'apagar',
+    // setTemperature: 'establecer temperatura',
+    setMode: 'Establecer modo',
+    setVerticalSwing: 'Establecer oscilación vertical',
+    setHorizontalSwing: 'Establecer oscilación horizontal',
+    setFanSpeed: 'Establecer velocidad del ventilador',
+
+    //Parametros
+    mode : 'Modo',
+    verticalSwing : 'Oscilación vertical',
+    horizontalSwing : 'Oscilación horizontal',
+    fanSpeed : 'Velocidad del ventilador',
+    cool: 'Frío',
+    //heat: 'calor',
+    fan: 'Ventilador',
+
+    //Puerta
+    // open: 'abrir',
+    // close: 'cerrar',
+    lock: 'Bloquear',
+    unlock: 'Desbloquear',
+
+    //Alarma
+    changeSecurityCode: 'Cambiar código de seguridad',
+    securityCode : 'Código de seguridad',
+    SecurityCode : 'Código de seguridad',
+    oldSecurityCode : 'Anterior código de seguridad',
+    newSecurityCode : 'Nuevo código de seguridad',
+    armStay: 'Activar alarma en casa',
+    armAway: 'Activar alarma fuera de casa',
+    disarm: 'Desactivar alarma',
+
+    //Heladera
+    setFreezerTemperature: 'Establecer temperatura del freezer',
+    // setTemperature: 'establecer temperatura',
+    // setMode: 'establecer modo',
+
+    //Parametros
+    default: 'Por defecto',
+    vacation: 'Vacaciones',
+    party: 'Fiesta',
+
 </resources>

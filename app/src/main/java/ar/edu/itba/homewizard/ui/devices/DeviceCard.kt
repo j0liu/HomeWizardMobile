@@ -1,13 +1,11 @@
 package ar.edu.itba.homewizard.ui.devices
 
+import android.content.res.Resources
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
@@ -31,7 +29,7 @@ fun DeviceCard (
             .padding(10.dp)
             .height(60.dp)
             .fillMaxWidth(),
-            backgroundColor = Terciary,
+            backgroundColor = MaterialTheme.colors.primaryVariant,
             contentColor = Content,
             shape = RoundedCornerShape(15.dp),
             elevation = 10.dp,
