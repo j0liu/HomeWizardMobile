@@ -30,7 +30,7 @@ fun DeviceCard (
             .height(60.dp)
             .fillMaxWidth(),
             backgroundColor = MaterialTheme.colors.primaryVariant,
-            contentColor = Content,
+            contentColor = MaterialTheme.colors.onPrimary,
             shape = RoundedCornerShape(15.dp),
             elevation = 10.dp,
             onClick = { onClick(device) }
@@ -44,7 +44,7 @@ fun DeviceCard (
                 .padding(10.dp)
                 .size(50.dp)
                 .aspectRatio(1f)
-                .background(Surface, shape = CircleShape),
+                .background(MaterialTheme.colors.surface, shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

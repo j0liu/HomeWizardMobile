@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,8 +31,8 @@ fun ActionCard(
             .padding(10.dp)
             .height(60.dp)
             .fillMaxWidth(),
-        backgroundColor = Terciary,
-        contentColor = Content,
+        backgroundColor = MaterialTheme.colors.primaryVariant,
+        contentColor = MaterialTheme.colors.onPrimary,
         shape = RoundedCornerShape(15.dp),
         elevation = 10.dp,
     ) {
@@ -44,7 +45,7 @@ fun ActionCard(
                     .padding(10.dp)
                     .size(50.dp)
                     .aspectRatio(1f)
-                    .background(Surface, shape = CircleShape),
+                    .background(MaterialTheme.colors.surface, shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(

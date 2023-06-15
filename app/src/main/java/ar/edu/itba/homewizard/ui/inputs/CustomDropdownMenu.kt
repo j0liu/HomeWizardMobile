@@ -26,11 +26,11 @@ fun CustomDropdownMenu(elements: List<String>, modifier: Modifier = Modifier, on
             value = selectedText,
             onValueChange = {},
             readOnly = true,
-            label = { Text(text = title, color = lightSurface, fontSize = 11.sp) },
+            label = { Text(text = title, color = MaterialTheme.colors.surface, fontSize = 11.sp) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             colors = TextFieldDefaults.textFieldColors(
 //                backgroundColor = Content,
-                textColor = lightSurface
+                textColor = MaterialTheme.colors.surface
             ),
         )
 

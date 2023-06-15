@@ -52,7 +52,7 @@ fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .background(Primary)
+                        .background(MaterialTheme.colors.primary)
                         .zIndex(10f),
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally

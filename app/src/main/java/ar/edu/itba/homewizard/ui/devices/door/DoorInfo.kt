@@ -39,7 +39,7 @@ fun DoorInfo (doorViewModel: DoorViewModel = viewModel()){
         Button(
             onClick = { doorViewModel.toggleLock() },
             Modifier.padding(bottom = 40.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = lightSurface),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
             shape = RoundedCornerShape(20.dp)
         ) {
             Icon(
@@ -48,13 +48,13 @@ fun DoorInfo (doorViewModel: DoorViewModel = viewModel()){
                 imageVector =
                 if (devicesUiState.locked) ImageVector.vectorResource(id = R.drawable.lock)
                 else ImageVector.vectorResource(id = R.drawable.lock_open),
-                tint = Color.Black,
+                tint = MaterialTheme.colors.onPrimary,
                 contentDescription = "content description"
             )
         }
         Button(
             onClick = { doorViewModel.toggleClose() },
-            colors = ButtonDefaults.buttonColors(backgroundColor = lightSurface),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
             shape = RoundedCornerShape(20.dp)
         ) {
             Icon(

@@ -40,7 +40,7 @@ fun AlarmInfo(alarmViewModel: AlarmViewModel = viewModel()) {
                 modifier = Modifier.width(200.dp).height(64.dp),
                 shape = RoundedCornerShape(10.dp),
                 onClick = { changingCode.value = false },
-                colors = ButtonDefaults.buttonColors(backgroundColor = Secondary, contentColor = lightSurface)
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary, contentColor = MaterialTheme.colors.surface)
             ) {
                 Text(text = "Cambiar Código", fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }
@@ -57,7 +57,7 @@ fun AlarmInfo(alarmViewModel: AlarmViewModel = viewModel()) {
                 modifier = Modifier.width(200.dp).height(64.dp),
                 shape = RoundedCornerShape(10.dp),
                 onClick = { changingCode.value = true },
-                colors = ButtonDefaults.buttonColors(backgroundColor = lightSurface, contentColor = Content)
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface, contentColor = MaterialTheme.colors.onPrimary)
             ) {
                 Text("Cambiar Código", fontSize = 20.sp, fontWeight = FontWeight.Bold)
             }

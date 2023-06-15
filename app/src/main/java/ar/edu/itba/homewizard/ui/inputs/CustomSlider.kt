@@ -1,10 +1,7 @@
 package ar.edu.itba.homewizard.ui.inputs
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
-import androidx.compose.material.Slider
-import androidx.compose.material.SliderDefaults
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +41,7 @@ fun CustomSlider(
             Text(
                 text = title,
                 fontSize = 18.sp,
-                color = lightSurface,
+                color = MaterialTheme.colors.surface,
             )
         }
         Row(
@@ -64,9 +61,9 @@ fun CustomSlider(
                 steps = steps,
                 onValueChangeFinished = onValueChangeFinished,
                 colors = SliderDefaults.colors(
-                    thumbColor = lightSurface,
-                    activeTrackColor = lightSurface,
-                    inactiveTrackColor = Terciary,
+                    thumbColor = MaterialTheme.colors.surface,
+                    activeTrackColor = MaterialTheme.colors.surface,
+                    inactiveTrackColor = MaterialTheme.colors.primaryVariant,
                 )
             )
             Icon(
@@ -74,7 +71,7 @@ fun CustomSlider(
                     .weight(0.1f),
                 imageVector = ImageVector.vectorResource(id = icon),
                 contentDescription = "content description",
-                tint = lightSurface
+                tint = MaterialTheme.colors.surface
             )
             Text(
                 modifier = Modifier
@@ -82,7 +79,7 @@ fun CustomSlider(
                 maxLines = 1,
                 text = "${value.toInt()}${unit}",
                 fontSize = 18.sp,
-                color = lightSurface,
+                color = MaterialTheme.colors.surface,
             )
         }
     }

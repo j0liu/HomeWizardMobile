@@ -6,10 +6,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
@@ -35,8 +32,8 @@ fun RoutineCard(
             .padding(10.dp)
             .height(100.dp)
             .fillMaxWidth(),
-        backgroundColor = Terciary,
-        contentColor = Content,
+        backgroundColor = MaterialTheme.colors.primaryVariant,
+        contentColor = MaterialTheme.colors.onPrimary,
         shape = RoundedCornerShape(15.dp),
         elevation = 10.dp,
         onClick = { onClick(routine) }
@@ -49,7 +46,7 @@ fun RoutineCard(
                 fontSize = 16.sp
             )
             Row(
-                modifier = Modifier.background(Surface, shape = RoundedCornerShape(10.dp)).padding(8.dp),
+                modifier = Modifier.background(MaterialTheme.colors.surface, shape = RoundedCornerShape(10.dp)).padding(8.dp),
             ) {
                 routine.actions.forEach { action ->
                     Icon(

@@ -6,6 +6,7 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,15 +24,15 @@ fun CustomToggle(options : List<Int>, selected : Int, onSelectedChange : (Int) -
     Row (
         modifier = Modifier
             .padding(14.dp)
-            .border(1.dp, color = Primary, shape = RoundedCornerShape(50.dp))
+            .border(1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(50.dp))
             .clip(RoundedCornerShape(50.dp))
     ){
         //Toggle button of three states
         options.forEachIndexed { index, icon ->
             Row(
                 modifier = Modifier
-                    .background(color = if (selected == index) Terciary else Surface)
-                    .border(0.5.dp, color = Primary)
+                    .background(color = if (selected == index) MaterialTheme.colors.primaryVariant else MaterialTheme.colors.surface)
+                    .border(0.5.dp, color = MaterialTheme.colors.primary)
                     .height(70.dp)
                     .width(120.dp)
                     .pointerInput(Unit) {

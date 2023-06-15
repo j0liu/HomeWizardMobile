@@ -45,7 +45,7 @@ fun ACInfo(acViewModel: ACViewModel = viewModel()) {
                     modifier = Modifier
                         .size(60.dp),
                     imageVector = ImageVector.vectorResource(id = R.drawable.baseline_horizontal_rule_24) ,
-                    tint = lightSurface,
+                    tint = MaterialTheme.colors.surface,
                     contentDescription = "content description"
                 )
             }
@@ -53,7 +53,7 @@ fun ACInfo(acViewModel: ACViewModel = viewModel()) {
                 text = "24°",
                 fontSize = 70.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black,
+                color = MaterialTheme.colors.onPrimary,
                 modifier = Modifier
             )
             IconButton(
@@ -65,7 +65,7 @@ fun ACInfo(acViewModel: ACViewModel = viewModel()) {
                     modifier = Modifier
                         .size(70.dp),
                     imageVector = Icons.Filled.Add,
-                    tint = lightSurface,
+                    tint = MaterialTheme.colors.surface,
                     contentDescription = "content description"
                 )
             }
@@ -78,7 +78,7 @@ fun ACInfo(acViewModel: ACViewModel = viewModel()) {
                 onClick = { },
                 modifier = Modifier
                     .size(100.dp)
-                    .background(Surface, shape = CircleShape)
+                    .background(MaterialTheme.colors.surface, shape = CircleShape)
             ) {
                 Icon(
                     modifier = Modifier.size(60.dp),

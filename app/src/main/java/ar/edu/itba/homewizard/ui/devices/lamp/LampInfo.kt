@@ -39,7 +39,7 @@ fun LampInfo(lampViewModel: LampViewModel = viewModel()) {
             onClick = {  },
             modifier = Modifier
                 .size(160.dp)
-                .background(Surface, shape = CircleShape)
+                .background(MaterialTheme.colors.surface, shape = CircleShape)
         ) {
             Icon(
                 modifier = Modifier.size(80.dp),

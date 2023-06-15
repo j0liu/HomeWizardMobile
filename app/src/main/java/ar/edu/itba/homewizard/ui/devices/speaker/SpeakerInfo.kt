@@ -41,19 +41,19 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
             text = "Memories",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
-            color = lightSurface,
+            color = MaterialTheme.colors.surface,
             modifier = Modifier
         )
         Text(
             text = "Maroon 5",
             fontSize = 20.sp,
-            color = lightSurface,
+            color = MaterialTheme.colors.surface,
             modifier = Modifier
         )
         Text(
             text = "Memories",
             fontSize = 15.sp,
-            color = lightSurface,
+            color = MaterialTheme.colors.surface,
             modifier = Modifier.padding(bottom = 15.dp)
         )
         Row(
@@ -65,13 +65,13 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
         ){
             LinearProgressIndicator(
                 modifier = Modifier.padding(end = 20.dp),
-                color = lightSurface,
+                color = MaterialTheme.colors.surface,
                 progress = devicesUiState.songProgress
             )
             Text(
                 text = "1:20/3:20",
                 fontSize = 15.sp,
-                color = lightSurface,
+                color = MaterialTheme.colors.surface,
                 modifier = Modifier,
 
                 )
@@ -85,7 +85,7 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
         ){
             Button(
                 onClick = { speakerViewModel.prev() },
-                colors = ButtonDefaults.buttonColors(backgroundColor = lightSurface),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp)
             ) {
                 Icon(
@@ -98,7 +98,7 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
             }
             Button(
                 onClick = { speakerViewModel.togglePlay() },
-                colors = ButtonDefaults.buttonColors(backgroundColor = lightSurface),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp)
             ) {
                 Icon(
@@ -113,7 +113,7 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
             }
             Button(
                 onClick = { speakerViewModel.next() },
-                colors = ButtonDefaults.buttonColors(backgroundColor = lightSurface),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp)
             ) {
                 Icon(
@@ -151,7 +151,7 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 25.dp),
-            backgroundColor = Surface
+            backgroundColor = MaterialTheme.colors.surface
         )
         {
             Column(

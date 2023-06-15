@@ -6,6 +6,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,6 +23,7 @@ import ar.edu.itba.homewizard.ui.inputs.DropdownButton
 import ar.edu.itba.homewizard.ui.theme.Surface
 import ar.edu.itba.homewizard.ui.theme.lightSurface
 import ar.edu.itba.homewizard.viewmodels.OvenViewModel
+import com.google.android.filament.Material
 
 @Composable
 fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
@@ -39,7 +41,7 @@ fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
                 onClick = {  },
                 modifier = Modifier
                     .size(160.dp)
-                    .background(Surface, shape = CircleShape)
+                    .background(MaterialTheme.colors.surface, shape = CircleShape)
             ) {
                 Icon(
                     modifier = Modifier.size(80.dp),

@@ -37,7 +37,7 @@ fun DropdownButton (
             fontSize = titleSize.sp,
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.Bold,
-            color = lightSurface,
+            color = MaterialTheme.colors.surface,
             modifier = Modifier
                 .weight(1f)
         )
@@ -46,7 +46,7 @@ fun DropdownButton (
                 .padding(10.dp)
                 .clip(RoundedCornerShape(50.dp))
                 .width(150.dp)
-                .background(color = Surface)
+                .background(color = MaterialTheme.colors.surface)
                 .height(45.dp)
                 .pointerInput(Unit) {
                     detectTapGestures {
@@ -61,7 +61,7 @@ fun DropdownButton (
                 text = options[selectedIndex.value],
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.Black,
+                color = MaterialTheme.colors.onPrimary,
                 modifier = Modifier
                     .padding(10.dp)
             )
@@ -69,7 +69,7 @@ fun DropdownButton (
                 expanded = expanded,
                 onDismissRequest = { expanded = false },
                 modifier = Modifier
-                    .background(color = Surface)
+                    .background(color = MaterialTheme.colors.surface)
             ) {
                 options.forEachIndexed { index, s ->
                     DropdownMenuItem(onClick = {

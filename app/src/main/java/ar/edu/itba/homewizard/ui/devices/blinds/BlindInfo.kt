@@ -2,10 +2,7 @@ package ar.edu.itba.homewizard.ui.devices.blinds
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.Icon
-import androidx.compose.material.LinearProgressIndicator
-import androidx.compose.material.OutlinedButton
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,14 +40,14 @@ fun BlindInfo() {
                 shape = RoundedCornerShape(25),
 //                border= BorderStroke(5.dp, Color(0XFF0F9D58)),
                 contentPadding = PaddingValues(0.dp),
-                colors = ButtonDefaults.outlinedButtonColors(contentColor =  Primary)
+                colors = ButtonDefaults.outlinedButtonColors(contentColor =  MaterialTheme.colors.primary)
             ) {
                 // Adding an Icon "Add" inside the Button
                 Icon(
                     modifier = Modifier.size(50.dp),
                     imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal),
                     contentDescription = "content description",
-                    tint=Color.Black // TODO: Cambiar
+                    tint=MaterialTheme.colors.onPrimary // TODO: Cambiar
                 )
             }
             OutlinedButton(onClick = {},
@@ -58,14 +55,14 @@ fun BlindInfo() {
                 shape = RoundedCornerShape(25),
 //                border= BorderStroke(5.dp, Color(0XFF0F9D58)),
                 contentPadding = PaddingValues(0.dp),
-                colors = ButtonDefaults.outlinedButtonColors(contentColor =  Primary)
+                colors = ButtonDefaults.outlinedButtonColors(contentColor =  MaterialTheme.colors.primary)
             ) {
                 // Adding an Icon "Add" inside the Button
                 Icon(
                     modifier = Modifier.size(50.dp),
                     imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal_closed),
                     contentDescription = "content description",
-                    tint=Color.Black // TODO: Cambiar
+                    tint=MaterialTheme.colors.onPrimary // TODO: Cambiar
                 )
             }
         }
@@ -84,7 +81,7 @@ fun BlindInfo() {
         LinearProgressIndicator(
             modifier = Modifier
                 .fillMaxWidth(),
-            color = Secondary,
+            color = MaterialTheme.colors.secondary,
             progress = targetLevel
         )
 //            Spacer(modifier = Modifier.width(40.dp))
