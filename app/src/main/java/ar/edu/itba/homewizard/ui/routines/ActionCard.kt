@@ -14,12 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.data.Action
-import ar.edu.itba.homewizard.data.Device
-import ar.edu.itba.homewizard.ui.theme.Content
-import ar.edu.itba.homewizard.ui.theme.Surface
-import ar.edu.itba.homewizard.ui.theme.Terciary
 
 @Composable
 fun ActionCard(

@@ -6,8 +6,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.itba.homewizard.ui.theme.Content
-import ar.edu.itba.homewizard.ui.theme.lightSurface
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -26,7 +24,7 @@ fun CustomDropdownMenu(elements: List<String>, modifier: Modifier = Modifier, on
             value = selectedText,
             onValueChange = {},
             readOnly = true,
-            label = { Text(text = title, color = MaterialTheme.colors.surface, fontSize = 11.sp) },
+            label = { Text(text = title, color = MaterialTheme.colors.onSurface, fontSize = 11.sp) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             colors = TextFieldDefaults.textFieldColors(
 //                backgroundColor = Content,

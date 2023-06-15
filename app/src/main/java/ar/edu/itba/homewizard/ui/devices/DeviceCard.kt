@@ -30,7 +30,7 @@ fun DeviceCard (
             .height(60.dp)
             .fillMaxWidth(),
             backgroundColor = MaterialTheme.colors.primaryVariant,
-            contentColor = MaterialTheme.colors.onPrimary,
+            contentColor = MaterialTheme.colors.onSurface,
             shape = RoundedCornerShape(15.dp),
             elevation = 10.dp,
             onClick = { onClick(device) }
@@ -52,6 +52,7 @@ fun DeviceCard (
                         .padding(8.dp),
                     imageVector = ImageVector.vectorResource(device.type.icon),
                     contentDescription = null,
+                    tint = MaterialTheme.colors.onSurface
                 )
             }
             Text(modifier = Modifier,

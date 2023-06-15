@@ -16,8 +16,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.theme.Content
-import ar.edu.itba.homewizard.ui.theme.Surface
 
 @Composable
 fun PasswordInput(label : String, text : TextFieldValue, onValueChange : (TextFieldValue) -> Unit, modifier : Modifier = Modifier){

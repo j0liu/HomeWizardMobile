@@ -4,10 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,7 +44,6 @@ fun BottomBar(navController: NavController) {
     val items = listOf(
         Screen.DevicesScreen,
         Screen.RoutinesScreen,
-        Screen.SettingsScreen
     )
 
     BottomNavigation(
@@ -57,6 +53,8 @@ fun BottomBar(navController: NavController) {
         val currentRoute = navBackStackEntry?.destination?.route
         items.forEach { item ->
             BottomNavigationItem(
+                selectedContentColor = MaterialTheme.colors.secondary,
+                unselectedContentColor = MaterialTheme.colors.onPrimary,
                 icon = { Icon(modifier = Modifier.height(25.dp), imageVector = ImageVector.vectorResource(id = item.icon), contentDescription = stringResource(item.title)) },
                 label = { Text(text = stringResource(item.title)) },
                 alwaysShowLabel = true,

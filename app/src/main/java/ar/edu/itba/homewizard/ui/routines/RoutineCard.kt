@@ -16,9 +16,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.data.Routine
-import ar.edu.itba.homewizard.ui.theme.Content
-import ar.edu.itba.homewizard.ui.theme.Surface
-import ar.edu.itba.homewizard.ui.theme.Terciary
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -33,26 +30,29 @@ fun RoutineCard(
             .height(100.dp)
             .fillMaxWidth(),
         backgroundColor = MaterialTheme.colors.primaryVariant,
-        contentColor = MaterialTheme.colors.onPrimary,
+        contentColor = MaterialTheme.colors.onSurface,
         shape = RoundedCornerShape(15.dp),
         elevation = 10.dp,
         onClick = { onClick(routine) }
     ) {
         Column(
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(8.dp),
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
+                modifier = Modifier.padding(bottom = 8.dp),
                 text = routine.name,
                 fontSize = 16.sp
             )
             Row(
-                modifier = Modifier.background(MaterialTheme.colors.surface, shape = RoundedCornerShape(10.dp)).padding(8.dp),
+                modifier = Modifier.background(MaterialTheme.colors.surface, shape = RoundedCornerShape(10.dp)).padding(4.dp),
             ) {
                 routine.actions.forEach { action ->
                     Icon(
-                        modifier = Modifier.fillMaxHeight().padding(4.dp),
+                        modifier = Modifier.padding(4.dp),
                         imageVector = ImageVector.vectorResource(action.device.type.icon),
-                        contentDescription = null
+                        contentDescription = null,
+                        tint = MaterialTheme.colors.onSurface
                     )
                 }
 

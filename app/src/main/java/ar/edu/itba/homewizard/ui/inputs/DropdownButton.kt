@@ -60,8 +60,7 @@ fun DropdownButton (
             Text(
                 text = options[selectedIndex.value],
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onPrimary,
+                color = MaterialTheme.colors.onSurface,
                 modifier = Modifier
                     .padding(10.dp)
             )

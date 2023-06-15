@@ -7,14 +7,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.ui.theme.Primary
-import ar.edu.itba.homewizard.ui.theme.Secondary
-import ar.edu.itba.homewizard.ui.theme.Terciary
-import ar.edu.itba.homewizard.ui.theme.lightSurface
 
 @Composable
 fun CustomSlider(

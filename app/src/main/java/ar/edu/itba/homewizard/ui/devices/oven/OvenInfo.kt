@@ -5,25 +5,18 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.ui.inputs.DropdownButton
-import ar.edu.itba.homewizard.ui.theme.Surface
-import ar.edu.itba.homewizard.ui.theme.lightSurface
 import ar.edu.itba.homewizard.viewmodels.OvenViewModel
-import com.google.android.filament.Material
 
 @Composable
 fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
