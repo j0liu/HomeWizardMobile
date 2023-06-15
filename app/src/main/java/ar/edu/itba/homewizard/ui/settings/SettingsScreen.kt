@@ -17,9 +17,5 @@ fun SettingsScreen() {
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text = stringResource(id = R.string.third_screen),
-            fontSize = 30.sp
-        )
     }
 }

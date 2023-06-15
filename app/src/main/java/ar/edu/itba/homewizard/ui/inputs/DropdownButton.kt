@@ -22,36 +22,39 @@ import ar.edu.itba.homewizard.ui.theme.*
 fun DropdownButton (
     modifier : Modifier = Modifier,
     title : String,
+    titleSize : Int,
     options : List<String>,
-    heightDropdown : Int = 160,
 ){
-    Column (
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+    var expanded by remember { mutableStateOf(false) }
+    val selectedIndex = remember { mutableStateOf(0) }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .padding(horizontal = 20.dp)
     ){
         Text(
             text = title,
-            textAlign = TextAlign.Center,
-            fontSize = 18.sp,
+            fontSize = titleSize.sp,
+            textAlign = TextAlign.Start,
             fontWeight = FontWeight.Bold,
             color = lightSurface,
             modifier = Modifier
+                .weight(1f)
         )
-        var expanded by remember { mutableStateOf(false) }
-        val selectedIndex = remember { mutableStateOf(0) }
-        Row(
+        Column (
             modifier = Modifier
                 .padding(10.dp)
                 .clip(RoundedCornerShape(50.dp))
+                .width(150.dp)
                 .background(color = Surface)
-                .height(50.dp)
+                .height(45.dp)
                 .pointerInput(Unit) {
                     detectTapGestures {
                         expanded = true
                     }
                 },
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
 
         ) {
             Text(
@@ -67,7 +70,6 @@ fun DropdownButton (
                 onDismissRequest = { expanded = false },
                 modifier = Modifier
                     .background(color = Surface)
-                    .height(heightDropdown.dp)
             ) {
                 options.forEachIndexed { index, s ->
                     DropdownMenuItem(onClick = {

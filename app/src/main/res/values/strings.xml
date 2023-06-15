@@ -1,25 +1,11 @@
 <resources>
     <string name="app_name">HomeWizardMobile</string>
-    <string name="first_screen">First Screen</string>
-    <string name="second_screen">Second Screen</string>
-    <string name="third_screen">Third Screen</string>
+
     <string name="devices">Devices</string>
     <string name="routines">Routines</string>
     <string name="settings">Settings</string>
-    <string name="lamp">Lamp</string>
-    <string name="fridge">Fridge</string>
-    <string name="alarm">Alarm</string>
-    <string name="speaker">Speaker</string>
-    <string name="door">Door</string>
-    <string name="oven">Oven</string>
-    <string name="air_conditioner">Air Conditioner</string>
-    <string name="country">Country</string>
-    <string name="classical">Classical</string>
-    <string name="dance">Baile</string>
-    <string name="latina">Latina</string>
-    <string name="pop">Pop</string>
-    <string name="rock">Rock</string>
 
+    <string name="speaker">Speaker</string>
     <string name="setVolume">Set volume</string>
     <string name="play">Play</string>
     <string name="pause">Pause</string>
@@ -31,12 +17,20 @@
     <string name="getPlaylist">Get playlist</string>
     <string name="volume">Volume</string>
     <string name="genre">Genre</string>
+    <string name="country">Country</string>
+    <string name="classical">Classical</string>
+    <string name="dance">Baile</string>
+    <string name="latina">Latina</string>
+    <string name="pop">Pop</string>
+    <string name="rock">Rock</string>
 
+    <string name="blind">Blind</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="setLevel">Set level</string>
     <string name="level">Level</string>
 
+    <string name="lamp">Lamp</string>
     <string name="turnOn">Turn on</string>
     <string name="turnOff">Turn off</string>
     <string name="setColor">Set color</string>
@@ -44,69 +38,52 @@
     <string name="color">Color</string>
     <string name="brightness">Brightness</string>
 
-    //Horno
-    // turnOn: 'encender',
-    // turnOff: 'apagar',
-    setTemperature: 'Establecer temperatura',
-    setHeat: 'Establecer calor',
-    setGrill: 'Establecer parrilla',
-    setConvection: 'Establecer convección',
+    <string name="oven">Oven</string>
+    <string name="setTemperature">Set temperature</string>
+    <string name="setHeat">Set heat</string>
+    <string name="setGrill">Set grill</string>
+    <string name="setConvection">Set convection</string>
+    <string name="temperature">Temperature</string>
+    <string name="heat">Heat</string>
+    <string name="grill">Grill</string>
+    <string name="convection">Convection</string>
+    <string name="conventional">Conventional</string>
+    <string name="bottom">Bottom</string>
+    <string name="top">Top</string>
+    <string name="large">Large</string>
+    <string name="eco">Eco</string>
+    <string name="off">Off</string>
+    <string name="normal">Normal</string>
 
-    //Parametros
-    temperature: 'Temperatura',
-    heat: 'Calor',
-    grill: 'Parrilla',
-    convection: 'Convección',
-    conventional: 'Convencional',
-    bottom: 'Inferior',
-    top: 'Superior',
-    large: 'Grande',
-    eco: 'Eco',
-    off: 'Apagado',
-    normal: 'Normal',
+    <string name="airConditioner">Air Conditioner</string>
+    <string name="setMode">Set mode</string>
+    <string name="setVerticalSwing">Set vertical swing</string>
+    <string name="setHorizontalSwing">Set horizontal swing</string>
+    <string name="setFanSpeed">Set fan speed</string>
+    <string name="mode">Mode</string>
+    <string name="verticalSwing">Vertical swing</string>
+    <string name="horizontalSwing">Horizontal swing</string>
+    <string name="fanSpeed">Fan speed</string>
+    <string name="cool">Cool</string>
+    <string name="fan">Fan</string>
 
-    //Aire acondicionado
-    // turnOn: 'encender',
-    // turnOff: 'apagar',
-    // setTemperature: 'establecer temperatura',
-    setMode: 'Establecer modo',
-    setVerticalSwing: 'Establecer oscilación vertical',
-    setHorizontalSwing: 'Establecer oscilación horizontal',
-    setFanSpeed: 'Establecer velocidad del ventilador',
+    <string name="door">Door</string>
+    <string name="lock">Lock</string>
+    <string name="unlock">Unlock</string>
 
-    //Parametros
-    mode : 'Modo',
-    verticalSwing : 'Oscilación vertical',
-    horizontalSwing : 'Oscilación horizontal',
-    fanSpeed : 'Velocidad del ventilador',
-    cool: 'Frío',
-    //heat: 'calor',
-    fan: 'Ventilador',
+    <string name="alarm">Alarm</string>
+    <string name="changeSecurityCode">Change security code</string>
+    <string name="securityCode">Security code</string>
+    <string name="oldSecurityCode">Old security code</string>
+    <string name="newSecurityCode">New security code</string>
+    <string name="armStay">Arm stay</string>
+    <string name="armAway">Arm away</string>
+    <string name="disarm">Disarm</string>
 
-    //Puerta
-    // open: 'abrir',
-    // close: 'cerrar',
-    lock: 'Bloquear',
-    unlock: 'Desbloquear',
-
-    //Alarma
-    changeSecurityCode: 'Cambiar código de seguridad',
-    securityCode : 'Código de seguridad',
-    SecurityCode : 'Código de seguridad',
-    oldSecurityCode : 'Anterior código de seguridad',
-    newSecurityCode : 'Nuevo código de seguridad',
-    armStay: 'Activar alarma en casa',
-    armAway: 'Activar alarma fuera de casa',
-    disarm: 'Desactivar alarma',
-
-    //Heladera
-    setFreezerTemperature: 'Establecer temperatura del freezer',
-    // setTemperature: 'establecer temperatura',
-    // setMode: 'establecer modo',
-
-    //Parametros
-    default: 'Por defecto',
-    vacation: 'Vacaciones',
-    party: 'Fiesta',
+    <string name="fridge">Fridge</string>
+    <string name="setFreezerTemperature">Set freezer temperature</string>
+<!--    <string name="default">Default</string>-->
+    <string name="vacation">Vacation</string>
+    <string name="party">Party</string>
 
 </resources>

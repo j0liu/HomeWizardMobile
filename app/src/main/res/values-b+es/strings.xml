@@ -1,19 +1,25 @@
 <resources>
     <string name="app_name">HomeWizardMobile</string>
-    <string name="first_screen">Primera</string>
-    <string name="second_screen">Segunda Screen</string>
-    <string name="third_screen">Tercera pantalla</string>
+    <string name="firstScreen">Primera pantalla</string>
+    <string name="secondScreen">Segunda pantalla</string>
+    <string name="thirdScreen">Tercera pantalla</string>
+
     <string name="devices">Dispositivos</string>
     <string name="routines">Rutinas</string>
     <string name="settings">Ajustes</string>
-    <string name="lamp">Lampara</string>
-    <string name="fridge">Heladera</string>
-    <string name="alarm">Alarma</string>
-    <string name="speaker">Parlante</string>
-    <string name="door">Puerta</string>
-    <string name="oven">Horno</string>
-    <string name="air_conditioner">Aire Acondicionado</string>
 
+    <string name="speaker">Parlante</string>
+    <string name="setVolume">Establecer volumen</string>
+    <string name="play">Reproducir</string>
+    <string name="pause">Pausar</string>
+    <string name="stop">Detener</string>
+    <string name="resume">Reanudar</string>
+    <string name="nextSong">Canción siguiente</string>
+    <string name="previousSong">Canción anterior</string>
+    <string name="setGenre">Establecer género</string>
+    <string name="getPlaylist">Obtener lista de reproducción</string>
+    <string name="volume">Volumen</string>
+    <string name="genre">Género</string>
     <string name="country">Country</string>
     <string name="classical">Clásica</string>
     <string name="dance">Baile</string>
@@ -21,23 +27,13 @@
     <string name="pop">Pop</string>
     <string name="rock">Rock</string>
 
-    <string name="setVolume">Establecer volumen</string>
-    <string name="play">Reproducir</string>
-    <string name="pause">Pausar</string>
-    <string name="stop">Detener</string>
-    <string name="resume">Reanudar</string>
-    <string name="nextSong">Cancion siguiente</string>
-    <string name="previousSong">Cancion anterior</string>
-    <string name="setGenre">Establecer género</string>
-    <string name="getPlaylist">Obtener lista de reproducción</string>
-    <string name="volume">Volumen</string>
-    <string name="genre">Género</string>
-
+    <string name="blind">Persiana</string>
     <string name="open">Abrir</string>
     <string name="close">Cerrar</string>
     <string name="setLevel">Establecer nivel</string>
     <string name="level">Nivel</string>
 
+    <string name="lamp">Lámpara</string>
     <string name="turnOn">Encender</string>
     <string name="turnOff">Apagar</string>
     <string name="setColor">Establecer color</string>
@@ -45,11 +41,53 @@
     <string name="color">Color</string>
     <string name="brightness">Brillo</string>
 
-    //Lampara
-    turnOn: 'Encender',
-    turnOff: 'Apagar',
-    setColor: 'Establecer color',
-    setBrightness: 'Establecer brillo',
-    color : 'Color',
-    brightness : 'Brillo',
+    <string name="oven">Horno</string>
+    <string name="setTemperature">Establecer temperatura</string>
+    <string name="setHeat">Establecer calor</string>
+    <string name="setGrill">Establecer parrilla</string>
+    <string name="setConvection">Establecer convección</string>
+    <string name="temperature">Temperatura</string>
+    <string name="heat">Calor</string>
+    <string name="grill">Parrilla</string>
+    <string name="convection">Convección</string>
+    <string name="conventional">Convencional</string>
+    <string name="bottom">Abajo</string>
+    <string name="top">Arriba</string>
+    <string name="large">Grande</string>
+    <string name="eco">Eco</string>
+    <string name="off">Apagado</string>
+    <string name="normal">Normal</string>
+
+    <string name="airConditioner">Aire Acondicionado</string>
+    <string name="setMode">Establecer modo</string>
+    <string name="setVerticalSwing">Establecer oscilación vertical</string>
+    <string name="setHorizontalSwing">Establecer oscilación horizontal</string>
+    <string name="setFanSpeed">Establecer velocidad del ventilador</string>
+    <string name="mode">Modo</string>
+    <string name="verticalSwing">Oscilación vertical</string>
+    <string name="horizontalSwing">Oscilación horizontal</string>
+    <string name="fanSpeed">Velocidad del ventilador</string>
+    <string name="cool">Frío</string>
+    <string name="fan">Ventilador</string>
+
+    <string name="door">Puerta</string>
+    <string name="lock">Bloqueado</string>
+    <string name="unlock">Desbloqueado</string>
+
+    <string name="alarm">Alarma</string>
+    <string name="changeSecurityCode">Cambiar código de seguridad</string>
+    <string name="securityCode">Código de seguridad</string>
+    <string name="oldSecurityCode">Anterior ódigo de seguridad</string>
+    <string name="newSecurityCode">Nuevo código de seguridad</string>
+    <string name="armStay">Activar alarma en casa</string>
+    <string name="armAway">Activar alarma fuera de casa</string>
+    <string name="disarm">Desactivar alarma</string>
+
+    <string name="fridge">Heladera</string>
+    <string name="setFreezerTemperature">Establecer temperatura del freezer</string>
+<!--    <string name="default">Por defecto</string>-->
+    <string name="vacation">Vacaciones</string>
+    <string name="party">Fiesta</string>
+
+
 </resources>

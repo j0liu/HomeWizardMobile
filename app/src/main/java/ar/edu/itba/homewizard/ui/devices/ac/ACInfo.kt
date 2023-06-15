@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -89,18 +90,14 @@ fun ACInfo(acViewModel: ACViewModel = viewModel()) {
         // TODO: Move to state
         val options = listOf(R.drawable.white_balance_sunny, R.drawable.snowflake, R.drawable.weather_windy)
         var selected by remember { mutableStateOf(0) }
-       CustomToggle(options = options, selected = selected, onSelectedChange = {  selected = it })
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly,
+        CustomToggle(options = options, selected = selected, onSelectedChange = {  selected = it })
+        Column(
+            horizontalAlignment = Alignment.Start,
             modifier = Modifier
-                .padding(10.dp)
-                .fillMaxWidth(),
         ) {
-            DropdownButton(modifier = Modifier, "Velocidad\nventilador", listOf("25", "50", "75", "100"), 118)
-            DropdownButton(modifier = Modifier, "Aspas\nverticales", listOf("Auto", "22", "45", "67", "90"), 118)
-            DropdownButton(modifier = Modifier, "Aspas\nhorizontales", listOf("Auto", "-90", "-45", "0", "45", "90"), 118)
+            DropdownButton(modifier = Modifier, "Velocidad ventilador", 20, listOf("25", "50", "75", "100"))
+            DropdownButton(modifier = Modifier, "Aspas verticales", 20, listOf("Auto", "22", "45", "67", "90"))
+            DropdownButton(modifier = Modifier, "Aspas horizontales", 20, listOf("Auto", "-90", "-45", "0", "45", "90"))
         }
-
     }
 }
