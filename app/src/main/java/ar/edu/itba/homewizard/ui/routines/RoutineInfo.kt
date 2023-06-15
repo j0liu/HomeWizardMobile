@@ -29,17 +29,27 @@ fun RoutineInfo(routinesViewModel: RoutinesViewModel) {
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        modifier = Modifier.fillMaxHeight(0.97f),
+        modifier = Modifier.fillMaxHeight(0.95f),
         topBar = {
             TopAppBar(
                 elevation = 0.dp,
-                modifier = Modifier.fillMaxWidth().height(32.dp),
+                modifier = Modifier.fillMaxWidth(),
+                title = {
+                    Text(
+                        text = routineUiState.currentRoutine?.name ?: "",
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+                },
                 navigationIcon = {
-                    IconButton(onClick = {
-                        scope.launch {
-                            routineUiState.scaffoldState.bottomSheetState.collapse()
+                    IconButton(
+                        modifier = Modifier,
+                        onClick = {
+                            scope.launch {
+                                routineUiState.scaffoldState.bottomSheetState.collapse()
+                            }
                         }
-                    }) {
+                    ) {
                         Icon(
                             modifier = Modifier.size(30.dp, 30.dp),
                             imageVector = ImageVector.vectorResource(R.drawable.chevron_down),
@@ -47,26 +57,17 @@ fun RoutineInfo(routinesViewModel: RoutinesViewModel) {
                         )
                     }
                 },
-                title = {}
             )
         }
     ) {
         Column(
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primary),
-            verticalArrangement = Arrangement.Top,
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(
-                text = routineUiState.currentRoutine?.name ?: "",
-                textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
-                fontSize = 20.sp,
-                color = MaterialTheme.colors.onPrimary
-            )
             routine?.actions?.forEach { action ->
                 ActionCard(action = action)
             }
         }
     }
-
 }

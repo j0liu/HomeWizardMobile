@@ -34,7 +34,7 @@ fun DeviceInfo(devicesViewModel: DevicesViewModel) {
                 title = {
                     Text(
                         text = devicesUiState.currentDevice?.name ?: "",
-                        textAlign = TextAlign.Center,
+                        textAlign = TextAlign.Start,
                         modifier = Modifier.fillMaxWidth()
                     )
                 },
