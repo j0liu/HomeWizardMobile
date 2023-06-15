@@ -1,5 +1,7 @@
 package ar.edu.itba.homewizard.viewmodels
 
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.data.Device
@@ -14,19 +16,16 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterialApi::class)
 class DevicesViewModel(private val deviceRepository : DeviceRepository ) : ViewModel() {
     private val _uiState = MutableStateFlow(DevicesUiState())
     val uiState : StateFlow<DevicesUiState> = _uiState.asStateFlow()
 
-    var devices : MutableSet<Device> = mutableSetOf()
     init {
         viewModelScope.launch {
             runCatching {
-                deviceRepository.getDevices().forEach { device ->
-                    devices.add(device)
-                }
                 _uiState.update { it.copy(
-                    devices = devices,
+                    devices = deviceRepository.getDevices().toMutableSet(),
                     isLoading = false
                 ) }
             }
@@ -34,7 +33,22 @@ class DevicesViewModel(private val deviceRepository : DeviceRepository ) : ViewM
     }
 
     fun setCurrentDevice(device : Device) {
-        _uiState.value = DevicesUiState(devices = devices, currentDevice = device)
+        _uiState.update {
+            it.copy(
+                devices = uiState.value.devices,
+                currentDevice = device
+            )
+        }
+    }
+
+    fun setOverflowMenuVisibility(expanded: Boolean) {
+        _uiState.update {
+            it.copy(
+                devices = uiState.value.devices,
+                currentDevice = uiState.value.currentDevice,
+                overflowExpanded = expanded
+            )
+        }
     }
     private var fetchJob: Job? = null
 

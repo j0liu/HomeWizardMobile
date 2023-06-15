@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        actionBar?.hide() // TODO: Sacar
         setContent {
             HomeWizardMobileTheme {
                 val navController = rememberNavController()
