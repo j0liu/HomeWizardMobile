@@ -85,5 +85,6 @@
 <!--    <string name="default">Default</string>-->
     <string name="vacation">Vacation</string>
     <string name="party">Party</string>
+    <string name="schedule_message">Number of seconds between 1 and 60</string>
 
 </resources>

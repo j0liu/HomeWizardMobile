@@ -89,5 +89,7 @@
     <string name="vacation">Vacaciones</string>
     <string name="party">Fiesta</string>
 
+    <string name="schedule_message">Segundos entre 1 y 60</string>
+
 
 </resources>
