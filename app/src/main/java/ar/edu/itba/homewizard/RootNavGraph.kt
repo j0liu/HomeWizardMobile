@@ -17,10 +17,10 @@ fun RootNavGraph(navController: NavHostController) {
         startDestination = Screen.DevicesScreen.route
     ) {
         composable(Screen.DevicesScreen.route) {
-            DevicesScreen(DevicesViewModel((LocalContext.current.applicationContext as HomeWizardApplication).deviceRepository))
+            DevicesScreen()
         }
         composable(Screen.RoutinesScreen.route) {
-            RoutinesScreen(RoutinesViewModel((LocalContext.current.applicationContext as HomeWizardApplication).routineRepository))
+            RoutinesScreen()
         }
 //        composable(Screen.SettingsScreen.route) {
 //            SettingsScreen()

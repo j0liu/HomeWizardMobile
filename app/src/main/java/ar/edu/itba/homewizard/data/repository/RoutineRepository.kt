@@ -2,8 +2,11 @@ package ar.edu.itba.homewizard.data.repository
 
 import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.data.network.RoutineRemoteDataSource
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class RoutineRepository (
+@Singleton
+class RoutineRepository @Inject constructor (
     private val routineRemoteDataSource: RoutineRemoteDataSource
 ) {
     suspend fun getRoutines(): List<Routine> {

@@ -17,13 +17,14 @@ import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.ui.theme.*
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DevicesScreen(devicesViewModel: DevicesViewModel) {
+fun DevicesScreen(devicesViewModel: DevicesViewModel = hiltViewModel()) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
 

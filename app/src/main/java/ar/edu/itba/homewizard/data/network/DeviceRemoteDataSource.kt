@@ -2,8 +2,11 @@ package ar.edu.itba.homewizard.data.network
 
 import ar.edu.itba.homewizard.data.network.models.NetworkDevice
 import ar.edu.itba.homewizard.data.network.models.NetworkResponse
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DeviceRemoteDataSource (
+@Singleton
+class DeviceRemoteDataSource @Inject constructor(
     private val apiService: ApiService
 ) : RemoteDataSource() {
     suspend fun getDevices() : NetworkResponse<List<NetworkDevice>> {

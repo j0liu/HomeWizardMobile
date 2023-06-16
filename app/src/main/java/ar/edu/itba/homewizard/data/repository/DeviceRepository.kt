@@ -2,9 +2,11 @@ package ar.edu.itba.homewizard.data.repository
 
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.network.DeviceRemoteDataSource
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DeviceRepository (
-    //private val deviceLocalDataSource: DeviceLocalDataSource
+@Singleton
+class DeviceRepository @Inject constructor (
     private val deviceRemoteDataSource: DeviceRemoteDataSource
 ) {
     suspend fun getDevices(): List<Device> {

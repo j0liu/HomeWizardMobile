@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
@@ -21,7 +22,9 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun RoutinesScreen(routinesViewModel: RoutinesViewModel = viewModel()) {
+fun RoutinesScreen(
+    routinesViewModel: RoutinesViewModel = hiltViewModel()
+) {
     val routinesUiState by routinesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
 

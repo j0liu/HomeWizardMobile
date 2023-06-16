@@ -6,15 +6,20 @@ import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @OptIn(ExperimentalMaterialApi::class)
-class DevicesViewModel(private val deviceRepository : DeviceRepository ) : ViewModel() {
+@HiltViewModel
+class DevicesViewModel @Inject constructor(
+    private val deviceRepository : DeviceRepository
+) : ViewModel() {
     private val _uiState = MutableStateFlow(DevicesUiState())
     val uiState : StateFlow<DevicesUiState> = _uiState.asStateFlow()
 
