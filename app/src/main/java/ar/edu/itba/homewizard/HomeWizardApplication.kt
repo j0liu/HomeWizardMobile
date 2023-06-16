@@ -10,7 +10,7 @@ class HomeWizardApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         val intent = Intent(this, EventService::class.java)
-        startService(intent)
+//        startService(intent)
     }
 
 }

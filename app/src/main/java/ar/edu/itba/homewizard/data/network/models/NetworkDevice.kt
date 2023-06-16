@@ -3,6 +3,8 @@ package ar.edu.itba.homewizard.data.network.models
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
 import com.google.gson.annotations.SerializedName
+import kotlin.reflect.full.createInstance
+import kotlin.reflect.full.primaryConstructor
 
 
 data class NetworkDevice (
@@ -19,13 +21,15 @@ data class NetworkDevice (
 ){
     //cast networkdevice to device
     fun toDevice(): Device {
-        return Device(
-            id = this.id!!,
-            name = this.name!!,
-            type = this.type!!.toDeviceType(),
-            state = this.state,
-            meta = this.meta!!
+        val deviceType : DeviceType = this.type!!.toDeviceType()
+        val classInstance = deviceType.deviceClass.primaryConstructor?.call(
+            this.id!!,
+            this.name!!,
+            deviceType,
+            this.state,
+            this.meta!!
         )
+        return classInstance as Device
     }
 }
 

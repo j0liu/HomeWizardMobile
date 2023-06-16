@@ -27,7 +27,7 @@ class DevicesViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 _uiState.update { it.copy(
-                    devices = deviceRepository.getDevices().toMutableSet(),
+                    devices = deviceRepository.getDevices(),
                     isLoading = false
                 ) }
             }
@@ -52,6 +52,10 @@ class DevicesViewModel @Inject constructor(
             )
         }
     }
-    private var fetchJob: Job? = null
+
+    fun printHola(name : String) {
+        println("hola $name");
+    }
+
 
 }

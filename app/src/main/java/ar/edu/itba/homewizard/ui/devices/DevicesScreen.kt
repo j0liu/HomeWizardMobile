@@ -24,7 +24,9 @@ import ar.edu.itba.homewizard.ui.theme.*
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DevicesScreen(devicesViewModel: DevicesViewModel = hiltViewModel()) {
+fun DevicesScreen(
+    devicesViewModel: DevicesViewModel = hiltViewModel()
+) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
 

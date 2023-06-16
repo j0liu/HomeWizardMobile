@@ -16,17 +16,25 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.viewmodels.LampViewModel
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.data.models.devices.Lamp
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.ui.theme.Surface
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import io.mhssn.colorpicker.ColorPicker
 import io.mhssn.colorpicker.ColorPickerType
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LampInfo(lampViewModel: LampViewModel = viewModel()) {
+fun LampInfo(
+    devicesViewModel: DevicesViewModel = hiltViewModel()
+) {
+    val devicesUiState by devicesViewModel.uiState.collectAsState()
+    val lamp = devicesUiState.currentDevice as Lamp
+
     var lampBrightness by remember { mutableStateOf(2f) }
     Column (
         modifier = Modifier
@@ -63,6 +71,7 @@ fun LampInfo(lampViewModel: LampViewModel = viewModel()) {
             modifier = Modifier.pointerInput(Unit) {
                 detectDragGestures (
                     onDrag = { dragEnd, velocity ->
+                        lamp.turnOn(devicesViewModel)
                         // Lógica para manejar el final del arrastre
                     }
                 )
