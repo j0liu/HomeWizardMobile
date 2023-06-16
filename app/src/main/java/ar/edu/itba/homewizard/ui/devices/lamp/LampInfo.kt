@@ -42,9 +42,10 @@ fun LampInfo(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        //rounded button with material design icon
         IconButton(
-            onClick = {  },
+            onClick = {
+                lamp.turnOn(devicesViewModel)
+            },
             modifier = Modifier
                 .size(160.dp)
                 .background(MaterialTheme.colors.surface, shape = CircleShape)
@@ -71,7 +72,6 @@ fun LampInfo(
             modifier = Modifier.pointerInput(Unit) {
                 detectDragGestures (
                     onDrag = { dragEnd, velocity ->
-                        lamp.turnOn(devicesViewModel)
                         // Lógica para manejar el final del arrastre
                     }
                 )

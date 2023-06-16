@@ -22,7 +22,11 @@ open class Device (
     val type: DeviceType,
     val state: Any?,
     val meta: Any,
-)
+) {
+    fun executeAction(viewModel: DevicesViewModel, action: Action) {
+       viewModel.executeAction(action)
+    }
+}
 
 typealias ComposableFun = @Composable () -> Unit
 class DeviceType(var id: String, var name: String, val infoScreen: ComposableFun, val icon : Int, val deviceClass : KClass<*>) {

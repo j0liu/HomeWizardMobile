@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.data.models.devices
 
+import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
@@ -14,7 +15,7 @@ class Lamp (
 ) : Device(id, name, type, state, meta)
 {
     fun turnOn(devicesViewModel: DevicesViewModel) {
-        devicesViewModel.printHola("lamp!")
+        devicesViewModel.executeAction(Action("turnOn", this, listOf()))
     }
 
 }

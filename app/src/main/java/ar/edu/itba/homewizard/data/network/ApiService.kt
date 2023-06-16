@@ -2,7 +2,9 @@ package ar.edu.itba.homewizard.data.network
 
 import ar.edu.itba.homewizard.data.network.models.*
 import retrofit2.Response
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface ApiService {
@@ -18,4 +20,7 @@ interface ApiService {
 
     @GET("/api/routines/{routineId}")
     suspend fun getRoutine(@Path("routineId") routineId: String): Response<NetworkResponse<NetworkRoutine>>
+
+    @PUT("/api/devices/{deviceId}/{actionName}")
+    suspend fun executeAction(@Path("deviceId") deviceId: String, @Path("actionName") actionName: String, @Body params: Array<Any>): Response<NetworkResponse<Any>>
 }

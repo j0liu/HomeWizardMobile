@@ -3,6 +3,7 @@ package ar.edu.itba.homewizard.viewmodels
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
@@ -21,20 +22,22 @@ class DevicesViewModel @Inject constructor(
     private val deviceRepository : DeviceRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DevicesUiState())
-    val uiState : StateFlow<DevicesUiState> = _uiState.asStateFlow()
+    val uiState: StateFlow<DevicesUiState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
             runCatching {
-                _uiState.update { it.copy(
-                    devices = deviceRepository.getDevices(),
-                    isLoading = false
-                ) }
+                _uiState.update {
+                    it.copy(
+                        devices = deviceRepository.getDevices(),
+                        isLoading = false
+                    )
+                }
             }
         }
     }
 
-    fun setCurrentDevice(device : Device) {
+    fun setCurrentDevice(device: Device) {
         _uiState.update {
             it.copy(
                 devices = uiState.value.devices,
@@ -53,9 +56,11 @@ class DevicesViewModel @Inject constructor(
         }
     }
 
-    fun printHola(name : String) {
-        println("hola $name");
+    fun executeAction(action: Action) {
+        viewModelScope.launch {
+//            runCatching {
+                deviceRepository.executeAction(action.device.id, action.actionName, action.params)
+//            }
+        }
     }
-
-
 }
