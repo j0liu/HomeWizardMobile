@@ -5,15 +5,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.data.models.devices.Fridge
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.ui.inputs.CustomToggle
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @Composable
-fun RefrigeratorInfo() {
-    // TODO: Mover a state
-    var fridgeTemperature by remember { mutableStateOf(2f) }
-    var freezerTemperature by remember { mutableStateOf(-8f) }
+fun RefrigeratorInfo (devicesViewModel: DevicesViewModel = hiltViewModel()) {
+    val devicesUiState by devicesViewModel.uiState.collectAsState()
+    val fridge = devicesUiState.currentDevice as Fridge
 
     Column (
         modifier = Modifier.fillMaxHeight(),
@@ -21,19 +23,17 @@ fun RefrigeratorInfo() {
     ) {
 
         CustomSlider(
-            value = fridgeTemperature,
-            //onValueChange = { fridgeTemperature = it },
+            value = fridge.temperature.toFloat(),
             valueRange = 2f..8f,
-            onValueChangeFinished = { /*TODO*/ },
+            onValueChangeFinished = {fridge.changeTemperature(devicesViewModel, it.toInt())},
             title = "Temperatura heladera",
             unit = "°",
             icon = R.drawable.thermometer_low
         )
         CustomSlider(
-            value = freezerTemperature,
-            //onValueChange = { freezerTemperature = it },
+            value = fridge.freezerTemperature.toFloat(),
             valueRange = -20f..-8f,
-            onValueChangeFinished = { /*TODO*/ },
+            onValueChangeFinished = { fridge.changeFreezerTemperature(devicesViewModel, it.toInt()) },
             title = "Temperatura freezer",
             unit = "°",
             icon = R.drawable.snowflake_thermometer
@@ -45,7 +45,7 @@ fun RefrigeratorInfo() {
             //Toggle button of three states
             var selected by remember { mutableStateOf(0) }
             val options = listOf(R.drawable.mdi_fridge, R.drawable.mdi_beach, R.drawable.mdi_party_popper)
-            CustomToggle(options = options, selected = selected, onSelectedChange = {  selected = it })
+            CustomToggle(options = options, selected = fridge.getMode(), onSelectedChange = { selection -> fridge.setMode(devicesViewModel, selection)  })
 
         }
     }

@@ -13,12 +13,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ar.edu.itba.homewizard.data.models.devices.Door
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.DoorViewModel
 
 @Composable
-fun DoorInfo (doorViewModel: DoorViewModel = viewModel()){
-    val devicesUiState by doorViewModel.uiState.collectAsState()
+fun DoorInfo (devicesViewModel: DevicesViewModel = hiltViewModel()){
+//    val devicesUiState by doorViewModel.uiState.collectAsState()
+    val devicesUiState by devicesViewModel.uiState.collectAsState()
+    val door = devicesUiState.currentDevice as Door
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -27,7 +32,7 @@ fun DoorInfo (doorViewModel: DoorViewModel = viewModel()){
             .padding(top = 40.dp)
     ) {
         Button(
-            onClick = { doorViewModel.toggleLock() },
+            onClick = { door.toggleLock(devicesViewModel) },
             Modifier.padding(bottom = 40.dp),
             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
             shape = RoundedCornerShape(20.dp)
@@ -36,14 +41,14 @@ fun DoorInfo (doorViewModel: DoorViewModel = viewModel()){
                 modifier = Modifier
                     .size(120.dp),
                 imageVector =
-                if (devicesUiState.locked) ImageVector.vectorResource(id = R.drawable.lock)
+                if ((devicesUiState.currentDevice as Door).lock) ImageVector.vectorResource(id = R.drawable.lock)
                 else ImageVector.vectorResource(id = R.drawable.lock_open),
-                tint = MaterialTheme.colors.onPrimary,
+                tint = MaterialTheme.colors.onSurface,
                 contentDescription = "content description"
             )
         }
         Button(
-            onClick = { doorViewModel.toggleClose() },
+            onClick = { door.toggleOpenClose(devicesViewModel)},
             colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
             shape = RoundedCornerShape(20.dp)
         ) {
@@ -51,9 +56,9 @@ fun DoorInfo (doorViewModel: DoorViewModel = viewModel()){
                 modifier = Modifier
                     .size(120.dp),
                 imageVector =
-                if (devicesUiState.closed) ImageVector.vectorResource(id = R.drawable.door_closed)
+                if ((devicesUiState.currentDevice as Door).status) ImageVector.vectorResource(id = R.drawable.door_closed)
                 else ImageVector.vectorResource(id = R.drawable.door_open),
-                tint = Color.Black,
+                tint = MaterialTheme.colors.onSurface,
                 contentDescription = "content description"
             )
         }
