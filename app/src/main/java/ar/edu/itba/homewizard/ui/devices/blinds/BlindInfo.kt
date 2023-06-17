@@ -68,7 +68,7 @@ fun BlindInfo() {
         }
         CustomSlider(
             value = currentLevel,
-            onValueChange = { currentLevel = it },
+//            onValueChange = { currentLevel = it },
             valueRange = 0f..100f,
             onValueChangeFinished = { /*TODO*/ },
             title = "Nivel de la persiana",

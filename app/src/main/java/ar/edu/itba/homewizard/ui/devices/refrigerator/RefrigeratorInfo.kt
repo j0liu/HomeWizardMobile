@@ -22,7 +22,7 @@ fun RefrigeratorInfo() {
 
         CustomSlider(
             value = fridgeTemperature,
-            onValueChange = { fridgeTemperature = it },
+            //onValueChange = { fridgeTemperature = it },
             valueRange = 2f..8f,
             onValueChangeFinished = { /*TODO*/ },
             title = "Temperatura heladera",
@@ -31,7 +31,7 @@ fun RefrigeratorInfo() {
         )
         CustomSlider(
             value = freezerTemperature,
-            onValueChange = { freezerTemperature = it },
+            //onValueChange = { freezerTemperature = it },
             valueRange = -20f..-8f,
             onValueChangeFinished = { /*TODO*/ },
             title = "Temperatura freezer",

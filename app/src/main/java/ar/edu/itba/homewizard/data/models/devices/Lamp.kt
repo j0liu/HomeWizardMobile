@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.data.models.devices
 
+import androidx.compose.ui.text.toLowerCase
 import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceState
@@ -23,7 +24,7 @@ data class Lamp (
         val lampState = this.state as LampState
         this.status = lampState.status == "on"
         this.brightness = lampState.brightness.toInt()
-        this.color = lampState.color
+        this.color = "#FF" + lampState.color.replace("#", "")
     }
 
     fun turnOn(devicesViewModel: DevicesViewModel) {
@@ -35,20 +36,22 @@ data class Lamp (
     }
 
     fun changeColor(devicesViewModel: DevicesViewModel, color: String) {
-        devicesViewModel.executeAction(Action("changeColor", this, listOf(color)))
+        devicesViewModel.executeAction(Action("setColor", this, listOf(color.replace("#", "").substring(2))))
+        this.color = color
     }
 
     fun changeBrightness(devicesViewModel: DevicesViewModel, brightness: Int) {
-        devicesViewModel.executeAction(Action("changeBrightness", this, listOf(brightness)))
+        this.brightness = brightness
+        devicesViewModel.executeAction(Action("setBrightness", this, listOf(brightness)))
     }
 
     fun toggle(devicesViewModel: DevicesViewModel) {
-//        this.status = !this.status
         if (this.status) {
             this.turnOff(devicesViewModel)
         } else {
             this.turnOn(devicesViewModel)
         }
+        this.status = !this.status
     }
 
     data class LampState (

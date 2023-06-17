@@ -2,7 +2,7 @@ package ar.edu.itba.homewizard.ui.inputs
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -15,16 +15,16 @@ fun CustomSlider(
     modifier: Modifier = Modifier,
     title: String,
     value: Float,
-    onValueChange: (Float) -> Unit,
     valueRange: ClosedFloatingPointRange<Float>,
     steps: Int = 0,
-    onValueChangeFinished: () -> Unit = {},
+    onValueChangeFinished: (Float) -> Unit = {},
     unit: String,
     icon: Int,
 ) {
+    var currentValue by remember { mutableStateOf(value) }
+
     Column(
         modifier = Modifier
-            .then(modifier)
             .padding(start = 10.dp)
     )
     {
@@ -49,11 +49,11 @@ fun CustomSlider(
 //                    .width(315.dp)
 //                    .fillMaxWidth(),
                     .weight(0.8f),
-                value = value,
-                onValueChange = onValueChange,
+                value = currentValue,
+                onValueChange = { currentValue = it },
                 valueRange = valueRange,
                 steps = steps,
-                onValueChangeFinished = onValueChangeFinished,
+                onValueChangeFinished = {onValueChangeFinished(currentValue)},
                 colors = SliderDefaults.colors(
                     thumbColor = MaterialTheme.colors.surface,
                     activeTrackColor = MaterialTheme.colors.surface,

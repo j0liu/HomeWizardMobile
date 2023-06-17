@@ -117,7 +117,7 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
         //todo ver si podemos cambiarlo por eventos de los botones
         CustomSlider(
             value = devicesUiState.volume,
-            onValueChange = {  speakerViewModel.setVolume(it) },
+//            onValueChange = {  speakerViewModel.setVolume(it) },
             valueRange = 0f..100f,
             onValueChangeFinished = { },
             title = "",

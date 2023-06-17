@@ -58,9 +58,15 @@ class DevicesViewModel @Inject constructor(
 
     fun executeAction(action: Action) {
         viewModelScope.launch {
-//            runCatching {
+            runCatching {
+                _uiState.update {
+                    it.copy(isLoading = true)
+                }
                 deviceRepository.executeAction(action.device.id, action.actionName, action.params)
-//            }
+                _uiState.update {
+                    it.copy(isLoading = false)
+                }
+            }
         }
     }
 }

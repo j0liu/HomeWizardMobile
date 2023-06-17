@@ -49,7 +49,7 @@ fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
         ) {
             CustomSlider(
                 value = ovenTemperature,
-                onValueChange = { ovenTemperature = it },
+//                onValueChange = { ovenTemperature = it },
                 valueRange = 90f..230f,
                 onValueChangeFinished = { /*TODO*/ },
                 title = "Temperatura",
