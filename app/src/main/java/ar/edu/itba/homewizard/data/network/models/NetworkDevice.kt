@@ -3,12 +3,10 @@ package ar.edu.itba.homewizard.data.network.models
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceState
 import ar.edu.itba.homewizard.data.models.DeviceType
-import ar.edu.itba.homewizard.data.models.devices.Door
 import ar.edu.itba.homewizard.data.models.devices.Speaker
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
-import kotlin.reflect.full.createInstance
 import kotlin.reflect.full.primaryConstructor
 
 
@@ -32,7 +30,8 @@ data class NetworkDevice (
         // Edge case
         if (deviceType.deviceClass == Speaker::class)  {
             val speakerState = deviceState as Speaker.SpeakerState
-            speakerState.song = Gson().fromJson(this.state!!.get("song"), Speaker.SpeakerSong::class.java)
+            if (this.state!!.has("song"))
+                speakerState.song = Gson().fromJson(this.state!!.get("song"), Speaker.SpeakerSong::class.java)
         }
 
         val classInstance = deviceType.deviceClass.primaryConstructor?.call(

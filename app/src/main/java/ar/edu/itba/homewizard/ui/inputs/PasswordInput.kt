@@ -29,7 +29,7 @@ fun PasswordInput(label : String, text : TextFieldValue, onValueChange : (TextFi
         visualTransformation =  if(passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = MaterialTheme.colors.surface,
-            textColor = MaterialTheme.colors.onPrimary
+            textColor = MaterialTheme.colors.onSurface
         ),
         trailingIcon = {
             IconButton(onClick = {passwordVisible = !passwordVisible}){
