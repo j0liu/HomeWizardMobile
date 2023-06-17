@@ -17,7 +17,7 @@ import ar.edu.itba.homewizard.R
 fun PowerButton(modifier: Modifier = Modifier, selected: Boolean, onClick: () -> Unit) {
     Button(
         onClick = { onClick() },
-        modifier.padding(bottom = 40.dp).then(modifier),
+        modifier.padding(bottom = 10.dp).then(modifier),
         colors = ButtonDefaults.buttonColors(backgroundColor = if (!selected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.secondary),
         shape = RoundedCornerShape(20.dp)
     ) {

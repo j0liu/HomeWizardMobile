@@ -40,9 +40,7 @@ fun DeviceInfo(devicesViewModel: DevicesViewModel) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        scope.launch {
-                            devicesUiState.scaffoldState.bottomSheetState.collapse()
-                        }
+                        devicesViewModel.collapseBottomSheet(scope)
                     }) {
                         Icon(
                             modifier = Modifier.size(30.dp, 30.dp),

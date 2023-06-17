@@ -23,10 +23,12 @@ fun DropdownButton (
     modifier : Modifier = Modifier,
     title : String,
     titleSize : Int,
-    options : List<String>,
+    options : Array<String>,
+    initialValue: String,
+    onOptionSelected: (value: String) -> Unit
 ){
     var expanded by remember { mutableStateOf(false) }
-    val selectedIndex = remember { mutableStateOf(0) }
+    val selectedIndex = remember { mutableStateOf(options.indexOf(initialValue)) }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -74,6 +76,7 @@ fun DropdownButton (
                     DropdownMenuItem(onClick = {
                         selectedIndex.value = index
                         expanded = false
+                        onOptionSelected(options[index])
                     }) {
                         Text(text = s, textAlign = TextAlign.Center)
                     }

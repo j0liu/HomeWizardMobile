@@ -31,7 +31,7 @@ fun RoutinesScreen(
     // TODO: Modularizar?
     BackHandler(enabled = routinesUiState.scaffoldState.bottomSheetState.isExpanded) {
         scope.launch {
-            routinesUiState.scaffoldState.bottomSheetState.collapse()
+            routinesUiState.scaffoldState.bottomSheetState.collapse() // TODO: Cambiar a funcion del viewmodel
         }
     }
 

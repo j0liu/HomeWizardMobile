@@ -1,103 +1,67 @@
 package ar.edu.itba.homewizard.ui.devices.ac
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.data.models.devices.AC
 import ar.edu.itba.homewizard.ui.inputs.CustomToggle
 import ar.edu.itba.homewizard.ui.inputs.DropdownButton
-import ar.edu.itba.homewizard.ui.theme.*
-import ar.edu.itba.homewizard.viewmodels.ACViewModel
+import ar.edu.itba.homewizard.ui.inputs.NumericController
+import ar.edu.itba.homewizard.ui.inputs.PowerButton
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun ACInfo(acViewModel: ACViewModel = viewModel()) {
+fun ACInfo(
+    devicesViewModel: DevicesViewModel = hiltViewModel()
+) {
+    val devicesUiState by devicesViewModel.uiState.collectAsState()
+    val ac = devicesUiState.currentDevice as AC
+    val options = listOf(R.drawable.white_balance_sunny, R.drawable.snowflake, R.drawable.weather_windy)
+    var selected by remember { mutableStateOf(AC.modeNames.indexOf(ac.mode)) }
+
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        //rounded button with material design icon
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ){
-            IconButton(
-                onClick = {  },
-                modifier = Modifier
-                    .size(100.dp)
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .size(60.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.baseline_horizontal_rule_24) ,
-                    tint = MaterialTheme.colors.surface,
-                    contentDescription = "content description"
-                )
-            }
-            Text(
-                text = "24°",
-                fontSize = 70.sp,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colors.onPrimary,
-                modifier = Modifier
-            )
-            IconButton(
-                onClick = {  },
-                modifier = Modifier
-                    .size(100.dp)
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .size(70.dp),
-                    imageVector = Icons.Filled.Add,
-                    tint = MaterialTheme.colors.surface,
-                    contentDescription = "content description"
-                )
-            }
-        }
+        NumericController(value = ac.temperature, unit = "°", onValueChanged = {
+            ac.setTemperature(devicesViewModel, it)
+        })
         Row(
             modifier = Modifier
                 .padding(8.dp),
         ) {
-            IconButton(
-                onClick = { },
-                modifier = Modifier
-                    .size(100.dp)
-                    .background(MaterialTheme.colors.surface, shape = CircleShape)
+            PowerButton(
+                selected = ac.status,
             ) {
-                Icon(
-                    modifier = Modifier.size(60.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.baseline_power_settings_new_24),
-                    contentDescription = "content description"
-                )
+                ac.toggle(devicesViewModel)
             }
         }
-        // TODO: Move to state
-        val options = listOf(R.drawable.white_balance_sunny, R.drawable.snowflake, R.drawable.weather_windy)
-        var selected by remember { mutableStateOf(0) }
-        CustomToggle(options = options, selected = selected, onSelectedChange = {  selected = it })
+
+        CustomToggle(options = options, selected = selected, onSelectedChange = {
+            selected = it
+            ac.setMode(devicesViewModel, selected)
+        })
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
         ) {
-            DropdownButton(modifier = Modifier, "Velocidad ventilador", 20, listOf("25", "50", "75", "100"))
-            DropdownButton(modifier = Modifier, "Aspas verticales", 20, listOf("Auto", "22", "45", "67", "90"))
-            DropdownButton(modifier = Modifier, "Aspas horizontales", 20, listOf("Auto", "-90", "-45", "0", "45", "90"))
+            DropdownButton(modifier = Modifier, "Velocidad ventilador", 20, AC.fanSpeedValues, ac.fanSpeed) {
+                ac.setFanSpeed(devicesViewModel, it)
+            }
+            DropdownButton(modifier = Modifier, "Aspas verticales", 20, AC.verticalSwingValues, ac.verticalSwing) {
+                ac.setVerticalSwing(devicesViewModel, it)
+            }
+            DropdownButton(modifier = Modifier, "Aspas horizontales", 20, AC.horizontalSwingValues, ac.horizontalSwing) {
+                ac.setHorizontalSwing(devicesViewModel, it)
+            }
         }
     }
 }

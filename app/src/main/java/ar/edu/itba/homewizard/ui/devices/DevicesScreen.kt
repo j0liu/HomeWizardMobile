@@ -32,9 +32,7 @@ fun DevicesScreen(
 
     // TODO: Modularizar?
     BackHandler(enabled = devicesUiState.scaffoldState.bottomSheetState.isExpanded) {
-        scope.launch {
-            devicesUiState.scaffoldState.bottomSheetState.collapse()
-        }
+        devicesViewModel.collapseBottomSheet(scope)
     }
 
     Column(

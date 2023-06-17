@@ -61,9 +61,9 @@ fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
         ) {
-            DropdownButton(modifier = Modifier, "Calor", 24, listOf("Convencional", "Abajo", "Arriba"))
-            DropdownButton(modifier = Modifier, "Parrilla", 24, listOf("Apagado", "Económico", "Completo"))
-            DropdownButton(modifier = Modifier, "Convección", 24, listOf("Apagado", "Económico", "Convencional"))
+//            DropdownButton(modifier = Modifier, "Calor", 24, arrayOf("Convencional", "Abajo", "Arriba"), {})
+//            DropdownButton(modifier = Modifier, "Parrilla", 24, arrayOf("Apagado", "Económico", "Completo"), {})
+//            DropdownButton(modifier = Modifier, "Convección", 24, arrayOf("Apagado", "Económico", "Convencional"), {})
         }
     }
 }

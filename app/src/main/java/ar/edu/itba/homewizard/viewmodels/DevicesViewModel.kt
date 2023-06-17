@@ -1,6 +1,7 @@
 package ar.edu.itba.homewizard.viewmodels
 
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.runtime.currentRecomposeScope
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.data.models.Action
@@ -8,6 +9,7 @@ import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +23,7 @@ import javax.inject.Inject
 class DevicesViewModel @Inject constructor(
     private val deviceRepository : DeviceRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(DevicesUiState())
+    private val _uiState = MutableStateFlow(DevicesUiState(collapseBottomSheet = { collapseBottomSheet() }))
     val uiState: StateFlow<DevicesUiState> = _uiState.asStateFlow()
 
     init {
@@ -37,10 +39,16 @@ class DevicesViewModel @Inject constructor(
         }
     }
 
-    fun setCurrentDevice(device: Device) {
+    fun collapseBottomSheet(scope: CoroutineScope? = null) {
+        scope?.launch {
+            _uiState.value.scaffoldState.bottomSheetState.collapse()
+        }
+        setCurrentDevice(null)
+    }
+
+    fun setCurrentDevice(device: Device?) {
         _uiState.update {
             it.copy(
-                devices = uiState.value.devices,
                 currentDevice = device
             )
         }
