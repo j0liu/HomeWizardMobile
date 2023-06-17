@@ -32,7 +32,7 @@ data class AC (
 
     companion object {
         val modeNames = arrayOf("heat", "cool", "fan")
-        var fanSpeedValues = arrayOf("25", "50", "75", "100")
+        var fanSpeedValues = arrayOf("auto","25", "50", "75", "100")
         var verticalSwingValues = arrayOf("auto", "22", "45", "67", "90")
         var horizontalSwingValues = arrayOf("auto", "-90", "-45", "0", "45", "90")
     }
