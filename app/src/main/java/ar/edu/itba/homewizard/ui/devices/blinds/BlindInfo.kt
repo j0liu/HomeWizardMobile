@@ -25,63 +25,11 @@ fun BlindInfo(
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val blind = devicesUiState.currentDevice as Blind
 
-    Column (
-        modifier = Modifier
-            .padding(20.dp)
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        Row(
-            Modifier
-                .padding(bottom = 20.dp)
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Button(
-                onClick = { blind.open(devicesViewModel) },
-                modifier= Modifier.padding(bottom = 10.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
-                shape = RoundedCornerShape(20.dp),
-            ) {
-                Icon(
-                    modifier = Modifier.size(100.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal),
-                    contentDescription = "content description",
-                )
-            }
-            Button(
-                onClick = { blind.close(devicesViewModel) },
-                modifier= Modifier.padding(bottom = 10.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
-                shape = RoundedCornerShape(20.dp),
-            ) {
-                Icon(
-                    modifier = Modifier.size(100.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal_closed),
-                    contentDescription = "content description", // TODO: Cambiar
-                )
-            }
+    BoxWithConstraints {
+        if (maxWidth < maxHeight) {
+            BlindInfoVertical(devicesViewModel, blind)
+        } else {
+            BlindInfoHorizontal(devicesViewModel, blind)
         }
-        CustomSlider(
-            value = blind.level.toFloat(),
-            valueRange = 0f..100f,
-            onValueChangeFinished = { blind.setLevel(devicesViewModel, it.toInt()) },
-            title = "Nivel de la persiana",
-            unit = "",
-            icon = R.drawable.blinds,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 10.dp)
-        )
-        // TODO: Traducir
-        Text(text = "Nivel actual: ${blind.currentLevel}% (${blind.status})", color = MaterialTheme.colors.onPrimary, modifier = Modifier.padding(bottom = 10.dp))
-        LinearProgressIndicator(
-            modifier = Modifier
-                .fillMaxWidth(),
-            color = MaterialTheme.colors.secondary,
-            progress = blind.currentLevel.toFloat() / 100f,
-        )
-//            Spacer(modifier = Modifier.width(40.dp))
     }
 }
