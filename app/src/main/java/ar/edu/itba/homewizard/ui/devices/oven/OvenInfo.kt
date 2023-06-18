@@ -12,15 +12,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.data.models.devices.AC
+import ar.edu.itba.homewizard.data.models.devices.Oven
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.ui.inputs.DropdownButton
-import ar.edu.itba.homewizard.viewmodels.OvenViewModel
+import ar.edu.itba.homewizard.ui.inputs.PowerButton
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @Composable
-fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
-    var ovenTemperature by remember { mutableStateOf(2f) }
+fun OvenInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
+    val devicesUiState by devicesViewModel.uiState.collectAsState()
+    val oven = devicesUiState.currentDevice as Oven
+
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -28,19 +34,12 @@ fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
     ) {
         Row(
             modifier = Modifier
-                .padding(20.dp),
+                .padding(8.dp),
         ) {
-            IconButton(
-                onClick = {  },
-                modifier = Modifier
-                    .size(160.dp)
-                    .background(MaterialTheme.colors.surface, shape = CircleShape)
+            PowerButton(
+                selected = oven.status,
             ) {
-                Icon(
-                    modifier = Modifier.size(80.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.baseline_power_settings_new_24),
-                    contentDescription = "content description"
-                )
+                oven.toggle(devicesViewModel)
             }
         }
         Row(
@@ -48,10 +47,10 @@ fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
                 .padding(10.dp),
         ) {
             CustomSlider(
-                value = ovenTemperature,
-//                onValueChange = { ovenTemperature = it },
+                value = oven.temperature.toFloat(),
+//            onValueChange = { lamp.brightness = it.toInt() },
                 valueRange = 90f..230f,
-                onValueChangeFinished = { /*TODO*/ },
+                onValueChangeFinished = { oven.setTemperature(devicesViewModel, it.toInt()) },
                 title = "Temperatura",
                 unit = "°",
                 icon = R.drawable.baseline_thermostat_24
@@ -61,9 +60,15 @@ fun OvenInfo(ovenViewModel: OvenViewModel = viewModel()) {
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
         ) {
-//            DropdownButton(modifier = Modifier, "Calor", 24, arrayOf("Convencional", "Abajo", "Arriba"), {})
-//            DropdownButton(modifier = Modifier, "Parrilla", 24, arrayOf("Apagado", "Económico", "Completo"), {})
-//            DropdownButton(modifier = Modifier, "Convección", 24, arrayOf("Apagado", "Económico", "Convencional"), {})
+            DropdownButton(modifier = Modifier, "Heat", 24, Oven.heatModes, oven.heat) {
+                oven.setHeat(devicesViewModel, it)
+            }
+            DropdownButton(modifier = Modifier, "Grill", 24, Oven.grillModes, oven.grill) {
+               oven.setGrill(devicesViewModel, it)
+            }
+            DropdownButton(modifier = Modifier, "Convection", 24, Oven.convectionModes, oven.convection) {
+                oven.setConvection(devicesViewModel, it)
+            }
         }
     }
 }

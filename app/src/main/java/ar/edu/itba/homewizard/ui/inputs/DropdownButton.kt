@@ -28,7 +28,7 @@ fun DropdownButton (
     onOptionSelected: (value: String) -> Unit
 ){
     var expanded by remember { mutableStateOf(false) }
-    val selectedIndex = remember { mutableStateOf(options.indexOf(initialValue)) }
+    var selectedIndex by remember { mutableStateOf(options.indexOf(initialValue)) }
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -60,7 +60,7 @@ fun DropdownButton (
 
         ) {
             Text(
-                text = options[selectedIndex.value],
+                text = options[selectedIndex],
                 fontSize = 18.sp,
                 color = MaterialTheme.colors.onSurface,
                 modifier = Modifier
@@ -74,7 +74,7 @@ fun DropdownButton (
             ) {
                 options.forEachIndexed { index, s ->
                     DropdownMenuItem(onClick = {
-                        selectedIndex.value = index
+                        selectedIndex = index
                         expanded = false
                         onOptionSelected(options[index])
                     }) {
