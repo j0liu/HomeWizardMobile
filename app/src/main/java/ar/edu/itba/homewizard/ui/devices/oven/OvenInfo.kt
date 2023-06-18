@@ -27,48 +27,13 @@ fun OvenInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val oven = devicesUiState.currentDevice as Oven
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(8.dp),
-        ) {
-            PowerButton(
-                selected = oven.status,
-            ) {
-                oven.toggle(devicesViewModel)
-            }
-        }
-        Row(
-            modifier = Modifier
-                .padding(10.dp),
-        ) {
-            CustomSlider(
-                value = oven.temperature.toFloat(),
-//            onValueChange = { lamp.brightness = it.toInt() },
-                valueRange = 90f..230f,
-                onValueChangeFinished = { oven.setTemperature(devicesViewModel, it.toInt()) },
-                title = "Temperatura",
-                unit = "°",
-                icon = R.drawable.baseline_thermostat_24
-            )
-        }
-        Column(
-            horizontalAlignment = Alignment.Start,
-            modifier = Modifier
-        ) {
-            DropdownButton(modifier = Modifier, "Heat", 24, Oven.heatModes, oven.heat) {
-                oven.setHeat(devicesViewModel, it)
-            }
-            DropdownButton(modifier = Modifier, "Grill", 24, Oven.grillModes, oven.grill) {
-               oven.setGrill(devicesViewModel, it)
-            }
-            DropdownButton(modifier = Modifier, "Convection", 24, Oven.convectionModes, oven.convection) {
-                oven.setConvection(devicesViewModel, it)
-            }
+    BoxWithConstraints {
+        if (maxWidth < maxHeight){
+            OvenInfoVertical(devicesViewModel, oven)
+        } else {
+            OvenInfoHorizontal(devicesViewModel, oven)
         }
     }
+
+
 }
