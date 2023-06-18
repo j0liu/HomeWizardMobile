@@ -21,46 +21,17 @@ import ar.edu.itba.homewizard.viewmodels.DoorViewModel
 
 @Composable
 fun DoorInfo (devicesViewModel: DevicesViewModel = hiltViewModel()){
-//    val devicesUiState by doorViewModel.uiState.collectAsState()
+
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val door = devicesUiState.currentDevice as Door
-    Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(top = 40.dp)
-    ) {
-        Button(
-            onClick = { door.toggleLock(devicesViewModel) },
-            Modifier.padding(bottom = 40.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-            shape = RoundedCornerShape(20.dp)
-        ) {
-            Icon(
-                modifier = Modifier
-                    .size(120.dp),
-                imageVector =
-                if ((devicesUiState.currentDevice as Door).lock) ImageVector.vectorResource(id = R.drawable.lock)
-                else ImageVector.vectorResource(id = R.drawable.lock_open),
-                tint = MaterialTheme.colors.onSurface,
-                contentDescription = "content description"
-            )
-        }
-        Button(
-            onClick = { door.toggleOpenClose(devicesViewModel)},
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-            shape = RoundedCornerShape(20.dp)
-        ) {
-            Icon(
-                modifier = Modifier
-                    .size(120.dp),
-                imageVector =
-                if ((devicesUiState.currentDevice as Door).status) ImageVector.vectorResource(id = R.drawable.door_closed)
-                else ImageVector.vectorResource(id = R.drawable.door_open),
-                tint = MaterialTheme.colors.onSurface,
-                contentDescription = "content description"
-            )
+
+    BoxWithConstraints {
+        if (maxWidth < maxHeight) {
+            DoorInfoVertical(devicesViewModel, door)
+        } else {
+            DoorInfoHorizontal(devicesViewModel, door)
         }
     }
+
+
 }
