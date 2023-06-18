@@ -25,41 +25,14 @@ fun ACInfo(
     val options = listOf(R.drawable.white_balance_sunny, R.drawable.snowflake, R.drawable.weather_windy)
     var selected by remember { mutableStateOf(AC.modeNames.indexOf(ac.mode)) }
 
-    Column (
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ){
-        NumericController(value = ac.temperature, unit = "°", onValueChanged = {
-            ac.setTemperature(devicesViewModel, it)
-        })
-        Row(
-            modifier = Modifier
-                .padding(8.dp),
-        ) {
-            PowerButton(
-                selected = ac.status,
-            ) {
-                ac.toggle(devicesViewModel)
-            }
-        }
-
-        CustomToggle(options = options, selected = selected, modifier = Modifier.padding(16.dp).height(64.dp), onSelectedChange = {
-            selected = it
-            ac.setMode(devicesViewModel, selected)
-        })
-        Column(
-            horizontalAlignment = Alignment.Start,
-            modifier = Modifier
-        ) {
-            DropdownButton(modifier = Modifier, "Velocidad ventilador", 20, AC.fanSpeedValues, ac.fanSpeed) {
-                ac.setFanSpeed(devicesViewModel, it)
-            }
-            DropdownButton(modifier = Modifier, "Aspas verticales", 20, AC.verticalSwingValues, ac.verticalSwing) {
-                ac.setVerticalSwing(devicesViewModel, it)
-            }
-            DropdownButton(modifier = Modifier, "Aspas horizontales", 20, AC.horizontalSwingValues, ac.horizontalSwing) {
-                ac.setHorizontalSwing(devicesViewModel, it)
-            }
+    BoxWithConstraints {
+        if(maxWidth < maxHeight){
+            ACInfoVertical(devicesViewModel, ac, options)
+        } else {
+            ACInfoHorizontal(devicesViewModel, ac, options)
         }
     }
 }
+
+
+

@@ -39,7 +39,7 @@ fun DropdownButton (
             fontSize = titleSize.sp,
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.surface,
+            color = MaterialTheme.colors.onPrimary,
             modifier = Modifier
                 .weight(1f)
         )
