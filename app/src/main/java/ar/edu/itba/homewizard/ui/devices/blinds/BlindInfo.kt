@@ -74,11 +74,13 @@ fun BlindInfo(
                 .fillMaxWidth()
                 .padding(bottom = 10.dp)
         )
+        // TODO: Traducir
+        Text(text = "Nivel actual: ${blind.currentLevel}% (${blind.status})", color = MaterialTheme.colors.onPrimary, modifier = Modifier.padding(bottom = 10.dp))
         LinearProgressIndicator(
             modifier = Modifier
                 .fillMaxWidth(),
             color = MaterialTheme.colors.secondary,
-            progress = blind.currentLevel.toFloat()
+            progress = blind.currentLevel.toFloat() / 100f,
         )
 //            Spacer(modifier = Modifier.width(40.dp))
     }

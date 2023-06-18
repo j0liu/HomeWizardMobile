@@ -10,10 +10,13 @@ import androidx.core.app.NotificationManagerCompat
 
 class ShowNotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        val deviceId: String? = intent.getStringExtra(MyIntent.UPDATE_DEVICE)
-        Log.d(TAG, "Show notification intent received {$deviceId)")
+        val background : Boolean = context.getSharedPreferences("ar.edu.itba.homewizard", Context.MODE_PRIVATE).getBoolean("background", false)
+        if (background) {
+            val deviceId: String? = intent.getStringExtra(MyIntent.UPDATE_DEVICE)
+            Log.d(TAG, "Show notification intent received {$deviceId)")
 
-        showNotification(context, deviceId!!)
+            showNotification(context, deviceId!!)
+        }
     }
 
     private fun showNotification(context: Context, deviceId: String) {

@@ -20,9 +20,9 @@ class SkipNotificationReceiver(private val deviceId: String) : BroadcastReceiver
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
-        if (intent.action.equals(MyIntent.SHOW_NOTIFICATION)
-        // &&
-//            intent.getStringExtra(MyIntent.UPDATE_DEVICE).equals(deviceId)
+        val background : Boolean = context.getSharedPreferences("ar.edu.itba.homewizard", Context.MODE_PRIVATE).getBoolean("background", false)
+        if (intent.action.equals(MyIntent.SHOW_NOTIFICATION) && !background
+            // && intent.getStringExtra(MyIntent.UPDATE_DEVICE).equals(deviceId)
         ) {
             Log.d(TAG, "Skipping notification send ($deviceId)")
              GlobalScope.launch(Dispatchers.IO) {
@@ -31,8 +31,6 @@ class SkipNotificationReceiver(private val deviceId: String) : BroadcastReceiver
             abortBroadcast()
         }
     }
-
-
 
     companion object {
         private const val TAG = "SkipNotificationReceiver"

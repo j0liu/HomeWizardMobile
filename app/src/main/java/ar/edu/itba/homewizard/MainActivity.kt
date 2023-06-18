@@ -61,6 +61,16 @@ class MainActivity : ComponentActivity() {
             .also { registerReceiver(receiver, it) }
     }
 
+    override fun onPause() {
+        super.onPause()
+        getSharedPreferences("ar.edu.itba.homewizard", MODE_PRIVATE).edit().putBoolean("background", true).apply()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getSharedPreferences("ar.edu.itba.homewizard", MODE_PRIVATE).edit().putBoolean("background", false).apply()
+    }
+
     override fun onStop() {
         super.onStop()
 

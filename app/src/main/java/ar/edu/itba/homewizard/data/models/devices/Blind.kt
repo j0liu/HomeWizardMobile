@@ -13,8 +13,16 @@ data class Blind (
     override var state: DeviceState,
     override var meta: Any
 ) : Device {
+    var status : String = "closed"
     var level: Int = 0
     var currentLevel: Int = 0
+
+    init {
+        val blindState = this.state as BlindState
+        this.level = blindState.level
+        this.currentLevel = blindState.currentLevel
+        this.status = blindState.status
+    }
 
     fun open(devicesViewModel: DevicesViewModel) {
         devicesViewModel.executeAction(Action("open", this, listOf()))

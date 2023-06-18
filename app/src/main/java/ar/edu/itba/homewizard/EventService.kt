@@ -22,7 +22,7 @@ class EventService : Service() {
 
     companion object {
         private const val TAG = "EventService"
-        private const val DELAY_MILLIS: Long = 10000
+        private const val DELAY_MILLIS: Long = 2000
     }
 
     private val gson = Gson()

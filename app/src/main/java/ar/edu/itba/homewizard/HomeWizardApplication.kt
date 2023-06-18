@@ -5,13 +5,30 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import androidx.core.app.NotificationManagerCompat
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleObserver
+import androidx.lifecycle.OnLifecycleEvent
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class HomeWizardApplication : Application() {
     private var eventServiceRunning = false
 
+//    private val lifecycleObserver = LifecycleEventObserver { source, event ->
+//        when (event) {
+//            Lifecycle.Event.ON_RESUME -> {
+//                Log.e("HomeWizardApplication", "ON_RESUME")
+//            }
+//            Lifecycle.Event.ON_PAUSE -> {
+//                Log.e("HomeWizardApplication", "ON_RESUME")
+//            }
+//            else -> {}
+//        }
+//    }
 
     override fun onCreate() {
         super.onCreate()
@@ -38,6 +55,7 @@ class HomeWizardApplication : Application() {
     }
 
     companion object {
+        val isForeground: Boolean = false
         const val CHANNEL_ID = "device"
     }
 }
