@@ -40,7 +40,7 @@ class EventService : Service() {
                     val intent2 = Intent().apply {
                         action = MyIntent.SHOW_NOTIFICATION
                         `package` = MyIntent.PACKAGE
-                        putExtra(MyIntent.DEVICE_ID, it.deviceId)
+                        putExtra(MyIntent.UPDATE_DEVICE, it.deviceId)
                     }
                     sendOrderedBroadcast(intent2, null)
                 }

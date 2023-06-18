@@ -19,7 +19,6 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import ar.edu.itba.homewizard.MyIntent.Companion.DEVICE_ID
 import ar.edu.itba.homewizard.ui.theme.HomeWizardMobileTheme
 import ar.edu.itba.homewizard.ui.Screen
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,11 +45,6 @@ class MainActivity : ComponentActivity() {
                         rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
                     NotificationPermission(permissionState = permissionState)
                     permissionState.launchPermissionRequest()
-                }
-
-                val deviceId = intent?.getStringExtra(MyIntent.DEVICE_ID)
-                if (deviceId != null) {
-                    Text(text = "RECEIVED!!!")
                 }
 
                 val navController = rememberNavController()

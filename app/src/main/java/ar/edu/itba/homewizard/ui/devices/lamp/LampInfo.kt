@@ -1,41 +1,24 @@
 package ar.edu.itba.homewizard.ui.devices.lamp
 
-import android.annotation.SuppressLint
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import ar.edu.itba.homewizard.viewmodels.LampViewModel
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.devices.Lamp
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.ui.inputs.PowerButton
-import ar.edu.itba.homewizard.ui.theme.Surface
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
-import com.github.skydoves.colorpicker.compose.HsvColorPicker
 import com.github.skydoves.colorpicker.compose.rememberColorPickerController
 
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.update
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -53,7 +36,6 @@ fun LampInfo(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        Text(text = (devicesUiState.currentDevice as Lamp).name)
         PowerButton(
             selected = lamp.status,
         ) {
@@ -74,5 +56,7 @@ fun LampInfo(
 //            controller = controller,
 //            onColorChanged = { a ->  lamp.changeColor(devicesViewModel, a.hexCode)},
 //        )
+
     }
+
 }

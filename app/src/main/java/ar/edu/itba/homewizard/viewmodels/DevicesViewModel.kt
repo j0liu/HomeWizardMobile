@@ -1,7 +1,11 @@
 package ar.edu.itba.homewizard.viewmodels
 
+import android.app.Activity
+import android.content.Context
+import android.content.ContextWrapper
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.currentRecomposeScope
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.data.models.Action
@@ -29,14 +33,26 @@ class DevicesViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             runCatching {
+                val devices = deviceRepository.getDevices()
+                devices.observeForever { dl ->
+                    println("Observing...")
+                    _uiState.update {
+                        it.copy(
+                            devices = dl,
+                            currentDevice = dl.find { d -> d.id == it.currentDevice?.id },
+                            isLoading = false
+                        )
+                    }
+                }
                 _uiState.update {
                     it.copy(
-                        devices = deviceRepository.getDevices(),
+                        devices = devices.value!!,
                         isLoading = false
                     )
                 }
             }
         }
+
     }
 
     fun collapseBottomSheet(scope: CoroutineScope? = null) {

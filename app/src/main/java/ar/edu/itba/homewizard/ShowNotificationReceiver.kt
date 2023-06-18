@@ -10,7 +10,7 @@ import androidx.core.app.NotificationManagerCompat
 
 class ShowNotificationReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
-        val deviceId: String? = intent.getStringExtra(MyIntent.DEVICE_ID)
+        val deviceId: String? = intent.getStringExtra(MyIntent.UPDATE_DEVICE)
         Log.d(TAG, "Show notification intent received {$deviceId)")
 
         showNotification(context, deviceId!!)
@@ -19,7 +19,7 @@ class ShowNotificationReceiver : BroadcastReceiver() {
     private fun showNotification(context: Context, deviceId: String) {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            putExtra(MyIntent.DEVICE_ID, deviceId)
+            putExtra(MyIntent.UPDATE_DEVICE, deviceId)
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
