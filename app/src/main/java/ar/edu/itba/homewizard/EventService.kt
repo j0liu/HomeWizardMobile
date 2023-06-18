@@ -16,9 +16,7 @@ import java.net.URL
 import javax.inject.Inject
 
 
-@AndroidEntryPoint
 class EventService : Service() {
-    @Inject lateinit var deviceRepository: DeviceRepository
 
     companion object {
         private const val TAG = "EventService"

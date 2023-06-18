@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RoutinesScreen(
-    routinesViewModel: RoutinesViewModel = hiltViewModel()
+    routinesViewModel: RoutinesViewModel = hiltViewModel(),
 ) {
     val routinesUiState by routinesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()

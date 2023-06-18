@@ -18,18 +18,6 @@ import dagger.hilt.android.HiltAndroidApp
 class HomeWizardApplication : Application() {
     private var eventServiceRunning = false
 
-//    private val lifecycleObserver = LifecycleEventObserver { source, event ->
-//        when (event) {
-//            Lifecycle.Event.ON_RESUME -> {
-//                Log.e("HomeWizardApplication", "ON_RESUME")
-//            }
-//            Lifecycle.Event.ON_PAUSE -> {
-//                Log.e("HomeWizardApplication", "ON_RESUME")
-//            }
-//            else -> {}
-//        }
-//    }
-
     override fun onCreate() {
         super.onCreate()
         createNotificationChannel()
@@ -55,7 +43,6 @@ class HomeWizardApplication : Application() {
     }
 
     companion object {
-        val isForeground: Boolean = false
         const val CHANNEL_ID = "device"
     }
 }

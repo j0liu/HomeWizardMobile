@@ -6,6 +6,7 @@ import android.os.Looper
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -19,6 +20,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 import kotlinx.coroutines.launch
 
@@ -26,7 +28,9 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterialApi::class)
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun RoutineInfo(routinesViewModel: RoutinesViewModel) {
+fun RoutineInfo(
+    routinesViewModel: RoutinesViewModel
+) {
     val routineUiState by routinesViewModel.uiState.collectAsState()
     val routine = routineUiState.currentRoutine
     val scope = rememberCoroutineScope()
@@ -69,7 +73,7 @@ fun RoutineInfo(routinesViewModel: RoutinesViewModel) {
                         if(text.matches(Regex("^([0-5]?[0-9]|60)"))){
                             openDialog.value = false
                             Handler(Looper.getMainLooper()).postDelayed({
-                                println("Hola mundo")
+                                routinesViewModel.executeRoutine(routine!!)
                             }, text.toLong() * 1000)
                         } else {
                             Toast.makeText(mContext, "The number must be between 1 and 60", Toast.LENGTH_SHORT).show() // TODO: Change message
@@ -134,9 +138,20 @@ fun RoutineInfo(routinesViewModel: RoutinesViewModel) {
     ) {
         Column(
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primary),
-            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Button(
+                onClick = { routinesViewModel.executeRoutine(routine!!) },
+                modifier= Modifier.padding(bottom = 10.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+                shape = RoundedCornerShape(20.dp),
+            ) {
+                Icon(
+                    modifier = Modifier.size(80.dp),
+                    imageVector = ImageVector.vectorResource(id = R.drawable.play),
+                    contentDescription = "content description",
+                )
+            }
             routine?.actions?.forEach { action ->
                 ActionCard(action = action)
             }
