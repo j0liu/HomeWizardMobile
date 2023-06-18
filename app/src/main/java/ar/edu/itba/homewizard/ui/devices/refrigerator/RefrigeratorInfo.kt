@@ -45,7 +45,7 @@ fun RefrigeratorInfo (devicesViewModel: DevicesViewModel = hiltViewModel()) {
             //Toggle button of three states
             var selected by remember { mutableStateOf(0) }
             val options = listOf(R.drawable.mdi_fridge, R.drawable.mdi_beach, R.drawable.mdi_party_popper)
-            CustomToggle(options = options, selected = fridge.getMode(), onSelectedChange = { selection -> fridge.setMode(devicesViewModel, selection)  })
+            CustomToggle(options = options, selected = fridge.getMode(), modifier = Modifier.padding(8.dp).height(64.dp), onSelectedChange = { selection -> fridge.setMode(devicesViewModel, selection)  })
 
         }
     }
