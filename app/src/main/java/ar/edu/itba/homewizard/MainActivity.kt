@@ -1,6 +1,8 @@
 package ar.edu.itba.homewizard
 
 import android.annotation.SuppressLint
+import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -17,18 +19,40 @@ import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import ar.edu.itba.homewizard.MyIntent.Companion.DEVICE_ID
 import ar.edu.itba.homewizard.ui.theme.HomeWizardMobileTheme
 import ar.edu.itba.homewizard.ui.Screen
 import dagger.hilt.android.AndroidEntryPoint
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.PermissionRequired
+import com.google.accompanist.permissions.PermissionState
+import com.google.accompanist.permissions.rememberPermissionState
+import android.Manifest
+import androidx.annotation.RequiresApi
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
+    private lateinit var receiver: ShowNotificationReceiver
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    @OptIn(ExperimentalPermissionsApi::class)
+    @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "PermissionLaunchedDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         actionBar?.hide() // TODO: Sacar
         setContent {
             HomeWizardMobileTheme {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    val permissionState =
+                        rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
+                    NotificationPermission(permissionState = permissionState)
+                    permissionState.launchPermissionRequest()
+                }
+
+                val deviceId = intent?.getStringExtra(MyIntent.DEVICE_ID)
+                if (deviceId != null) {
+                    Text(text = "RECEIVED!!!")
+                }
+
                 val navController = rememberNavController()
                 Scaffold(
                     bottomBar = { BottomBar(navController = navController)}
@@ -37,6 +61,35 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        receiver = ShowNotificationReceiver()
+        IntentFilter(MyIntent.SHOW_NOTIFICATION)
+            .apply { priority = 1 }
+            .also { registerReceiver(receiver, it) }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        unregisterReceiver(receiver)
+    }
+
+    @OptIn(ExperimentalPermissionsApi::class)
+    @Composable
+    fun NotificationPermission(
+        permissionState: PermissionState,
+    ) {
+        PermissionRequired(
+            permissionState = permissionState,
+            permissionNotGrantedContent = { /* TODO: función para infromarle al usuario de la necesidad de otrogar el permiso */ },
+            permissionNotAvailableContent = { /* TODO: función hacer las adecuaciones a la App debido a que el permiso no fue otorgado  */ }
+        ) {
+            /* Hacer uso del recurso porque el permiso fue otorgado */
+        }
+    }
+
+    companion object {
+        // TODO: valor fijo, cambiar por un valor de dispositivo válido.
+        private const val DEVICE_ID = "09bc8ad1f87d25c3"
     }
 }
 

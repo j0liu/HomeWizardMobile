@@ -10,15 +10,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.ui.theme.Primary
 import ar.edu.itba.homewizard.ui.theme.Secondary
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.data.models.devices.Blind
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @Composable
-fun BlindInfo() {
-    var currentLevel by remember { mutableStateOf(0f) }
-    var targetLevel by remember { mutableStateOf(0.75f) }
+fun BlindInfo(
+    devicesViewModel: DevicesViewModel = hiltViewModel()
+) {
+    val devicesUiState by devicesViewModel.uiState.collectAsState()
+    val blind = devicesUiState.currentDevice as Blind
 
     Column (
         modifier = Modifier
@@ -33,44 +38,35 @@ fun BlindInfo() {
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-
-            // TODO: Componentizar
-            OutlinedButton(onClick = {},
-                modifier= Modifier.size(100.dp),
-                shape = RoundedCornerShape(25),
-//                border= BorderStroke(5.dp, Color(0XFF0F9D58)),
-                contentPadding = PaddingValues(0.dp),
-                colors = ButtonDefaults.outlinedButtonColors(contentColor =  MaterialTheme.colors.primary)
+            Button(
+                onClick = { blind.open(devicesViewModel) },
+                modifier= Modifier.padding(bottom = 10.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+                shape = RoundedCornerShape(20.dp),
             ) {
-                // Adding an Icon "Add" inside the Button
                 Icon(
-                    modifier = Modifier.size(50.dp),
+                    modifier = Modifier.size(100.dp),
                     imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal),
                     contentDescription = "content description",
-                    tint=MaterialTheme.colors.onPrimary // TODO: Cambiar
                 )
             }
-            OutlinedButton(onClick = {},
-                modifier= Modifier.size(100.dp),
-                shape = RoundedCornerShape(25),
-//                border= BorderStroke(5.dp, Color(0XFF0F9D58)),
-                contentPadding = PaddingValues(0.dp),
-                colors = ButtonDefaults.outlinedButtonColors(contentColor =  MaterialTheme.colors.primary)
+            Button(
+                onClick = { blind.close(devicesViewModel) },
+                modifier= Modifier.padding(bottom = 10.dp),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+                shape = RoundedCornerShape(20.dp),
             ) {
-                // Adding an Icon "Add" inside the Button
                 Icon(
-                    modifier = Modifier.size(50.dp),
+                    modifier = Modifier.size(100.dp),
                     imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal_closed),
-                    contentDescription = "content description",
-                    tint=MaterialTheme.colors.onPrimary // TODO: Cambiar
+                    contentDescription = "content description", // TODO: Cambiar
                 )
             }
         }
         CustomSlider(
-            value = currentLevel,
-//            onValueChange = { currentLevel = it },
+            value = blind.level.toFloat(),
             valueRange = 0f..100f,
-            onValueChangeFinished = { /*TODO*/ },
+            onValueChangeFinished = { blind.setLevel(devicesViewModel, it.toInt()) },
             title = "Nivel de la persiana",
             unit = "",
             icon = R.drawable.blinds,
@@ -82,7 +78,7 @@ fun BlindInfo() {
             modifier = Modifier
                 .fillMaxWidth(),
             color = MaterialTheme.colors.secondary,
-            progress = targetLevel
+            progress = blind.currentLevel.toFloat()
         )
 //            Spacer(modifier = Modifier.width(40.dp))
     }

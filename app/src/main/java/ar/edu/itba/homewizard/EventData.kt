@@ -1,7 +1,6 @@
 package ar.edu.itba.homewizard
 
 import com.google.gson.annotations.SerializedName
-import java.sql.Timestamp
 
 data class EventData(
     @SerializedName("timestamp") var timestamp: String,

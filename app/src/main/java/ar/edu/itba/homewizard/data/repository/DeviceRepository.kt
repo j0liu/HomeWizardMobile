@@ -17,6 +17,10 @@ class DeviceRepository @Inject constructor (
         return deviceRemoteDataSource.getDevice(deviceId).result.toDevice()
     }
 
+    fun test() {
+       println("Hm????")
+    }
+
     suspend fun executeAction(deviceId: String, actionName: String, params: List<Any>) {
         deviceRemoteDataSource.executeAction(deviceId, actionName, params)
     }
