@@ -17,20 +17,18 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CustomToggle(options : List<Int>, selected : Int, onSelectedChange : (Int) -> Unit) {
+fun CustomToggle(options : List<Int>, selected : Int, modifier: Modifier = Modifier, onSelectedChange : (Int) -> Unit) {
     Row (
-        modifier = Modifier
-            .padding(14.dp)
+        modifier = Modifier.then(modifier)
             .border(1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(50.dp))
-            .clip(RoundedCornerShape(50.dp))
+            .clip(RoundedCornerShape(50.dp)),
+        horizontalArrangement = Arrangement.SpaceEvenly,
     ){
         options.forEachIndexed { index, icon ->
             Row(
                 modifier = Modifier
                     .background(color = if (selected == index) MaterialTheme.colors.primaryVariant else MaterialTheme.colors.surface)
-                    .border(0.5.dp, color = MaterialTheme.colors.primary)
-                    .height(70.dp)
-                    .width(120.dp)
+                    .border(0.5.dp, color = MaterialTheme.colors.primary).fillMaxHeight().weight(1f)
                     .pointerInput(Unit) {
                         detectTapGestures {
                             onSelectedChange(index)
@@ -41,7 +39,7 @@ fun CustomToggle(options : List<Int>, selected : Int, onSelectedChange : (Int) -
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(50.dp),
+                        .size(40.dp),
                     imageVector = ImageVector.vectorResource(id = icon),
 //                        tint = if (selected == index) lightSurface else Background,
                     contentDescription = "content description"
