@@ -15,12 +15,15 @@ interface ApiService {
     @GET("/api/devices/{deviceId}")
     suspend fun getDevice(@Path("deviceId") deviceId: String): Response<NetworkResponse<NetworkDevice>>
 
+    @PUT("/api/devices/{deviceId}/{actionName}")
+    suspend fun <T> executeAction(@Path("deviceId") deviceId: String, @Path("actionName") actionName: String, @Body params: Array<Any>): Response<NetworkResponse<T>>
+
     @GET("/api/routines")
     suspend fun getRoutines(): Response<NetworkResponse<List<NetworkRoutine>>>
 
     @GET("/api/routines/{routineId}")
     suspend fun getRoutine(@Path("routineId") routineId: String): Response<NetworkResponse<NetworkRoutine>>
 
-    @PUT("/api/devices/{deviceId}/{actionName}")
-    suspend fun <T> executeAction(@Path("deviceId") deviceId: String, @Path("actionName") actionName: String, @Body params: Array<Any>): Response<NetworkResponse<T>>
+    @PUT("/api/routines/{routineId}/execute")
+    suspend fun executeRoutine(@Path("routineId") routineId: String): Response<NetworkResponse<Any>>
 }

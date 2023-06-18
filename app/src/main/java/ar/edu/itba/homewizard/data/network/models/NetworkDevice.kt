@@ -23,25 +23,30 @@ data class NetworkDevice (
     var meta: Any? = null
 ){
     fun toDevice(): Device {
-        println(this.name)
         val deviceType : DeviceType = this.type!!.toDeviceType()
-        val deviceState : DeviceState = Gson().fromJson(this.state, deviceType.stateClass.java) as DeviceState
+        val deviceState : DeviceState?
+        val classInstance : Device
 
-        // Edge case
-        if (deviceType.deviceClass == Speaker::class)  {
-            val speakerState = deviceState as Speaker.SpeakerState
-            if (this.state!!.has("song"))
-                speakerState.song = Gson().fromJson(this.state!!.get("song"), Speaker.SpeakerSong::class.java)
+        if (this.state != null) {
+            deviceState = Gson().fromJson(this.state, deviceType.stateClass.java) as DeviceState
+            if (deviceType.deviceClass == Speaker::class)  { // Edge case
+                val speakerState = deviceState as Speaker.SpeakerState
+                if (this.state!!.has("song"))
+                    speakerState.song = Gson().fromJson(this.state!!.get("song"), Speaker.SpeakerSong::class.java)
+            }
+            classInstance = deviceType.deviceClass.primaryConstructor?.call(
+                this.id!!,
+                this.name!!,
+                deviceType,
+                deviceState,
+                this.meta!!
+            ) as Device
+        } else {
+            classInstance = Device(this.id!!, this.name!!, deviceType, null, this.meta!!)
         }
 
-        val classInstance = deviceType.deviceClass.primaryConstructor?.call(
-            this.id!!,
-            this.name!!,
-            deviceType,
-            deviceState,
-            this.meta!!
-        )
-        return classInstance as Device
+
+        return classInstance
     }
 }
 

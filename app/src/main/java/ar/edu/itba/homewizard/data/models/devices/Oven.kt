@@ -5,13 +5,13 @@ import ar.edu.itba.homewizard.data.models.DeviceState
 import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
-data class Oven (
+class Oven (
     override var id: String,
     override var name: String,
     override var type: DeviceType,
-    override var state: DeviceState,
+    override var state: DeviceState?,
     override var meta: Any
-) : Device
+) : Device(id, name, type, state, meta)
 {
     var status: Boolean = false
     var temperature: Int = 90
@@ -26,7 +26,7 @@ data class Oven (
     }
 
     init {
-        val ovenState = this.state as Oven.OvenState
+        val ovenState = this.state as OvenState
         this.status = ovenState.status == "on"
         this.temperature = ovenState.temperature
         this.heat = ovenState.heat

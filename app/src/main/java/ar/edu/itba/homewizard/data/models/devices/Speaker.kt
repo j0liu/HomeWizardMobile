@@ -4,13 +4,13 @@ import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceState
 import ar.edu.itba.homewizard.data.models.DeviceType
 
-data class Speaker (
+class Speaker (
     override var id: String,
     override var name: String,
     override var type: DeviceType,
-    override var state: DeviceState,
+    override var state: DeviceState?,
     override var meta: Any
-) : Device
+) : Device(id, name, type, state, meta)
 {
         data class SpeakerState (
                 val status: String,

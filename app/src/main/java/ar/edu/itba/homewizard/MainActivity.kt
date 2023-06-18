@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        receiver = SkipNotificationReceiver(DEVICE_ID)
+        receiver = SkipNotificationReceiver()
         IntentFilter(MyIntent.SHOW_NOTIFICATION)
             .apply { priority = 1 }
             .also { registerReceiver(receiver, it) }
@@ -89,11 +89,6 @@ class MainActivity : ComponentActivity() {
         ) {
             /* Hacer uso del recurso porque el permiso fue otorgado */
         }
-    }
-
-    companion object {
-        // TODO: valor fijo, cambiar por un valor de dispositivo válido.
-        private const val DEVICE_ID = "09bc8ad1f87d25c3"
     }
 }
 

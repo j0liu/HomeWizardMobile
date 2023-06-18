@@ -17,4 +17,8 @@ class RoutineRepository @Inject constructor (
         return routineRemoteDataSource.getRoutine(deviceId).result.toRoutine()
     }
 
+    suspend fun executeRoutine(routineId: String) : Any {
+        return routineRemoteDataSource.executeRoutine(routineId).result
+    }
+
 }

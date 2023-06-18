@@ -18,7 +18,7 @@ data class NetworkRoutine(
         return Routine(
             id = this.id!!,
             name = this.name!!,
-            actions = this.actions!!.map { it.toAction() },
+            actions = this.actions!!.map { it.toAction()},
             meta = this.meta!!
         )
     }

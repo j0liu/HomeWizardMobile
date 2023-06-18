@@ -6,13 +6,13 @@ import ar.edu.itba.homewizard.data.models.DeviceState
 import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
-data class Door (
+class Door (
     override var id: String,
     override var name: String,
     override var type: DeviceType,
-    override var state: DeviceState,
+    override var state: DeviceState?,
     override var meta: Any
-) : Device
+) : Device(id, name, type, state, meta)
 {
     var status: Boolean = false
     var lock: Boolean = false

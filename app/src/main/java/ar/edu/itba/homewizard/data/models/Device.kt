@@ -1,7 +1,6 @@
 package ar.edu.itba.homewizard.data.models
 
 import androidx.compose.runtime.Composable
-import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.*
 import ar.edu.itba.homewizard.ui.devices.door.DoorInfo
@@ -12,21 +11,15 @@ import ar.edu.itba.homewizard.ui.devices.lamp.LampInfo
 import ar.edu.itba.homewizard.ui.devices.oven.OvenInfo
 import ar.edu.itba.homewizard.ui.devices.refrigerator.RefrigeratorInfo
 import ar.edu.itba.homewizard.ui.devices.speaker.SpeakerInfo
-import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
-import javax.inject.Inject
 import kotlin.reflect.KClass
 
-interface Device {
-    var id: String
-    var name: String
-    var type: DeviceType
-    var state: DeviceState
-    var meta: Any
-
-//    fun executeAction(viewModel: DevicesViewModel, action: Action) {
-//       viewModel.executeAction(action)
-//    }
-}
+open class Device(
+     open var id: String,
+     open var name: String,
+     open var type: DeviceType,
+     open var state: DeviceState?,
+     open var meta: Any
+)
 
 typealias ComposableFun = @Composable () -> Unit
 class DeviceType(var id: String, var name: String, val infoScreen: ComposableFun, val icon : Int, val deviceClass : KClass<*>, val stateClass : KClass<*>) {

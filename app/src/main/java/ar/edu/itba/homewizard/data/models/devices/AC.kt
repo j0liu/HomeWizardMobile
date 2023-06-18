@@ -1,28 +1,19 @@
 package ar.edu.itba.homewizard.data.models.devices
 
-import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceState
 import ar.edu.itba.homewizard.data.models.DeviceType
-import ar.edu.itba.homewizard.ui.devices.ac.ACInfo
-import ar.edu.itba.homewizard.ui.devices.alarm.AlarmInfo
-import ar.edu.itba.homewizard.ui.devices.blinds.BlindInfo
-import ar.edu.itba.homewizard.ui.devices.door.DoorInfo
-import ar.edu.itba.homewizard.ui.devices.lamp.LampInfo
-import ar.edu.itba.homewizard.ui.devices.oven.OvenInfo
-import ar.edu.itba.homewizard.ui.devices.refrigerator.RefrigeratorInfo
-import ar.edu.itba.homewizard.ui.devices.speaker.SpeakerInfo
-import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
-import java.util.HashMap
 
-data class AC (
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
+
+class AC (
     override var id: String,
     override var name: String,
     override var type: DeviceType,
-    override var state: DeviceState,
+    override var state: DeviceState?,
     override var meta: Any
-) : Device {
+) : Device(id, name, type, state, meta) {
     var status: Boolean = false
     var temperature: Int = 0
     var mode: String = "fan"
@@ -38,7 +29,7 @@ data class AC (
     }
 
     init {
-        val acState = this.state as AC.ACState
+        val acState = this.state as ACState
         this.status = acState.status == "on"
         this.temperature = acState.temperature
         this.mode = acState.mode

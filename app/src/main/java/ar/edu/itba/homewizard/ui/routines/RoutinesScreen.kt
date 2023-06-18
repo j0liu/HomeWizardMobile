@@ -2,9 +2,9 @@ package ar.edu.itba.homewizard.ui.routines
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -13,9 +13,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 import kotlinx.coroutines.launch
@@ -41,25 +39,24 @@ fun RoutinesScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BottomSheetScaffold(
-            modifier = Modifier.zIndex(10f),
             sheetShape = RoundedCornerShape(15.dp),
             scaffoldState = routinesUiState.scaffoldState,
             sheetContent = {
                 RoutineInfo(routinesViewModel = routinesViewModel)
             }) {
-            Column(
+
+            LazyColumn (
                 modifier = Modifier
-                    .verticalScroll(rememberScrollState())
                     .weight(1f)
                     .padding(bottom = 10.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                routinesUiState.routines.forEach { routine: Routine ->
+                items(items = routinesUiState.routines.toMutableList(), key = { routine: Routine -> routine.id  }) { routine : Routine ->
                     RoutineCard(
                         routine = routine,
-                        onClick = { routineSelected ->
-                            routinesViewModel.setCurrentRoutine(routineSelected)
+                        onClick = { selectedRoutine ->
+                            routinesViewModel.setCurrentRoutine(selectedRoutine)
                             scope.launch {
                                 routinesUiState.scaffoldState.bottomSheetState.expand()
                             }

@@ -6,13 +6,13 @@ import ar.edu.itba.homewizard.data.models.DeviceState
 import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
-data class Blind (
+class Blind (
     override var id: String,
     override var name: String,
     override var type: DeviceType,
-    override var state: DeviceState,
+    override var state: DeviceState?,
     override var meta: Any
-) : Device {
+) : Device(id, name, type, state, meta) {
     var status : String = "closed"
     var level: Int = 0
     var currentLevel: Int = 0

@@ -23,16 +23,12 @@ class RoutinesViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(RoutinesUiState())
     val uiState : StateFlow<RoutinesUiState> = _uiState.asStateFlow()
 
-    var routines : MutableSet<Routine> = mutableSetOf()
 
     init {
         viewModelScope.launch {
             runCatching {
-                routineRepository.getRoutines().forEach { routine ->
-                    routines.add(routine)
-                }
                 _uiState.update { it.copy(
-                    routines = routines,
+                    routines = routineRepository.getRoutines(),
                     isLoading = false
                 ) }
             }
@@ -40,7 +36,19 @@ class RoutinesViewModel @Inject constructor(
     }
 
     fun setCurrentRoutine(routine : Routine) {
-        _uiState.value = RoutinesUiState(routines = routines, currentRoutine = routine)
+        _uiState.update {
+            it.copy(
+                currentRoutine = routine
+            )
+        }
     }
 
+    fun executeRoutine(routine: Routine) {
+        viewModelScope.launch {
+            runCatching {
+                routineRepository.executeRoutine(routine.id)
+            }
+        }
+
+    }
 }

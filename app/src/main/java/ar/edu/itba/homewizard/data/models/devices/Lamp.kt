@@ -1,20 +1,18 @@
 package ar.edu.itba.homewizard.data.models.devices
 
-import androidx.compose.ui.text.toLowerCase
 import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceState
 import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
-import javax.inject.Inject
 
-data class Lamp (
+class Lamp (
     override var id: String,
     override var name: String,
     override var type: DeviceType,
-    override var state: DeviceState,
+    override var state: DeviceState?,
     override var meta: Any
-) : Device
+) : Device(id, name, type, state, meta)
 {
     var status: Boolean = false
     var brightness: Int = 0
