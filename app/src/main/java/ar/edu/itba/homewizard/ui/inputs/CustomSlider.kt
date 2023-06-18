@@ -35,7 +35,7 @@ fun CustomSlider(
             Text(
                 text = title,
                 fontSize = 18.sp,
-                color = MaterialTheme.colors.surface,
+                color = MaterialTheme.colors.onPrimary
             )
         }
         Row(
@@ -46,8 +46,6 @@ fun CustomSlider(
         ) {
             Slider(
                 modifier = Modifier
-//                    .width(315.dp)
-//                    .fillMaxWidth(),
                     .weight(0.8f),
                 value = currentValue,
                 onValueChange = { currentValue = it },
@@ -65,7 +63,7 @@ fun CustomSlider(
                     .weight(0.1f),
                 imageVector = ImageVector.vectorResource(id = icon),
                 contentDescription = "content description",
-                tint = MaterialTheme.colors.surface
+                tint = MaterialTheme.colors.onPrimary
             )
             Text(
                 modifier = Modifier
@@ -73,7 +71,7 @@ fun CustomSlider(
                 maxLines = 1,
                 text = "${value.toInt()}${unit}",
                 fontSize = 18.sp,
-                color = MaterialTheme.colors.surface,
+                color = MaterialTheme.colors.onPrimary
             )
         }
     }
