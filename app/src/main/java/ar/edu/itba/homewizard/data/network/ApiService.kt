@@ -22,5 +22,5 @@ interface ApiService {
     suspend fun getRoutine(@Path("routineId") routineId: String): Response<NetworkResponse<NetworkRoutine>>
 
     @PUT("/api/devices/{deviceId}/{actionName}")
-    suspend fun executeAction(@Path("deviceId") deviceId: String, @Path("actionName") actionName: String, @Body params: Array<Any>): Response<NetworkResponse<Any>>
+    suspend fun <T> executeAction(@Path("deviceId") deviceId: String, @Path("actionName") actionName: String, @Body params: Array<Any>): Response<NetworkResponse<T>>
 }

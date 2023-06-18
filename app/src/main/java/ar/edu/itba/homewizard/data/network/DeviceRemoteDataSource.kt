@@ -20,9 +20,9 @@ class DeviceRemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun executeAction(deviceId: String, actionName: String, params: List<Any>) : NetworkResponse<Any> {
-        return handleApiResponse {
-            apiService.executeAction(deviceId, actionName, params.toTypedArray())
+    suspend fun <T> executeAction(deviceId: String, actionName: String, params: List<Any>) : NetworkResponse<T> {
+        return handleApiResponse<NetworkResponse<T>> {
+            apiService.executeAction<T>(deviceId, actionName, params.toTypedArray())
         }
     }
 }

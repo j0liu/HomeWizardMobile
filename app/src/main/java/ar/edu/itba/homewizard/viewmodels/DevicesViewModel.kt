@@ -14,7 +14,6 @@ import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -80,17 +79,23 @@ class DevicesViewModel @Inject constructor(
         }
     }
 
-    fun executeAction(action: Action) {
+    fun <T> executeActionWithResult(action: Action, onSuccess : suspend (T) -> Unit = {}) {
         viewModelScope.launch {
             runCatching {
                 _uiState.update {
                     it.copy(isLoading = true)
                 }
-                deviceRepository.executeAction(action.device.id, action.actionName, action.params)
+                val response = deviceRepository.executeAction<T>(action.device.id, action.actionName, action.params)
+                onSuccess(response)
                 _uiState.update {
                     it.copy(isLoading = false)
                 }
+
             }
         }
+    }
+
+    fun executeAction(action: Action) {
+        return executeActionWithResult<Any>(action)
     }
 }

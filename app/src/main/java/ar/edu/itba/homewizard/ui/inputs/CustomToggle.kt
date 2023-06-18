@@ -15,9 +15,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
-import ar.edu.itba.homewizard.ui.theme.Primary
-import ar.edu.itba.homewizard.ui.theme.Surface
-import ar.edu.itba.homewizard.ui.theme.Terciary
 
 @Composable
 fun CustomToggle(options : List<Int>, selected : Int, onSelectedChange : (Int) -> Unit) {
@@ -27,7 +24,6 @@ fun CustomToggle(options : List<Int>, selected : Int, onSelectedChange : (Int) -
             .border(1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(50.dp))
             .clip(RoundedCornerShape(50.dp))
     ){
-        //Toggle button of three states
         options.forEachIndexed { index, icon ->
             Row(
                 modifier = Modifier

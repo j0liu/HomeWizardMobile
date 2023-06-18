@@ -67,8 +67,9 @@ fun AlarmInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
 
             PasswordInput(label = "Código", text = code, onValueChange = { code = it }, modifier = Modifier.padding(10.dp).height(64.dp))
             CustomToggle(options, selected, onSelectedChange = {
-                alarm.setStatus(devicesViewModel, Alarm.statusValues[it], code.text)
-                selected = it
+                alarm.setStatus(devicesViewModel, Alarm.statusValues[it], code.text) {
+                    selected = it
+                }
             })
             Button(
                 modifier = Modifier.width(200.dp).height(64.dp),

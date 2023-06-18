@@ -19,7 +19,7 @@ data class Alarm(
         private val actionNames = mapOf(
             "armedStay" to "armStay",
             "armedAway" to "armAway",
-            "disarmed" to "disarmed"
+            "disarmed" to "disarm"
         )
         val statusValues : Array<String>
             get() = actionNames.keys.toTypedArray()
@@ -33,13 +33,21 @@ data class Alarm(
         this.status = (this.state as AlarmState).status
     }
 
-    fun setStatus(devicesViewModel : DevicesViewModel, status: String, securityCode : String) {
-        devicesViewModel.executeAction(Action(actionNames[status]!!, this, listOf(securityCode)))
-        this.status = status
+    fun setStatus(devicesViewModel : DevicesViewModel, status: String, securityCode : String, changeStatus: () -> Unit) {
+        devicesViewModel.executeActionWithResult<Boolean>(Action(actionNames[status]!!, this, listOf(securityCode))) { result ->
+            if (result) {
+                this.status = status
+                changeStatus()
+            }
+        }
     }
 
     fun changeSecurityCode(devicesViewModel : DevicesViewModel, oldSecurityCode : String, newSecurityCode : String) {
-        devicesViewModel.executeAction(Action("changeSecurityCode", this, listOf(oldSecurityCode, newSecurityCode)))
+        devicesViewModel.executeActionWithResult<Boolean>(Action("changeSecurityCode", this, listOf(oldSecurityCode, newSecurityCode))) { result ->
+            if (result)
+                println("cambiada satisfactoriamente") //TODO: ver si poner snackbar o que para los errores
+        }
+
     }
 
 }

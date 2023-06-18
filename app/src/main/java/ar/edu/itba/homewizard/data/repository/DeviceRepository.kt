@@ -26,8 +26,7 @@ class DeviceRepository @Inject constructor (
         return deviceRemoteDataSource.getDevice(deviceId).result.toDevice()
     }
 
-    suspend fun executeAction(deviceId: String, actionName: String, params: List<Any>) {
-        deviceRemoteDataSource.executeAction(deviceId, actionName, params)
+    suspend fun <T> executeAction(deviceId: String, actionName: String, params: List<Any>) : T {
+        return deviceRemoteDataSource.executeAction<T>(deviceId, actionName, params).result
     }
-
 }
