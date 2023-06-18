@@ -19,13 +19,7 @@ class HomeWizardApplication : Application() {
 
         if (!eventServiceRunning) {
             val intent = Intent(this, EventService::class.java)
-//                startForegroundService(intent)
-                startService(intent)
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            } else {
-//                startForegroundService(intent)
-//            }
-
+            startService(intent)
             eventServiceRunning = true
         }
     }

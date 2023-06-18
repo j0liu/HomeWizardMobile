@@ -32,7 +32,7 @@ import androidx.annotation.RequiresApi
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private lateinit var receiver: ShowNotificationReceiver
+    private lateinit var receiver: SkipNotificationReceiver
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @OptIn(ExperimentalPermissionsApi::class)
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "PermissionLaunchedDuringComposition")
@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        receiver = ShowNotificationReceiver()
+        receiver = SkipNotificationReceiver(DEVICE_ID)
         IntentFilter(MyIntent.SHOW_NOTIFICATION)
             .apply { priority = 1 }
             .also { registerReceiver(receiver, it) }

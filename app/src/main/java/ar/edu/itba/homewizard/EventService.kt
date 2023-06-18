@@ -4,9 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
-import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,9 +16,9 @@ import java.net.URL
 import javax.inject.Inject
 
 
-//@AndroidEntryPoint
+@AndroidEntryPoint
 class EventService : Service() {
-//    @Inject lateinit var deviceRepository: DeviceRepository
+    @Inject lateinit var deviceRepository: DeviceRepository
 
     companion object {
         private const val TAG = "EventService"
@@ -102,10 +100,6 @@ class EventService : Service() {
             }
             stream.close()
             Log.d(TAG, "New events found (${eventList.size})")
-            if (eventList.isNotEmpty()) {
-//                    deviceRepository.getDevices()
-//                    deviceRepository.test()
-            }
             eventList
         } else {
             Log.d(TAG, "No new events found")

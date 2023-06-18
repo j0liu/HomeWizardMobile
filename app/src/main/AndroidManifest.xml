@@ -32,7 +32,7 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter android:priority="0">
-                <action android:name="ar.edu.itba.example.notification.SHOW_NOTIFICATION" />
+                <action android:name="ar.edu.itba.homewizard.SHOW_NOTIFICATION" />
             </intent-filter>
         </receiver>
 
