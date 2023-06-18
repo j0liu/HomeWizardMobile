@@ -39,7 +39,7 @@ fun AlarmInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
             PasswordInput(label = "Código Anterior", text = oldCode, onValueChange = { oldCode = it }, modifier = passwordInputModifier)
             PasswordInput(label = "Código Nuevo", text = newCode, onValueChange = { newCode = it }, modifier = passwordInputModifier)
             Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.SpaceAround,
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Button(
