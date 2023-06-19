@@ -2,7 +2,9 @@
     <string name="app_name">HomeWizardMobile</string>
 
     <string name="devices">Devices</string>
+    <string name="device">Device</string>
     <string name="routines">Routines</string>
+    <string name="routine">Routine</string>
     <string name="settings">Settings</string>
 
     <string name="speaker">Speaker</string>
@@ -87,4 +89,8 @@
     <string name="party">Party</string>
     <string name="schedule_message">Number of seconds between 1 and 60</string>
 
+    <string name="cancel">Cancel</string>
+    <string name="filter">Filter</string>
+
+    <string name="schedule">Schedule</string>
 </resources>

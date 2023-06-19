@@ -5,9 +5,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -16,8 +14,14 @@ import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.launch
 import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.theme.*
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
 
@@ -42,8 +46,9 @@ fun DevicesScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         BottomSheetScaffold(
+            topBar = {DevicesTopBar(devicesViewModel = devicesViewModel, devicesUiState = devicesUiState)},
             sheetShape = RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp),
-            scaffoldState = mainUiState.scaffoldState,
+            scaffoldState = devicesUiState.scaffoldState,
             sheetContent = {
                 DeviceInfo(devicesViewModel = devicesViewModel, mainViewModel = mainViewModel)
             }
@@ -60,4 +65,43 @@ fun DevicesScreen(
     }
 }
 
+@Composable
+private fun DevicesTopBar( devicesViewModel: DevicesViewModel, devicesUiState : DevicesUiState) {
+    TopAppBar (
+        elevation = 0.dp,
+        modifier = Modifier.fillMaxWidth(),
+        title = {
+            Text(
+                text = stringResource(R.string.devices),
+                textAlign = TextAlign.Start,
+                modifier = Modifier.fillMaxWidth()
+            )
+        },
+        navigationIcon = {},
+        actions = {
+            IconButton(onClick = {
+                devicesViewModel.setFilterDialogOpen(true)
+            }) {
+                Icon(
+                    modifier = Modifier.size(30.dp, 30.dp),
+                    imageVector =  ImageVector.vectorResource(R.drawable.filter_variant),
+                    contentDescription = "Back"
+                )
+            }
+            if (devicesUiState.currentDevice === null) {
+                CustomDialog( openDialog = devicesUiState.filterDialogIsOpen, onClosureRequest = { devicesViewModel.setFilterDialogOpen(false) },
+                    title = "${stringResource(R.string.filter)} ${stringResource(R.string.devices)}", submitText = stringResource(R.string.filter),
+                    onSubmit = {
 
+                        true
+                    }
+                ) {
+                    Column() {
+
+                    }
+                }
+            }
+
+        }
+    )
+}

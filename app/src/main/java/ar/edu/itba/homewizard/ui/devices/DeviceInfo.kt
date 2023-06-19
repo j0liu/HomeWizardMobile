@@ -27,7 +27,7 @@ fun DeviceInfo(mainViewModel: MainViewModel, devicesViewModel: DevicesViewModel)
     val scope = rememberCoroutineScope()
 
     Scaffold(
-        modifier = Modifier.fillMaxHeight(0.95f),
+        modifier = Modifier.fillMaxHeight(0.99f),
         topBar = {
             TopAppBar (
                 elevation = 0.dp,
@@ -60,15 +60,17 @@ fun DeviceInfo(mainViewModel: MainViewModel, devicesViewModel: DevicesViewModel)
                             contentDescription = "Back"
                         )
                     }
-                    DropdownMenu(
-                        expanded = devicesUiState.overflowExpanded,
-                        onDismissRequest = { devicesViewModel.setOverflowMenuVisibility(false) },
-                    ) {
-                        DropdownMenuItem(onClick = { /*TODO*/ }) {
-                            Text("Edit")
-                        }
-                        DropdownMenuItem(onClick = { /*TODO*/ }) {
-                            Text("Delete")
+                    if (devicesUiState.currentDevice != null) {
+                        DropdownMenu(
+                            expanded = devicesUiState.overflowExpanded,
+                            onDismissRequest = { devicesViewModel.setOverflowMenuVisibility(false) },
+                        ) {
+                            DropdownMenuItem(onClick = { /*TODO*/ }) {
+                                Text("Edit")
+                            }
+                            DropdownMenuItem(onClick = { /*TODO*/ }) {
+                                Text("Delete")
+                            }
                         }
                     }
                 }

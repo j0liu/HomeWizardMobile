@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
+import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 import kotlinx.coroutines.launch
 
@@ -42,51 +43,24 @@ fun RoutineInfo(
     val openDialog = remember { mutableStateOf(false) }
     var text by remember { mutableStateOf("") }
 
-    if (openDialog.value) {
-        AlertDialog(
-            onDismissRequest = {
-                openDialog.value = false
-            },
-            title = {
-                Text(text = "Schedule routine") // TODO: Change message
-            },
-            text = {
-                Column() {
-                    TextField(
-                        value = text,
-                        onValueChange = { text = it },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
-                    )
-                    Text( stringResource(R.string.schedule_message))
-                }
-            },
-            buttons = {
-                Row(
-                    modifier = Modifier.padding(all = 8.dp).fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    Button(
-                        modifier = Modifier,
-                        onClick = { openDialog.value = false }
-                    ) {
-                        Text("Dismiss") // TODO: Change message
-                    }
-                    Button(onClick = {
-                        if(text.matches(Regex("^([0-5]?[0-9]|60)"))){
-                            openDialog.value = false
-                            Handler(Looper.getMainLooper()).postDelayed({
-                                routinesViewModel.executeRoutine(routine!!)
-                            }, text.toLong() * 1000)
-                        } else {
-                            Toast.makeText(mContext, "The number must be between 1 and 60", Toast.LENGTH_SHORT).show() // TODO: Change message
-                        }
-                    }
-                    ) {
-                        Text("Run") // TODO: Change message
-                    }
-                }
+    CustomDialog(openDialog = openDialog.value, onClosureRequest = {openDialog.value = false},
+        title = "${stringResource(R.string.schedule)} ${stringResource(R.string.routine)}", submitText = stringResource(R.string.schedule),
+        onSubmit = {
+            val submit = text.matches(Regex("^([0-5]?[0-9]|60)"))
+            if(submit){
+                Handler(Looper.getMainLooper()).postDelayed({
+                    routinesViewModel.executeRoutine(routine!!)
+                }, text.toLong() * 1000)
+            } else {
+                Toast.makeText(mContext, "The number must be between 1 and 60", Toast.LENGTH_SHORT).show() // TODO: Change message
             }
-        )
+            submit
+        }
+    ) {
+        Column() {
+            TextField(value = text, onValueChange = { text = it }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
+            Text( stringResource(R.string.schedule_message))
+        }
     }
     Scaffold(
         modifier = Modifier.fillMaxHeight(0.95f),

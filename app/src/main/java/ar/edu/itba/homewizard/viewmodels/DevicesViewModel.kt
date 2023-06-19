@@ -1,11 +1,6 @@
 package ar.edu.itba.homewizard.viewmodels
 
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.currentRecomposeScope
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.data.models.Action
@@ -88,6 +83,15 @@ class DevicesViewModel @Inject constructor(
         }
     }
 
+    fun setFilterDialogOpen(isOpen: Boolean) {
+        _uiState.update {
+            it.copy(
+                devices = uiState.value.devices,
+                currentDevice = uiState.value.currentDevice,
+                filterDialogIsOpen = isOpen
+            )
+        }
+    }
     fun <T> executeActionWithResult(action: Action, onSuccess : suspend (T) -> Unit = {}) {
         viewModelScope.launch {
             runCatching {

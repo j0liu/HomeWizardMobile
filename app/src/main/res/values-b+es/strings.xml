@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">HomeWizardMobile</string>
-    <string name="firstScreen">Primera pantalla</string>
-    <string name="secondScreen">Segunda pantalla</string>
-    <string name="thirdScreen">Tercera pantalla</string>
 
     <string name="devices">Dispositivos</string>
+    <string name="device">Dispositivo</string>
     <string name="routines">Rutinas</string>
+    <string name="routine">Rutina</string>
     <string name="settings">Ajustes</string>
 
     <string name="speaker">Parlante</string>
@@ -91,5 +90,9 @@
 
     <string name="schedule_message">Segundos entre 1 y 60</string>
 
+    <string name="cancel">Cancelar</string>
+    <string name="filter">Filtrar</string>
+
+    <string name="schedule">Programar</string>
 
 </resources>
