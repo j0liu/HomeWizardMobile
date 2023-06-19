@@ -29,28 +29,29 @@ class ShowNotificationReceiver : BroadcastReceiver() {
 
             val notificationsEnabled : Boolean = context.getSharedPreferences(DEVICE_SP_KEY, Context.MODE_PRIVATE).getBoolean(deviceId, false)
             if (notificationsEnabled) {
-                showNotification(context, deviceId!!)
                 GlobalScope.launch(Dispatchers.IO) {
+                    showNotification(context, deviceId!!)
                     deviceRepository.updateDevices()
                 }
             }
         }
     }
 
-    private fun showNotification(context: Context, deviceId: String) {
+    private suspend fun showNotification(context: Context, deviceId: String) {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra(MyIntent.UPDATE_DEVICE, deviceId)
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
+        val device = deviceRepository.getDevice(deviceId)
         val builder = NotificationCompat.Builder(context, HomeWizardApplication.CHANNEL_ID)
-            .setSmallIcon(R.drawable.air_conditioner)
-            .setContentTitle(context.getString(R.string.latina))
-            .setContentText(context.getString(R.string.door))
-            .setStyle(
-                NotificationCompat.BigTextStyle()
-                    .bigText(context.getString(R.string.cool)))
+            .setSmallIcon(device.type.icon)
+            .setContentTitle(device.name)
+            .setContentText(context.getString(R.string.device_changes))
+//            .setStyle(
+//                NotificationCompat.BigTextStyle()
+//                    .bigText(context.getString(R.string.cool)))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

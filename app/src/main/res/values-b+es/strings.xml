@@ -94,5 +94,6 @@
     <string name="filter">Filtrar</string>
 
     <string name="schedule">Programar</string>
+    <string name="device_changes">Se han detectado cambios en el dispositivo</string>
 
 </resources>

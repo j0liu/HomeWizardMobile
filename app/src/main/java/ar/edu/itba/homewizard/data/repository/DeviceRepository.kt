@@ -23,6 +23,12 @@ class DeviceRepository @Inject constructor (
     }
 
     suspend fun getDevice(deviceId : String): Device {
+        if (devicesCache.value != null) {
+            val cachedDevice = devicesCache.value!!.find { it.id == deviceId }
+            if (cachedDevice != null) {
+                return cachedDevice
+            }
+        }
         return deviceRemoteDataSource.getDevice(deviceId).result.toDevice()
     }
 
