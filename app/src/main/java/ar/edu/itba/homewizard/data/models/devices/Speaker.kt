@@ -1,7 +1,17 @@
 package ar.edu.itba.homewizard.data.models.devices
 
 import ar.edu.itba.homewizard.data.models.*
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewModelScope
+import ar.edu.itba.homewizard.data.models.Action
+import ar.edu.itba.homewizard.data.models.Device
+import ar.edu.itba.homewizard.data.models.DeviceState
+import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
+import com.google.gson.internal.LinkedTreeMap
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -18,6 +28,8 @@ class Speaker (
     var volume: Int = 5
     var genre: String = ""
     var song : SpeakerSong = SpeakerSong(title = "", artist = "", album = "", duration = "", progress = "")
+
+
 
     init {
         val speakerState = this.state as SpeakerState
@@ -49,9 +61,18 @@ class Speaker (
 //        }
     }
 
+    fun getPlaylist(devicesViewModel: DevicesViewModel, onSuccess : suspend (List<LinkedTreeMap<String, String>>) -> Unit = {}){
+        devicesViewModel.executeActionWithResult(Action("getPlaylist", this, listOf()), onSuccess)
+    }
+
     fun setGenre(devicesViewModel: DevicesViewModel, genre: String) {
         devicesViewModel.executeAction(Action("setGenre", this, listOf(genre)))
         this.genre = genre
+    }
+
+    fun setVolume(devicesViewModel: DevicesViewModel, volume: Int){
+        devicesViewModel.executeAction(Action("setVolume", this, listOf(volume)))
+        this.volume = volume
     }
 
     fun play(devicesViewModel: DevicesViewModel){

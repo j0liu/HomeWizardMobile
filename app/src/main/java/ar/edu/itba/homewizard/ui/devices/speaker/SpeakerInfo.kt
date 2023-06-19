@@ -10,6 +10,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,7 +22,9 @@ import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.SpeakerViewModel
+import com.google.gson.internal.LinkedTreeMap
 import kotlinx.coroutines.delay
+
 
 @Composable
 fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
@@ -30,12 +34,26 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val speaker = devicesUiState.currentDevice as Speaker
 
+    var songList by remember { mutableStateOf(listOf<LinkedTreeMap<String, String>>())}
+
+    fun getTime(time : String) : Int {
+        val MinSec = time.split(":")
+        if (MinSec.size == 2) {
+            return MinSec[1].toInt() + (MinSec[0].toInt() * 60)
+        }
+        return MinSec[1].toInt()
+    }
+
+    speaker.getPlaylist(devicesViewModel) {
+            list -> songList = list
+    }
     LaunchedEffect(Unit) {
         while(true) {
             devicesViewModel.updateDevice(speaker.id, scope)
-            delay(500)
+            delay(800)
         }
     }
+
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -43,22 +61,31 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
     ) {
         Text(
             text = speaker.song.title,
-            fontSize = 30.sp,
+            fontSize = 20.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colors.surface,
-            modifier = Modifier
+            modifier = Modifier,
+            textAlign = TextAlign.Center,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
         )
         Text(
             text = speaker.song.artist,
-            fontSize = 20.sp,
+            fontSize = 15.sp,
             color = MaterialTheme.colors.surface,
-            modifier = Modifier
+            modifier = Modifier,
+            textAlign = TextAlign.Center,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
         )
         Text(
             text = speaker.song.album,
-            fontSize = 15.sp,
+            fontSize = 10.sp,
             color = MaterialTheme.colors.surface,
-            modifier = Modifier.padding(bottom = 15.dp)
+            modifier = Modifier.padding(bottom = 15.dp),
+            textAlign = TextAlign.Center,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1
         )
         Row(
             modifier = Modifier
@@ -67,11 +94,11 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
             horizontalArrangement = Arrangement.Center
 
         ){
-//            LinearProgressIndicator(
-//                modifier = Modifier.padding(end = 20.dp),
-//                color = MaterialTheme.colors.surface,
-//                progress = 1.0
-//            )
+            LinearProgressIndicator(
+                modifier = Modifier.padding(end = 20.dp),
+                color = MaterialTheme.colors.surface,
+                progress = getTime(speaker.song.progress) / getTime(speaker.song.duration).toFloat()
+            )
             Text(
                 text = "${speaker.song.progress}/${speaker.song.duration}",
                 fontSize = 15.sp,
@@ -132,8 +159,8 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
         CustomSlider(
             value = speaker.volume.toFloat(),
 //            onValueChange = {  speakerViewModel.setVolume(it) },
-            valueRange = 0f..100f,
-            onValueChangeFinished = { },
+            valueRange = 0f..10f,
+            onValueChangeFinished = {speaker.setVolume(devicesViewModel, it.toInt()) },
             title = "",
             unit = "",
             icon = R.drawable.volume_high,
@@ -148,9 +175,15 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
                 .padding(bottom = 25.dp),
 //                .fillMaxSize(),
             title = "Géneros",
-            elements = listOf( "clasica", "country", "dance", "latina", "pop", "rock"),
-            onSelected = { speaker.setGenre(devicesViewModel, it) },
+            elements = listOf( "classical", "country", "dance", "latina", "pop", "rock"),
+            onSelected = {
+                speaker.setGenre(devicesViewModel, it)
+                speaker.getPlaylist(devicesViewModel) {
+                    list -> songList = list
+                }
+            },
         )
+        if (!songList.isEmpty()) {
         Card (
             modifier = Modifier
                 .fillMaxWidth()
@@ -165,14 +198,15 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
                     .height(180.dp)
                     .padding(start = 15.dp)
             ) {
-//                devicesUiState.playlist.forEach {song ->
-//                    Text(
-//                        text = song,
-//                        fontSize = 12.sp,
-//                        color = Color.Black,
-////                        modifier = Modifier.padding(bottom = 10.dp)
-//                    )
-//                }
+
+
+                songList.forEach() { song ->
+                    Text(
+                        song.get("title")!!,
+                        fontWeight = if (speaker.song.title == song.get("title")!!) FontWeight.Bold else FontWeight.Normal
+                    )
+                }
+            }
             }
         }
     }
