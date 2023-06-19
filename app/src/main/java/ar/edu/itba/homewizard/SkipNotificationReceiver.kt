@@ -17,12 +17,11 @@ class SkipNotificationReceiver() : BroadcastReceiver() {
     @Inject
     lateinit var deviceRepository : DeviceRepository
 
+
     @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
         val background : Boolean = context.getSharedPreferences("ar.edu.itba.homewizard", Context.MODE_PRIVATE).getBoolean("background", false)
-        if (intent.action.equals(MyIntent.SHOW_NOTIFICATION) && !background
-            // && intent.getStringExtra(MyIntent.UPDATE_DEVICE).equals(deviceId)
-        ) {
+        if (intent.action.equals(MyIntent.SHOW_NOTIFICATION) && !background) {
              GlobalScope.launch(Dispatchers.IO) {
                 deviceRepository.updateDevices()
             }

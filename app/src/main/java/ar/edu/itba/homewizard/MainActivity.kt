@@ -59,12 +59,22 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         getSharedPreferences("ar.edu.itba.homewizard", MODE_PRIVATE).edit().putBoolean("background", false).apply()
+        try {
+            IntentFilter(MyIntent.SHOW_NOTIFICATION)
+                .apply { priority = 1 }
+                .also { registerReceiver(receiver, it) }
+        } catch (e: Exception) {
+            println("Receiver already registered")
+        }
     }
 
     override fun onStop() {
+        try {
+            unregisterReceiver(receiver)
+        } catch (e: Exception) {
+            println("Receiver not registered")
+        }
         super.onStop()
-
-        unregisterReceiver(receiver)
     }
 
     @OptIn(ExperimentalPermissionsApi::class)

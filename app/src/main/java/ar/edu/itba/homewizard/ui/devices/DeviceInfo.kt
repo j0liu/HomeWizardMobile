@@ -51,6 +51,15 @@ fun DeviceInfo(mainViewModel: MainViewModel, devicesViewModel: DevicesViewModel)
                 },
                 actions = {
                     IconButton(onClick = {
+                        devicesViewModel.toggleNotificationsForCurrentDevice()
+                    }) {
+                        Icon(
+                            modifier = Modifier.size(30.dp, 30.dp),
+                            imageVector =  if (!devicesUiState.currentNotificationsEnabled) ImageVector.vectorResource(R.drawable.bell_cancel_outline) else ImageVector.vectorResource(R.drawable.bell_outline),
+                            contentDescription = "Back"
+                        )
+                    }
+                    IconButton(onClick = {
                         devicesViewModel.setOverflowMenuVisibility(true)
                     }) {
                         Icon(

@@ -10,6 +10,7 @@ data class DevicesUiState @OptIn(ExperimentalMaterialApi::class) constructor(
     var devices: List<Device> = listOf(),
     var filterDevices : Flow<Device> = devices.asFlow(),
     val currentDevice: Device? = null,
+    val currentNotificationsEnabled: Boolean = false,
 
     // UI
     var isLoading: Boolean = false,

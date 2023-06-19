@@ -7,15 +7,33 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import ar.edu.itba.homewizard.data.repository.DeviceRepository
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ShowNotificationReceiver : BroadcastReceiver() {
+    @Inject
+    lateinit var deviceRepository : DeviceRepository
+
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
         val background : Boolean = context.getSharedPreferences("ar.edu.itba.homewizard", Context.MODE_PRIVATE).getBoolean("background", false)
         if (background) {
             val deviceId: String? = intent.getStringExtra(MyIntent.UPDATE_DEVICE)
             Log.d(TAG, "Show notification intent received {$deviceId)")
 
-            showNotification(context, deviceId!!)
+            val notificationsEnabled : Boolean = context.getSharedPreferences(DEVICE_SP_KEY, Context.MODE_PRIVATE).getBoolean(deviceId, false)
+            if (notificationsEnabled) {
+                showNotification(context, deviceId!!)
+                GlobalScope.launch(Dispatchers.IO) {
+                    deviceRepository.updateDevices()
+                }
+            }
         }
     }
 
@@ -48,5 +66,6 @@ class ShowNotificationReceiver : BroadcastReceiver() {
 
     companion object {
         private const val TAG = "ShowNotificationReceiver"
+        private const val DEVICE_SP_KEY = "ar.edu.itba.homewizard.devices.notifications"
     }
 }

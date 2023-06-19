@@ -1,13 +1,19 @@
 package ar.edu.itba.homewizard.viewmodels
 
+import android.content.Context
+import android.provider.Settings.Global.getString
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.itba.homewizard.HomeWizardApplication
+import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
+import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -18,6 +24,7 @@ import javax.inject.Inject
 @OptIn(ExperimentalMaterialApi::class)
 @HiltViewModel
 class DevicesViewModel @Inject constructor(
+    @ApplicationContext private val context : Context,
     private val deviceRepository : DeviceRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DevicesUiState())
@@ -48,26 +55,34 @@ class DevicesViewModel @Inject constructor(
 
     }
 
-//    fun collapseBottomSheet(scope: CoroutineScope? = null) {
-//        scope?.launch {
-//            _uiState.value.scaffoldState.bottomSheetState.collapse()
-//        }
-//        _uiState.value.afterCollapseBottomSheet()
-//        setCurrentDevice(null)
-//    }
 
-//    fun setAfterCollapseBottomSheetAction(function: () -> Unit) {
-//        _uiState.update {
-//            it.copy(
-//                afterCollapseBottomSheet = function
-//            )
-//        }
-//    }
-
+    // TODO: Move names to constants
+    val DEVICE_SP_KEY = "ar.edu.itba.homewizard.devices.notifications"
     fun setCurrentDevice(device: Device?) {
+        var notificationsEnabled = false
+        if (device != null) {
+            notificationsEnabled = getApplication(context)
+                .getSharedPreferences(DEVICE_SP_KEY, Context.MODE_PRIVATE)
+                .getBoolean(device.id, false)
+        }
+
         _uiState.update {
             it.copy(
-                currentDevice = device
+                currentDevice = device,
+                currentNotificationsEnabled = notificationsEnabled
+            )
+        }
+    }
+
+    fun toggleNotificationsForCurrentDevice() {
+        getApplication(context)
+            .getSharedPreferences(DEVICE_SP_KEY, Context.MODE_PRIVATE)
+            .edit()
+            .putBoolean(uiState.value.currentDevice!!.id, !uiState.value.currentNotificationsEnabled)
+            .apply()
+        _uiState.update {
+            it.copy(
+                currentNotificationsEnabled = !uiState.value.currentNotificationsEnabled
             )
         }
     }
