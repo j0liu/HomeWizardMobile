@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.R
 
 @Composable
-fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: String = "", fontSize: Int = 70, multiplier: Float) {
+fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: String = "", fontSize: Int = 70, multiplier: Float, startLimit: Int, endLimit: Int) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -29,13 +29,14 @@ fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: St
         IconButton(
             onClick = { onValueChanged(value-1) },
             modifier = Modifier
-                .size(70.dp*multiplier)
+                .size(70.dp*multiplier),
+            enabled = value > startLimit
         ) {
             Icon(
                 modifier = Modifier
                     .size(60.dp*multiplier),
                 imageVector = ImageVector.vectorResource(id = R.drawable.baseline_horizontal_rule_24) ,
-                tint = MaterialTheme.colors.onPrimary,
+                tint = if(value > startLimit) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onPrimary.copy(alpha = 0.5f),
                 contentDescription = "content description"
             )
         }
@@ -49,13 +50,14 @@ fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: St
         IconButton(
             onClick = { onValueChanged(value+1)},
             modifier = Modifier
-                .size(70.dp*multiplier)
+                .size(70.dp*multiplier),
+            enabled = value < endLimit
         ) {
             Icon(
                 modifier = Modifier
                     .size(70.dp*multiplier),
                 imageVector = Icons.Filled.Add,
-                tint = MaterialTheme.colors.onPrimary,
+                tint = if(value < endLimit) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onPrimary.copy(alpha = 0.5f),
                 contentDescription = "content description"
             )
         }

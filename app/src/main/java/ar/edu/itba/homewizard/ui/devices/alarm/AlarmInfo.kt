@@ -30,5 +30,4 @@ fun AlarmInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
         else
             AlarmMultiplier(devicesViewModel, alarm, if (maxWidth > ScreenSize.tabletWidth) 1.5f else 1f)
     }
-
 }

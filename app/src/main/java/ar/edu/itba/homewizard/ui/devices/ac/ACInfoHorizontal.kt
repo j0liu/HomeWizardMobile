@@ -31,7 +31,7 @@ fun ACInfoHorizontal(devicesViewModel: DevicesViewModel, ac: AC, options: List<I
         ){
             NumericController(value = ac.temperature, unit = "°", fontSize = 60, multiplier = multiplier, onValueChanged = {
                 ac.setTemperature(devicesViewModel, it)
-            })
+            }, startLimit = 18, endLimit = 38)
             Box(modifier = Modifier.padding(vertical = 15.dp*multiplier)){
                 PowerButton(
                     selected = ac.status,

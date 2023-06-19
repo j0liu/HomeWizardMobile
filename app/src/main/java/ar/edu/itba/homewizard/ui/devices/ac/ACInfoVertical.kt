@@ -22,13 +22,12 @@ fun ACInfoVertical(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int
     ){
         NumericController(value = ac.temperature, unit = "°", multiplier = multiplier, onValueChanged = {
             ac.setTemperature(devicesViewModel, it)
-        })
+        }, startLimit = 18, endLimit = 38)
         Row(
             modifier = Modifier
                 .padding(4.dp),
         ) {
             Box(modifier = Modifier.padding(vertical = 15.dp*multiplier)){
-
                 PowerButton(
                     selected = ac.status,
                     modifier = Modifier,

@@ -26,7 +26,6 @@ fun ACInfo(
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val ac = devicesUiState.currentDevice as AC
     val options = listOf(R.drawable.white_balance_sunny, R.drawable.snowflake, R.drawable.weather_windy)
-    var selected by remember { mutableStateOf(AC.modeNames.indexOf(ac.mode)) }
 
     BoxWithConstraints {
         if (maxWidth < maxHeight)

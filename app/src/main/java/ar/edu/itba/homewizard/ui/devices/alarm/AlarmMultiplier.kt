@@ -21,6 +21,7 @@ import ar.edu.itba.homewizard.ui.inputs.CustomToggle
 import ar.edu.itba.homewizard.ui.inputs.PasswordInput
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
+
 @Composable
 fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier: Float){
     var changingCode by remember{ mutableStateOf(false) }
@@ -58,7 +59,6 @@ fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier
             ) {
                 Button(
                     modifier = Modifier.padding(16.dp*multiplier),
-//                    shape = RoundedCornerShape(10.dp*multiplier),
                     onClick = {
                         alarm.changeSecurityCode(devicesViewModel, oldCode.text, newCode.text)
                         changingCode = false
@@ -66,7 +66,10 @@ fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = MaterialTheme.colors.secondary,
                         contentColor = MaterialTheme.colors.onPrimary
-                    )
+                    ),
+                    enabled = wrongPasswordMessage(oldCode.text).isEmpty() &&
+                            wrongPasswordMessage(newCode.text).isEmpty() &&
+                            oldCode.text.length == 4 && newCode.text.length == 4
                 ) {
                     Text(text = "ACTUALIZAR", fontSize = 16.sp*multiplier)
                 }
@@ -97,12 +100,17 @@ fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier
             }
             Button(
                 modifier = Modifier.padding(16.dp*multiplier),
-//                shape = RoundedCornerShape(10.dp*multiplier),
                 onClick = { changingCode = true },
+                enabled = wrongPasswordMessage(code.text).isEmpty() || code.text.isEmpty(),
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.secondary, contentColor = MaterialTheme.colors.onPrimary)
             ) {
-                Text("INGRESAR NUEVO CÓDIGO", fontSize = 16.sp*multiplier )
+                Text("INGRESAR NUEVO CÓDIGO", fontSize = 16.sp*multiplier)
             }
         }
     }
+}
+fun wrongPasswordMessage(password: String): String {
+    if (password.length != 4 && password.isNotEmpty()) return "El código debe tener 4 dígitos"
+    if (!password.all { char -> char.isDigit() }) return "El código debe ser numérico"
+    return ""
 }

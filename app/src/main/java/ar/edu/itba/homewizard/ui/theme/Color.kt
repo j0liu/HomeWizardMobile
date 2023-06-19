@@ -17,3 +17,4 @@ val Surface = Color(0xFFD7FDFF) // --> Surface
 val onPrimary = Color(0xFFFFFFFF)  // --> OnPrimary
 val onSecondary = Color(0xFF808080) // --> onSecondary
 val onSurface = Color(0xFF000000) // --> OnSurface
+val Error = Color(0xFFFF0000) // --> Error
