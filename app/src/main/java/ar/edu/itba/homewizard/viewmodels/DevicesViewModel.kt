@@ -26,7 +26,7 @@ import javax.inject.Inject
 class DevicesViewModel @Inject constructor(
     private val deviceRepository : DeviceRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(DevicesUiState(collapseBottomSheet = { collapseBottomSheet() }))
+    private val _uiState = MutableStateFlow(DevicesUiState())
     val uiState: StateFlow<DevicesUiState> = _uiState.asStateFlow()
 
     init {
@@ -54,12 +54,21 @@ class DevicesViewModel @Inject constructor(
 
     }
 
-    fun collapseBottomSheet(scope: CoroutineScope? = null) {
-        scope?.launch {
-            _uiState.value.scaffoldState.bottomSheetState.collapse()
-        }
-        setCurrentDevice(null)
-    }
+//    fun collapseBottomSheet(scope: CoroutineScope? = null) {
+//        scope?.launch {
+//            _uiState.value.scaffoldState.bottomSheetState.collapse()
+//        }
+//        _uiState.value.afterCollapseBottomSheet()
+//        setCurrentDevice(null)
+//    }
+
+//    fun setAfterCollapseBottomSheetAction(function: () -> Unit) {
+//        _uiState.update {
+//            it.copy(
+//                afterCollapseBottomSheet = function
+//            )
+//        }
+//    }
 
     fun setCurrentDevice(device: Device?) {
         _uiState.update {

@@ -6,21 +6,10 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.height
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import androidx.navigation.NavController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import ar.edu.itba.homewizard.ui.theme.HomeWizardMobileTheme
-import ar.edu.itba.homewizard.ui.Screen
 import dagger.hilt.android.AndroidEntryPoint
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.PermissionRequired
@@ -28,6 +17,7 @@ import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberPermissionState
 import android.Manifest
 import androidx.annotation.RequiresApi
+import ar.edu.itba.homewizard.ui.BottomBar
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -88,42 +78,6 @@ class MainActivity : ComponentActivity() {
             permissionNotAvailableContent = { /* TODO: función hacer las adecuaciones a la App debido a que el permiso no fue otorgado  */ }
         ) {
             /* Hacer uso del recurso porque el permiso fue otorgado */
-        }
-    }
-}
-
-@Composable
-fun BottomBar(navController: NavController) {
-    val items = listOf(
-        Screen.DevicesScreen,
-        Screen.RoutinesScreen,
-    )
-
-    BottomNavigation(
-        modifier = Modifier.zIndex(1f)
-    ) {
-        val navBackStackEntry by navController.currentBackStackEntryAsState()
-        val currentRoute = navBackStackEntry?.destination?.route
-        items.forEach { item ->
-            BottomNavigationItem(
-                selectedContentColor = MaterialTheme.colors.secondary,
-                unselectedContentColor = MaterialTheme.colors.onPrimary,
-                icon = { Icon(modifier = Modifier.height(25.dp), imageVector = ImageVector.vectorResource(id = item.icon), contentDescription = stringResource(item.title)) },
-                label = { Text(text = stringResource(item.title)) },
-                alwaysShowLabel = true,
-                selected = currentRoute == item.route,
-                onClick = {
-                    navController.navigate(item.route) {
-                        navController.graph.startDestinationRoute?.let { screenRoute ->
-                            popUpTo(screenRoute) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    }
-                }
-            )
         }
     }
 }

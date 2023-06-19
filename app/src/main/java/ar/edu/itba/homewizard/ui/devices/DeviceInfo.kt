@@ -16,12 +16,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
+import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun DeviceInfo(devicesViewModel: DevicesViewModel) {
+fun DeviceInfo(mainViewModel: MainViewModel, devicesViewModel: DevicesViewModel) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
 
@@ -40,7 +41,7 @@ fun DeviceInfo(devicesViewModel: DevicesViewModel) {
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        devicesViewModel.collapseBottomSheet(scope)
+                        mainViewModel.collapseBottomSheet(scope)
                     }) {
                         Icon(
                             modifier = Modifier.size(30.dp, 30.dp),

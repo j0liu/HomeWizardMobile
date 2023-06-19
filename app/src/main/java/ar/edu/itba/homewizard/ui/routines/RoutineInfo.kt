@@ -21,6 +21,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
+import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 import kotlinx.coroutines.launch
 
@@ -29,6 +30,7 @@ import kotlinx.coroutines.launch
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun RoutineInfo(
+    mainViewModel: MainViewModel,
     routinesViewModel: RoutinesViewModel
 ) {
     val routineUiState by routinesViewModel.uiState.collectAsState()
@@ -104,7 +106,7 @@ fun RoutineInfo(
                         modifier = Modifier,
                         onClick = {
                             scope.launch {
-                                routineUiState.scaffoldState.bottomSheetState.collapse()
+                                mainViewModel.collapseBottomSheet(scope)
                             }
                         }
                     ) {

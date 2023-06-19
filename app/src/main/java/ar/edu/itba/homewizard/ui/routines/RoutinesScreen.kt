@@ -15,23 +15,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.data.models.Routine
+import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun RoutinesScreen(
+    mainViewModel: MainViewModel,
     routinesViewModel: RoutinesViewModel = hiltViewModel(),
 ) {
+    val mainUiState by mainViewModel.uiState.collectAsState()
     val routinesUiState by routinesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
-
-    // TODO: Modularizar?
-    BackHandler(enabled = routinesUiState.scaffoldState.bottomSheetState.isExpanded) {
-        scope.launch {
-            routinesUiState.scaffoldState.bottomSheetState.collapse() // TODO: Cambiar a funcion del viewmodel
-        }
-    }
+    mainViewModel.setBackHandler(scope)
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -39,10 +36,10 @@ fun RoutinesScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BottomSheetScaffold(
-            sheetShape = RoundedCornerShape(15.dp),
-            scaffoldState = routinesUiState.scaffoldState,
+            sheetShape = RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp),
+            scaffoldState = mainUiState.scaffoldState,
             sheetContent = {
-                RoutineInfo(routinesViewModel = routinesViewModel)
+                RoutineInfo(routinesViewModel = routinesViewModel, mainViewModel = mainViewModel)
             }) {
 
             LazyColumn (
@@ -57,8 +54,9 @@ fun RoutinesScreen(
                         routine = routine,
                         onClick = { selectedRoutine ->
                             routinesViewModel.setCurrentRoutine(selectedRoutine)
+                            mainViewModel.setBottomBarVisibility(false)
                             scope.launch {
-                                routinesUiState.scaffoldState.bottomSheetState.expand()
+                                mainUiState.scaffoldState.bottomSheetState.expand()
                             }
                         }
                     )

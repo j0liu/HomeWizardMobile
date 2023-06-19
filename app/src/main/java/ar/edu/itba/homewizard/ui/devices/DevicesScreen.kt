@@ -19,38 +19,40 @@ import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.ui.theme.*
+import ar.edu.itba.homewizard.viewmodels.MainViewModel
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DevicesScreen(
+    mainViewModel: MainViewModel,
     devicesViewModel: DevicesViewModel = hiltViewModel()
 ) {
-    val devicesUiState by devicesViewModel.uiState.collectAsState()
-    val scope = rememberCoroutineScope()
-
-    // TODO: Modularizar?
-    BackHandler(enabled = devicesUiState.scaffoldState.bottomSheetState.isExpanded) {
-        devicesViewModel.collapseBottomSheet(scope)
+    val mainUiState by mainViewModel.uiState.collectAsState()
+    mainViewModel.setAfterCollapseBottomSheetAction {
+        devicesViewModel.setCurrentDevice(null)
     }
+    val scope = rememberCoroutineScope()
+    mainViewModel.setBackHandler(scope)
+
 
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
         BottomSheetScaffold(
-            sheetShape = RoundedCornerShape(15.dp),
-            scaffoldState = devicesUiState.scaffoldState,
+            sheetShape = RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp),
+            scaffoldState = mainUiState.scaffoldState,
             sheetContent = {
-                DeviceInfo(devicesViewModel = devicesViewModel)
+                DeviceInfo(devicesViewModel = devicesViewModel, mainViewModel = mainViewModel)
             }
         ) {
             BoxWithConstraints {
                 if(maxWidth < maxHeight) {
-                    DevicesVertical(devicesViewModel = devicesViewModel)
+                    DevicesVertical(mainViewModel = mainViewModel, devicesViewModel = devicesViewModel)
                 } else {
-                    DevicesHorizontal(devicesViewModel = devicesViewModel)
+                    DevicesHorizontal(mainViewModel = mainViewModel, devicesViewModel = devicesViewModel)
                 }
             }
 
