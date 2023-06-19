@@ -1,6 +1,6 @@
 package ar.edu.itba.homewizard.ui.inputs
 
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -33,8 +33,7 @@ fun CustomDropdownMenu(modifier: Modifier = Modifier, elements: List<String>, se
         )
 
         ExposedDropdownMenu(
-            modifier = Modifier
-                .height(200.dp),
+            modifier = Modifier.heightIn(max = 320.dp),
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {

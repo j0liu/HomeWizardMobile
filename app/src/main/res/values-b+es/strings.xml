@@ -95,5 +95,9 @@
 
     <string name="schedule">Programar</string>
     <string name="device_changes">Se han detectado cambios en el dispositivo</string>
+    <string name="orderby">Ordenar Por</string>
+    <string name="name">Nombre</string>
+    <string name="uses">Usos</string>
+    <string name="type">Tipo</string>
 
 </resources>

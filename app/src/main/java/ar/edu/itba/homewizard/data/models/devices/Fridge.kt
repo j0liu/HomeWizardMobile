@@ -1,17 +1,14 @@
 package ar.edu.itba.homewizard.data.models.devices
 
-import ar.edu.itba.homewizard.data.models.Action
-import ar.edu.itba.homewizard.data.models.Device
-import ar.edu.itba.homewizard.data.models.DeviceState
-import ar.edu.itba.homewizard.data.models.DeviceType
+import ar.edu.itba.homewizard.data.models.*
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 class Fridge (
-    override var id: String,
-    override var name: String,
-    override var type: DeviceType,
-    override var state: DeviceState?,
-    override var meta: Any
+    id: String,
+    name: String,
+    type: DeviceType,
+    state: DeviceState?,
+    meta: MetaObject
 ) : Device(id, name, type, state, meta) {
 
     var temperature: Int = 0

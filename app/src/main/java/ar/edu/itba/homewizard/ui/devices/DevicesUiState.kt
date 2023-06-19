@@ -11,14 +11,19 @@ data class DevicesUiState constructor(
     var filterTypeName : String = "",
     var filterType : DeviceType? = null,
     val filteredDevices : List<Device> = listOf(),
+
+    val orderCriteria : Comparator<Device> = Device.orderCriterias["Alphabetical"]!!,
+    val orderCriteriaName : String = "Alphabetical",
+    val ascendantOrder : Boolean = true,
+
     // UI
     var isLoading: Boolean = false,
     var overflowExpanded: Boolean = false,
     var filterDialogIsOpen : Boolean = false,
-) {
-    fun filterDevices(devices : List<Device> = this.devices, filterType: DeviceType? = this.filterType) : List<Device> {
-        println("Filtering...")
-        return if (filterType != null) devices.filter {it.type == filterType} else devices
-    }
 
+    ) {
+    fun filterDevices(devices : List<Device> = this.devices, filterType: DeviceType? = this.filterType) : List<Device> {
+        val filteredDevices = if (filterType != null) devices.filter {it.type == filterType} else devices
+        return filteredDevices.sortedWith(orderCriteria)
+    }
 }

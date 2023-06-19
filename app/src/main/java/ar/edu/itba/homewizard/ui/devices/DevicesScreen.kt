@@ -120,20 +120,27 @@ private fun DevicesTopBar( devicesViewModel: DevicesViewModel, devicesUiState : 
                 CustomDialog( openDialog = devicesUiState.filterDialogIsOpen, onClosureRequest = { devicesViewModel.setFilterDialogOpen(false) },
                     title = "${stringResource(R.string.filter)} ${stringResource(R.string.devices)}", submitText = stringResource(R.string.filter),
                     onSubmit = {
-                        devicesViewModel.filterByType(DeviceType.deviceTypesByName.getOrDefault(devicesUiState.filterTypeName, null))
+                        devicesViewModel.filterByType(DeviceType.deviceTypesByName[devicesUiState.filterTypeName])
                         true
                     }
                 ) {
                     Column(
-                        modifier = Modifier.padding(top = 16.dp, bottom = 16.dp)
+                        modifier = Modifier.background(color = MaterialTheme.colors.primary)
                     ) {
                         //TODO: change dropdown to toggle group
                         CustomDropdownMenu(
-                            modifier = Modifier.background(color = MaterialTheme.colors.surface, shape = RectangleShape),
+                            modifier = Modifier.padding(bottom = 16.dp).background(color = MaterialTheme.colors.surface, shape = RectangleShape),
                             elements = listOf(listOf("all"), DeviceType.deviceTypesByName.keys).flatten(),
-                            title = "Type",
+                            title = stringResource(R.string.type),
                             selected = devicesUiState.filterTypeName
                         ){devicesViewModel.setFilterType(it)}
+
+                        CustomDropdownMenu(
+                            modifier = Modifier.background(color = MaterialTheme.colors.surface, shape = RectangleShape),
+                            elements = Device.orderCriteriaNames,
+                            title = stringResource(R.string.orderby),
+                            selected = devicesUiState.orderCriteriaName
+                        ){devicesViewModel.setOrderCriteria(it)}
                     }
                 }
             }

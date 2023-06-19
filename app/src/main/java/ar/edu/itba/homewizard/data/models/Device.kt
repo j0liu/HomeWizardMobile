@@ -14,12 +14,26 @@ import ar.edu.itba.homewizard.ui.devices.speaker.SpeakerInfo
 import kotlin.reflect.KClass
 
 open class Device(
-     open var id: String,
-     open var name: String,
-     open var type: DeviceType,
-     open var state: DeviceState?,
-     open var meta: Any
-)
+     var id: String,
+     var name: String,
+     var type: DeviceType,
+     var state: DeviceState?,
+     var meta: MetaObject
+) {
+    var qtyUses : Int
+        get() = (meta.qtyUses?:0) as Int
+        set(value) {  }
+
+    companion object {
+        val orderCriterias: HashMap<String, Comparator<Device>> = hashMapOf(
+            "Alphabetical" to compareBy { it.name },
+            "Alphabetical Descending" to compareByDescending { it.name },
+            "Uses" to compareByDescending { it.qtyUses },
+            "Uses Ascending" to compareBy { it.qtyUses },
+        )
+        val orderCriteriaNames = listOf("Alphabetical", "Alphabetical Descending", "Uses", "Uses Ascending")
+    }
+}
 
 typealias ComposableFun = @Composable () -> Unit
 class DeviceType(var id: String, var name: String, val infoScreen: ComposableFun, val icon : Int, val deviceClass : KClass<*>, val stateClass : KClass<*>) {

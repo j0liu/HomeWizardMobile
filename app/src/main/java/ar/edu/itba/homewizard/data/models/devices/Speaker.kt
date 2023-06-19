@@ -1,20 +1,16 @@
 package ar.edu.itba.homewizard.data.models.devices
 
-import androidx.lifecycle.viewModelScope
-import ar.edu.itba.homewizard.data.models.Action
-import ar.edu.itba.homewizard.data.models.Device
-import ar.edu.itba.homewizard.data.models.DeviceState
-import ar.edu.itba.homewizard.data.models.DeviceType
+import ar.edu.itba.homewizard.data.models.*
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class Speaker (
-    override var id: String,
-    override var name: String,
-    override var type: DeviceType,
-    override var state: DeviceState?,
-    override var meta: Any
+    id: String,
+    name: String,
+    type: DeviceType,
+    state: DeviceState?,
+    meta: MetaObject
 ) : Device(id, name, type, state, meta)
 {
 
@@ -80,9 +76,6 @@ class Speaker (
 
 //        this.status = !this.status
     }
-
-
-
 
         data class SpeakerState (
                 val status: String,

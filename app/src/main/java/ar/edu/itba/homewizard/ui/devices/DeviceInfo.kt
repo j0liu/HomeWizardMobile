@@ -92,7 +92,9 @@ fun DeviceInfo(mainViewModel: MainViewModel, devicesViewModel: DevicesViewModel)
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally,
         ){
-            devicesUiState.currentDevice?.type?.infoScreen?.invoke()
+            if (devicesUiState.currentDevice != null) {
+                devicesUiState.currentDevice?.type?.infoScreen?.invoke()
+            }
         }
     }
 }

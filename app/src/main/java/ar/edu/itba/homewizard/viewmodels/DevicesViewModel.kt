@@ -1,12 +1,8 @@
 package ar.edu.itba.homewizard.viewmodels
 
 import android.content.Context
-import android.provider.Settings.Global.getString
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.itba.homewizard.HomeWizardApplication
-import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
@@ -46,9 +42,11 @@ class DevicesViewModel @Inject constructor(
                     }
                 }
                 _uiState.update {
+                    it.copy(devices = devices.value!!)
+                }
+                _uiState.update {
                     it.copy(
-                        devices = devices.value!!,
-                        filteredDevices = it.filterDevices(devices = devices.value!!),
+                        filteredDevices = it.filterDevices(),
                         isLoading = false
                     )
                 }
@@ -155,16 +153,26 @@ class DevicesViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 filterType = deviceType,
-                filteredDevices = it.filterDevices(filterType = deviceType)
+                orderCriteria = Device.orderCriterias[it.orderCriteriaName]!!
             )
+        }
+        _uiState.update {
+            it.copy(filteredDevices = it.filterDevices())
         }
     }
 
     fun setFilterType(name : String) {
-        println(name)
         _uiState.update {
             it.copy(
                 filterTypeName = name
+            )
+        }
+    }
+
+    fun setOrderCriteria(name : String) {
+        _uiState.update {
+            it.copy(
+                orderCriteriaName = name
             )
         }
     }

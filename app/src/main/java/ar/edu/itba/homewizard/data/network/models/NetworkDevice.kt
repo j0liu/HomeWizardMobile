@@ -20,7 +20,7 @@ data class NetworkDevice (
     @SerializedName("state")
     var state: JsonObject? = null,
     @SerializedName("meta")
-    var meta: Any? = null
+    var meta: NetworkMeta? = null
 ){
     fun toDevice(): Device {
         val deviceType : DeviceType = this.type!!.toDeviceType()
@@ -39,12 +39,11 @@ data class NetworkDevice (
                 this.name!!,
                 deviceType,
                 deviceState,
-                this.meta!!
+                this.meta!!.toMeta()
             ) as Device
         } else {
-            classInstance = Device(this.id!!, this.name!!, deviceType, null, this.meta!!)
+            classInstance = Device(this.id!!, this.name!!, deviceType, null, this.meta!!.toMeta())
         }
-
 
         return classInstance
     }
