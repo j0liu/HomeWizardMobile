@@ -26,7 +26,6 @@ fun RoutinesScreen(
     routinesViewModel: RoutinesViewModel = hiltViewModel(),
 ) {
     val mainUiState by mainViewModel.uiState.collectAsState()
-    val routinesUiState by routinesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
     mainViewModel.setBackHandler(scope)
 
@@ -42,26 +41,14 @@ fun RoutinesScreen(
                 RoutineInfo(routinesViewModel = routinesViewModel, mainViewModel = mainViewModel)
             }) {
 
-            LazyColumn (
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(bottom = 10.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                items(items = routinesUiState.routines.toMutableList(), key = { routine: Routine -> routine.id  }) { routine : Routine ->
-                    RoutineCard(
-                        routine = routine,
-                        onClick = { selectedRoutine ->
-                            routinesViewModel.setCurrentRoutine(selectedRoutine)
-                            mainViewModel.setBottomBarVisibility(false)
-                            scope.launch {
-                                mainUiState.scaffoldState.bottomSheetState.expand()
-                            }
-                        }
-                    )
+            BoxWithConstraints {
+                if(maxWidth < maxHeight) {
+                    RoutinesVertical(mainViewModel = mainViewModel, routinesViewModel = routinesViewModel)
+                } else {
+                    RoutinesHorizontal(mainViewModel = mainViewModel, routinesViewModel = routinesViewModel)
                 }
             }
+
         }
     }
 }
