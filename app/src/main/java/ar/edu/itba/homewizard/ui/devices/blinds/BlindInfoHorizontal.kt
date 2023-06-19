@@ -21,35 +21,35 @@ import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @Composable
 
-fun BlindInfoHorizontal(devicesViewModel: DevicesViewModel, blind : Blind) {
+fun BlindInfoHorizontal(devicesViewModel: DevicesViewModel, blind : Blind, multiplier: Float = 1f) {
     Row {
         Column(
             modifier = Modifier
-                .weight(0.4f)
+                .weight(0.35f)
                 .fillMaxHeight(),
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button(
                 onClick = { blind.open(devicesViewModel) },
-                modifier= Modifier.padding(bottom = 10.dp),
+                modifier= Modifier.padding(bottom = 10.dp*multiplier),
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
-                shape = RoundedCornerShape(20.dp),
+                shape = RoundedCornerShape(20.dp*multiplier),
             ) {
                 Icon(
-                    modifier = Modifier.size(90.dp),
+                    modifier = Modifier.size(90.dp*multiplier),
                     imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal),
                     contentDescription = "content description",
                 )
             }
             Button(
                 onClick = { blind.close(devicesViewModel) },
-                modifier= Modifier.padding(bottom = 10.dp),
+                modifier= Modifier.padding(bottom = 10.dp*multiplier),
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
-                shape = RoundedCornerShape(20.dp),
+                shape = RoundedCornerShape(20.dp*multiplier),
             ) {
                 Icon(
-                    modifier = Modifier.size(90.dp),
+                    modifier = Modifier.size(90.dp*multiplier),
                     imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal_closed),
                     contentDescription = "content description", // TODO: Cambiar
                 )
@@ -57,23 +57,23 @@ fun BlindInfoHorizontal(devicesViewModel: DevicesViewModel, blind : Blind) {
         }
         Column(
             modifier = Modifier
-                .weight(0.6f)
-                .fillMaxHeight(),
+                .weight(0.65f)
+                .fillMaxHeight()
+                .padding(end = 20.dp*multiplier),
             verticalArrangement = Arrangement.SpaceEvenly,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CustomSlider(
-                value = blind.level.toFloat(),
-                valueRange = 0f..100f,
-                onValueChangeFinished = { blind.setLevel(devicesViewModel, it.toInt()) },
-                title = "Nivel de la persiana",
-                unit = "",
-                icon = R.drawable.blinds,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 10.dp)
-            )
-
+            Box(modifier = Modifier.padding(vertical = 10.dp*multiplier)){
+                CustomSlider(
+                    value = blind.level.toFloat(),
+                    valueRange = 0f..100f,
+                    onValueChangeFinished = { blind.setLevel(devicesViewModel, it.toInt()) },
+                    title = "Nivel de la persiana",
+                    unit = "",
+                    icon = R.drawable.blinds,
+                    multiplier = multiplier,
+                )
+            }
             Column (
                 modifier = Modifier
                     .padding(horizontal = 20.dp),
@@ -82,14 +82,9 @@ fun BlindInfoHorizontal(devicesViewModel: DevicesViewModel, blind : Blind) {
                 // TODO: Traducir
                 Box(
                     contentAlignment = Alignment.Center,
-                    modifier = Modifier.height(45.dp).fillMaxWidth()
+                    modifier = Modifier.height(45.dp*multiplier).fillMaxWidth()
                 ) {
-                    Text(
-                        text = "Nivel actual: ${blind.currentLevel}% (${blind.status})",
-                        color = MaterialTheme.colors.onPrimary,
-                        modifier = Modifier.padding(bottom = 10.dp)
-                    )
-
+                    Text(text = "Nivel actual: ${blind.currentLevel}% (${blind.status})", fontSize = 18.sp*multiplier , color = MaterialTheme.colors.onPrimary, modifier = Modifier.padding(bottom = 20.dp))
                 }
                 LinearProgressIndicator(
                     modifier = Modifier

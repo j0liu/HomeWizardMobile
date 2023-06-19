@@ -15,6 +15,7 @@ import ar.edu.itba.homewizard.ui.theme.Primary
 import ar.edu.itba.homewizard.ui.theme.Secondary
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.Blind
+import ar.edu.itba.homewizard.ui.constants.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
@@ -27,9 +28,9 @@ fun BlindInfo(
 
     BoxWithConstraints {
         if (maxWidth < maxHeight) {
-            BlindInfoVertical(devicesViewModel, blind)
+            BlindInfoVertical(devicesViewModel, blind, if (maxHeight > ScreenSize.tabletHeight) 1.8f else 1f)
         } else {
-            BlindInfoHorizontal(devicesViewModel, blind)
+            BlindInfoHorizontal(devicesViewModel, blind, if (maxWidth > ScreenSize.tabletWidth) 1.8f else 1f)
         }
     }
 }
