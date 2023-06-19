@@ -46,25 +46,14 @@ fun DevicesScreen(
                 DeviceInfo(devicesViewModel = devicesViewModel)
             }
         ) {
-            LazyColumn (
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(bottom = 10.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                items(items = devicesUiState.devices.toMutableList(), key = { device: Device -> device.id }) { device : Device ->
-                    DeviceCard(
-                        device = device,
-                        onClick = { deviceSelected ->
-                            devicesViewModel.setCurrentDevice(deviceSelected)
-                            scope.launch {
-                                devicesUiState.scaffoldState.bottomSheetState.expand()
-                            }
-                        }
-                    )
+            BoxWithConstraints {
+                if(maxWidth < maxHeight) {
+                    DevicesVertical(devicesViewModel = devicesViewModel)
+                } else {
+                    DevicesHorizontal(devicesViewModel = devicesViewModel)
                 }
             }
+
         }
     }
 }
