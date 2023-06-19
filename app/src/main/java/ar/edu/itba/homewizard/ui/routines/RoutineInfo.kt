@@ -1,11 +1,17 @@
 package ar.edu.itba.homewizard.ui.routines
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Handler
 import android.os.Looper
+import android.view.accessibility.AccessibilityNodeInfo.CollectionInfo
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -13,6 +19,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -20,8 +27,12 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.data.models.Action
+import ar.edu.itba.homewizard.data.models.Routine
+import ar.edu.itba.homewizard.ui.constants.ScreenSize
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
+import ar.edu.itba.homewizard.ui.inputs.PaginationArrows
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 import kotlinx.coroutines.launch
 
@@ -41,6 +52,25 @@ fun RoutineInfo(
     // TODO: Mover a estado
     val openDialog = remember { mutableStateOf(false) }
     var text by remember { mutableStateOf("") }
+
+
+    var orientation by remember { mutableStateOf(Configuration.ORIENTATION_PORTRAIT) }
+
+    val configuration = LocalConfiguration.current
+
+// If our configuration changes then this will launch a new coroutine scope for it
+    LaunchedEffect(configuration) {
+        // Save any changes to the orientation value on the configuration object
+        snapshotFlow { configuration.orientation }
+            .collect { orientation = it }
+    }
+
+    routinesViewModel.setItemsPerPage(
+        if(orientation == ORIENTATION_LANDSCAPE)
+            if (LocalConfiguration.current.screenWidthDp.dp > ScreenSize.tabletWidth) 10 else 4
+        else
+            if (LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight) 20 else 5
+    )
 
     CustomDialog(openDialog = openDialog.value, onClosureRequest = {openDialog.value = false},
         title = "${stringResource(R.string.schedule)} ${stringResource(R.string.routine)}", submitText = stringResource(R.string.schedule),
@@ -112,24 +142,47 @@ fun RoutineInfo(
         }
     ) {
         Column(
+            verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.primary),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                onClick = { routinesViewModel.executeRoutine(routine!!) },
-                modifier= Modifier.padding(bottom = 10.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
-                shape = RoundedCornerShape(20.dp),
-            ) {
-                Icon(
-                    modifier = Modifier.size(80.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.play),
-                    contentDescription = "content description",
-                )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ){
+                Button(
+                    onClick = { routinesViewModel.executeRoutine(routine!!) },
+                    modifier= Modifier.padding(bottom = 10.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+                    shape = RoundedCornerShape(20.dp),
+                ) {
+                    Icon(
+                        modifier = Modifier.size(80.dp),
+                        imageVector = ImageVector.vectorResource(id = R.drawable.play),
+                        contentDescription = "content description",
+                    )
+                }
+
+                BoxWithConstraints {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(if(LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight || orientation == ORIENTATION_LANDSCAPE) 2 else 1),
+                        modifier = Modifier
+                            .padding(start = 16.dp, end = 16.dp)
+                    ) {
+                        if(routine != null && routine.actions.toMutableList().size != 0){
+                            items(
+                                routine.actions.toMutableList().subList(
+                                    routineUiState.currentPage * routineUiState.itemsPerPage,
+                                    ((routineUiState.currentPage + 1) * routineUiState.itemsPerPage).coerceAtMost(routine.actions.size)
+                                )
+                            ){ action ->
+                                ActionCard(action = action)
+                            }
+                        }
+                    }
+                }
             }
-            routine?.actions?.forEach { action ->
-                ActionCard(action = action)
-            }
+            if(routineUiState.currentRoutine != null)
+                PaginationArrows(currentPage = routineUiState.currentPage, maxPage = (routineUiState.currentRoutine!!.actions.size - 1)/routineUiState.itemsPerPage, modifier = Modifier, onLeftClick = {routinesViewModel.prevPage()}, onRightClick = {routinesViewModel.nextPage()})
         }
     }
 }

@@ -30,7 +30,9 @@ fun RoutinesScreen(
     val routinesUiState by routinesViewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
     mainViewModel.setBackHandler(scope)
-
+    mainViewModel.setAfterCollapseBottomSheetAction {
+        routinesViewModel.resetState()
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,

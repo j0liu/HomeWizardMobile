@@ -7,4 +7,6 @@ data class RoutinesUiState (
     val routines : List<Routine> = listOf(),
     var currentRoutine : Routine? = null,
     val isLoading: Boolean = false,
+    var itemsPerPage : Int = 5,
+    var currentPage: Int = 0
 )
