@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.data.models.Routine
+import ar.edu.itba.homewizard.ui.constants.ScreenSize
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 import kotlinx.coroutines.launch
@@ -43,19 +44,18 @@ fun RoutinesScreen(
             }) {
 
             BoxWithConstraints {
-                /*
-                if(maxWidth < maxHeight) {
-                    RoutinesVertical(mainViewModel = mainViewModel, routinesViewModel = routinesViewModel)
-                } else {
-                    RoutinesHorizontal(mainViewModel = mainViewModel, routinesViewModel = routinesViewModel)
-                }*/
-
-
                 LazyVerticalGrid(
-                    columns = GridCells.Fixed(if (maxWidth < maxHeight) 1 else 2),
+                    columns = GridCells.Fixed(
+                        if(maxWidth < maxHeight) {
+                            if(maxHeight > ScreenSize.tabletHeight) 2 else 1
+                        }
+                        else {
+                            if(maxWidth > ScreenSize.tabletWidth) 3 else 2
+                        }
+                    ),
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(16.dp)
+                        .padding(start = 16.dp, end = 16.dp, bottom = 56.dp)
                 ) {
                     items(
                         routinesUiState.routines.toMutableList(),

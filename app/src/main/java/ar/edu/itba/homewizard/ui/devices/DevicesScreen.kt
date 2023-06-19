@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
+import ar.edu.itba.homewizard.ui.constants.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
 import ar.edu.itba.homewizard.ui.theme.*
@@ -60,10 +61,17 @@ fun DevicesScreen(
         ) {
             BoxWithConstraints {
                 LazyVerticalGrid (
-                    columns = GridCells.Fixed(if(maxWidth < maxHeight) 1 else 2),
+                    columns = GridCells.Fixed(
+                        if(maxWidth < maxHeight) {
+                            if(maxHeight > ScreenSize.tabletHeight) 2 else 1
+                        }
+                        else {
+                            if(maxWidth > ScreenSize.tabletWidth) 3 else 2
+                        }
+                    ),
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(start = 16.dp, end = 16.dp)
+                        .padding(start = 16.dp, end = 16.dp, bottom = 56.dp)
                 ) {
                     items(devicesUiState.filteredDevices, key = { device: Device -> device.id }) { device : Device ->
                         DeviceCard(
