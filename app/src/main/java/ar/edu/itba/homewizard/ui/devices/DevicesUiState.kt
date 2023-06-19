@@ -17,7 +17,7 @@ data class DevicesUiState constructor(
     val ascendantOrder : Boolean = true,
 
     // UI
-    var isLoading: Boolean = false,
+    var isLoading: Boolean = true,
     var overflowExpanded: Boolean = false,
     var filterDialogIsOpen : Boolean = false,
 

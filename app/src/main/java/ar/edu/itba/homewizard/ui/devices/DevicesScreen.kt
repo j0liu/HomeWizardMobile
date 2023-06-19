@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
+import ar.edu.itba.homewizard.ui.LoadingAnimation
 import ar.edu.itba.homewizard.ui.constants.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
@@ -46,7 +47,6 @@ fun DevicesScreen(
     val scope = rememberCoroutineScope()
     mainViewModel.setBackHandler(scope)
 
-
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -59,36 +59,46 @@ fun DevicesScreen(
                 DeviceInfo(devicesViewModel = devicesViewModel, mainViewModel = mainViewModel)
             }
         ) {
-            BoxWithConstraints {
-                LazyVerticalGrid (
-                    columns = GridCells.Fixed(
-                        if(maxWidth < maxHeight) {
-                            if(maxHeight > ScreenSize.tabletHeight) 2 else 1
-                        }
-                        else {
-                            if(maxWidth > ScreenSize.tabletWidth) 3 else 2
-                        }
-                    ),
+            if (devicesUiState.isLoading) {
+                Column(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(start = 16.dp, end = 16.dp, bottom = 56.dp)
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    items(devicesUiState.filteredDevices, key = { device: Device -> device.id }) { device : Device ->
-                        DeviceCard(
-                            device = device,
-                            onClick = { deviceSelected ->
-                                devicesViewModel.setCurrentDevice(deviceSelected)
-                                mainViewModel.setBottomBarVisibility(false)
-                                scope.launch {
-                                    mainUiState.scaffoldState.bottomSheetState.expand()
-                                }
+                    LoadingAnimation()
+                }
+            }  else {
+                BoxWithConstraints {
+                    LazyVerticalGrid (
+                        columns = GridCells.Fixed(
+                            if(maxWidth < maxHeight) {
+                                if(maxHeight > ScreenSize.tabletHeight) 2 else 1
                             }
-                        )
-                    }
+                            else {
+                                if(maxWidth > ScreenSize.tabletWidth) 3 else 2
+                            }
+                        ),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(start = 16.dp, end = 16.dp, bottom = 56.dp)
+                    ) {
+                        items(devicesUiState.filteredDevices, key = { device: Device -> device.id }) { device : Device ->
+                            DeviceCard(
+                                device = device,
+                                onClick = { deviceSelected ->
+                                    devicesViewModel.setCurrentDevice(deviceSelected)
+                                    mainViewModel.setBottomBarVisibility(false)
+                                    scope.launch {
+                                        mainUiState.scaffoldState.bottomSheetState.expand()
+                                    }
+                                }
+                            )
+                        }
 
+                    }
                 }
             }
-
         }
     }
 }

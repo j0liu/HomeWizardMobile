@@ -30,6 +30,7 @@ class DevicesViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             runCatching {
+                _uiState.update { it.copy(isLoading = true) }
                 val devices = deviceRepository.getDevices()
                 devices.observeForever { dl ->
                     println("Observing...")
@@ -47,7 +48,7 @@ class DevicesViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         filteredDevices = it.filterDevices(),
-                        isLoading = false
+//                        isLoading = true
                     )
                 }
             }
@@ -59,6 +60,7 @@ class DevicesViewModel @Inject constructor(
     // TODO: Move names to constants
     val DEVICE_SP_KEY = "ar.edu.itba.homewizard.devices.notifications"
     fun setCurrentDevice(device: Device?) {
+        _uiState.update { it.copy(isLoading = true) }
         var notificationsEnabled = false
         if (device != null) {
             notificationsEnabled = getApplication(context)
@@ -69,7 +71,8 @@ class DevicesViewModel @Inject constructor(
         _uiState.update {
             it.copy(
                 currentDevice = device,
-                currentNotificationsEnabled = notificationsEnabled
+                currentNotificationsEnabled = notificationsEnabled,
+                isLoading = false
             )
         }
     }
