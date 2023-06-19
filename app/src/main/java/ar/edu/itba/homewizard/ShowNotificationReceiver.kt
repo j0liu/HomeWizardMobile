@@ -31,7 +31,6 @@ class ShowNotificationReceiver : BroadcastReceiver() {
             if (notificationsEnabled) {
                 GlobalScope.launch(Dispatchers.IO) {
                     showNotification(context, deviceId!!)
-                    deviceRepository.updateDevices()
                 }
             }
         }

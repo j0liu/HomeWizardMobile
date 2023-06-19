@@ -20,11 +20,11 @@ class SkipNotificationReceiver() : BroadcastReceiver() {
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onReceive(context: Context, intent: Intent) {
+        GlobalScope.launch(Dispatchers.IO) {
+            deviceRepository.updateDevices()
+        }
         val background : Boolean = context.getSharedPreferences("ar.edu.itba.homewizard", Context.MODE_PRIVATE).getBoolean("background", false)
         if (intent.action.equals(MyIntent.SHOW_NOTIFICATION) && !background) {
-             GlobalScope.launch(Dispatchers.IO) {
-                deviceRepository.updateDevices()
-            }
             abortBroadcast()
         }
     }
