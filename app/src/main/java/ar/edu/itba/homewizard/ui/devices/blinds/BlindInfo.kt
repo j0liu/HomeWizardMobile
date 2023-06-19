@@ -18,6 +18,7 @@ import ar.edu.itba.homewizard.data.models.devices.Blind
 import ar.edu.itba.homewizard.ui.constants.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
+import kotlinx.coroutines.delay
 
 @Composable
 fun BlindInfo(
@@ -25,6 +26,14 @@ fun BlindInfo(
 ) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val blind = devicesUiState.currentDevice as Blind
+    val scope  = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        while(true) {
+            devicesViewModel.updateDevice(blind.id, scope)
+            delay(500)
+        }
+    }
 
     BoxWithConstraints {
         if (maxWidth < maxHeight) {

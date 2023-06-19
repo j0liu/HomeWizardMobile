@@ -13,11 +13,20 @@ import ar.edu.itba.homewizard.ui.devices.lamp.LampInfoVertical
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.ui.inputs.CustomToggle
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
+import kotlinx.coroutines.delay
 
 @Composable
 fun RefrigeratorInfo (devicesViewModel: DevicesViewModel = hiltViewModel()) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val fridge = devicesUiState.currentDevice as Fridge
+    val scope  = rememberCoroutineScope()
+
+    LaunchedEffect(Unit) {
+        while(true) {
+            devicesViewModel.updateDevice(fridge.id, scope)
+            delay(500)
+        }
+    }
 
     BoxWithConstraints {
         if(maxWidth < maxHeight)
