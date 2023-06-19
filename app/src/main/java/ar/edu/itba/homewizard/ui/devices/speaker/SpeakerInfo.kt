@@ -133,7 +133,7 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
         )
         // exposed dropdown menu
         CustomDropdownMenu(
-            initialValue = speaker.genre,
+            selected = speaker.genre,
             modifier = Modifier
                 .padding(horizontal = 10.dp)
                 .padding(bottom = 25.dp),

@@ -9,8 +9,8 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CustomDropdownMenu(elements: List<String>, modifier: Modifier = Modifier, onSelected: (String) -> Unit, title: String = "", initialValue : String ) {
-    var selectedText by remember { mutableStateOf(initialValue) }
+fun CustomDropdownMenu(modifier: Modifier = Modifier, elements: List<String>, selected : String = elements[0], title: String = "", onSelected: (String) -> Unit) {
+    var selectedText by remember { mutableStateOf(if (selected in elements) selected else elements[0]) }
     var expanded by remember { mutableStateOf(false) }
 
     ExposedDropdownMenuBox(
@@ -27,8 +27,8 @@ fun CustomDropdownMenu(elements: List<String>, modifier: Modifier = Modifier, on
             label = { Text(text = title, color = MaterialTheme.colors.onSurface, fontSize = 11.sp) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             colors = TextFieldDefaults.textFieldColors(
-//                backgroundColor = Content,
-                textColor = MaterialTheme.colors.surface
+                backgroundColor = MaterialTheme.colors.surface,
+                textColor = MaterialTheme.colors.onSurface
             ),
         )
 

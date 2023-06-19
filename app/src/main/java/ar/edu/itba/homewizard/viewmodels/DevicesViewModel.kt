@@ -9,6 +9,7 @@ import ar.edu.itba.homewizard.HomeWizardApplication
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
+import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
 import dagger.hilt.android.internal.Contexts.getApplication
@@ -21,7 +22,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@OptIn(ExperimentalMaterialApi::class)
 @HiltViewModel
 class DevicesViewModel @Inject constructor(
     @ApplicationContext private val context : Context,
@@ -47,6 +47,7 @@ class DevicesViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         devices = devices.value!!,
+                        filteredDevices = it.filterDevices(devices = devices.value!!),
                         isLoading = false
                     )
                 }
@@ -90,8 +91,6 @@ class DevicesViewModel @Inject constructor(
     fun setOverflowMenuVisibility(expanded: Boolean) {
         _uiState.update {
             it.copy(
-                devices = uiState.value.devices,
-                currentDevice = uiState.value.currentDevice,
                 overflowExpanded = expanded
             )
         }
@@ -100,8 +99,6 @@ class DevicesViewModel @Inject constructor(
     fun setFilterDialogOpen(isOpen: Boolean) {
         _uiState.update {
             it.copy(
-                devices = uiState.value.devices,
-                currentDevice = uiState.value.currentDevice,
                 filterDialogIsOpen = isOpen
             )
         }
@@ -138,6 +135,24 @@ class DevicesViewModel @Inject constructor(
                     it.copy(isLoading = false)
                 }
             }
+        }
+    }
+    
+    fun filterByType(deviceType : DeviceType?) {
+        _uiState.update {
+            it.copy(
+                filterType = deviceType,
+                filteredDevices = it.filterDevices(filterType = deviceType)
+            )
+        }
+    }
+
+    fun setFilterType(name : String) {
+        println(name)
+        _uiState.update {
+            it.copy(
+                filterTypeName = name
+            )
         }
     }
 }
