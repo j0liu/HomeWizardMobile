@@ -15,12 +15,12 @@ import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @Composable
 
-fun ACInfoHorizontal(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int>) {
+fun ACInfoHorizontal(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int>, multiplier: Float = 1f) {
     var selected by remember { mutableStateOf(AC.modeNames.indexOf(ac.mode)) }
 
     Row(
         modifier = Modifier
-            .padding(top = 8.dp)
+            .padding(top = 8.dp*multiplier)
     ){
         Column (
 //            verticalArrangement = Arrangement.Center,
@@ -29,16 +29,19 @@ fun ACInfoHorizontal(devicesViewModel: DevicesViewModel, ac: AC, options: List<I
                 .weight(0.5f)
                 .fillMaxHeight()
         ){
-            NumericController(value = ac.temperature, unit = "°", fontSize = 60, onValueChanged = {
+            NumericController(value = ac.temperature, unit = "°", fontSize = 60, multiplier = multiplier, onValueChanged = {
                 ac.setTemperature(devicesViewModel, it)
             })
-            PowerButton(
-                Modifier.size(80.dp).padding(vertical = 2.dp),
-                selected = ac.status,
-            ) {
-                ac.toggle(devicesViewModel)
+            Box(modifier = Modifier.padding(vertical = 15.dp*multiplier)){
+                PowerButton(
+                    selected = ac.status,
+                    modifier = Modifier,
+                    multiplier = multiplier
+                ) {
+                    ac.toggle(devicesViewModel)
+                }
             }
-            CustomToggle(options = options, selected = selected, modifier = Modifier.padding(16.dp).height(64.dp), onSelectedChange = {
+            CustomToggle(options = options, selected = selected, modifier = Modifier.padding(16.dp*multiplier).height(64.dp*multiplier), multiplier = multiplier, onSelectedChange = {
                 selected = it
                 ac.setMode(devicesViewModel, selected)
             })
@@ -47,15 +50,16 @@ fun ACInfoHorizontal(devicesViewModel: DevicesViewModel, ac: AC, options: List<I
             modifier = Modifier
                 .weight(0.5f)
                 .fillMaxHeight()
-//            verticalArrangement = Arrangement.Center
         ){
-            DropdownButton(modifier = Modifier, "Velocidad\nventilador", 20, AC.fanSpeedValues, ac.fanSpeed) {
+            DropdownButton(modifier = Modifier, "Velocidad\nventilador", 20, AC.fanSpeedValues, ac.fanSpeed, multiplier) {
                 ac.setFanSpeed(devicesViewModel, it)
             }
-            DropdownButton(modifier = Modifier, "Aspas\nverticales", 20, AC.verticalSwingValues, ac.verticalSwing) {
-                ac.setVerticalSwing(devicesViewModel, it)
+            Box(modifier = Modifier.padding(vertical = 20.dp*multiplier)){
+                DropdownButton(modifier = Modifier, "Aspas\nverticales", 20, AC.verticalSwingValues, ac.verticalSwing, multiplier) {
+                    ac.setVerticalSwing(devicesViewModel, it)
+                }
             }
-            DropdownButton(modifier = Modifier, "Aspas\nhorizontales", 20, AC.horizontalSwingValues, ac.horizontalSwing) {
+            DropdownButton(modifier = Modifier, "Aspas\nhorizontales", 20, AC.horizontalSwingValues, ac.horizontalSwing, multiplier) {
                 ac.setHorizontalSwing(devicesViewModel, it)
             }
         }

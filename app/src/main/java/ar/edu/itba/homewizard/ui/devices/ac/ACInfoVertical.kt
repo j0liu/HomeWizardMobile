@@ -13,28 +13,32 @@ import ar.edu.itba.homewizard.ui.inputs.PowerButton
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @Composable
-fun ACInfoVertical(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int>) {
+fun ACInfoVertical(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int>, multiplier: Float = 1f) {
     var selected by remember { mutableStateOf(AC.modeNames.indexOf(ac.mode)) }
 
     Column (
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ){
-        NumericController(value = ac.temperature, unit = "°", onValueChanged = {
+        NumericController(value = ac.temperature, unit = "°", multiplier = multiplier, onValueChanged = {
             ac.setTemperature(devicesViewModel, it)
         })
         Row(
             modifier = Modifier
                 .padding(4.dp),
         ) {
-            PowerButton(
-                selected = ac.status,
-            ) {
-                ac.toggle(devicesViewModel)
-            }
+            Box(modifier = Modifier.padding(vertical = 15.dp*multiplier)){
+
+                PowerButton(
+                    selected = ac.status,
+                    modifier = Modifier,
+                    multiplier = multiplier
+                ) {
+                    ac.toggle(devicesViewModel)
+                }}
         }
 
-        CustomToggle(options = options, selected = selected, modifier = Modifier.padding(16.dp).height(64.dp), onSelectedChange = {
+        CustomToggle(options = options, selected = selected, modifier = Modifier.padding(16.dp*multiplier).height(64.dp*multiplier), multiplier = multiplier, onSelectedChange = {
             selected = it
             ac.setMode(devicesViewModel, selected)
         })
@@ -42,13 +46,13 @@ fun ACInfoVertical(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
         ) {
-            DropdownButton(modifier = Modifier, "Velocidad ventilador", 20, AC.fanSpeedValues, ac.fanSpeed) {
+            DropdownButton(modifier = Modifier, "Velocidad ventilador", 20, AC.fanSpeedValues, ac.fanSpeed, multiplier) {
                 ac.setFanSpeed(devicesViewModel, it)
             }
-            DropdownButton(modifier = Modifier, "Aspas verticales", 20, AC.verticalSwingValues, ac.verticalSwing) {
+            DropdownButton(modifier = Modifier, "Aspas verticales", 20, AC.verticalSwingValues, ac.verticalSwing, multiplier) {
                 ac.setVerticalSwing(devicesViewModel, it)
             }
-            DropdownButton(modifier = Modifier, "Aspas horizontales", 20, AC.horizontalSwingValues, ac.horizontalSwing) {
+            DropdownButton(modifier = Modifier, "Aspas horizontales", 20, AC.horizontalSwingValues, ac.horizontalSwing, multiplier) {
                 ac.setHorizontalSwing(devicesViewModel, it)
             }
         }

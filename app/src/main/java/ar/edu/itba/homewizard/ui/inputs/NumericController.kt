@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.R
 
 @Composable
-fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: String = "", fontSize: Int = 70) {
+fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: String = "", fontSize: Int = 70, multiplier: Float) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceEvenly,
@@ -29,11 +29,11 @@ fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: St
         IconButton(
             onClick = { onValueChanged(value-1) },
             modifier = Modifier
-                .size(70.dp)
+                .size(70.dp*multiplier)
         ) {
             Icon(
                 modifier = Modifier
-                    .size(60.dp),
+                    .size(60.dp*multiplier),
                 imageVector = ImageVector.vectorResource(id = R.drawable.baseline_horizontal_rule_24) ,
                 tint = MaterialTheme.colors.onPrimary,
                 contentDescription = "content description"
@@ -41,7 +41,7 @@ fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: St
         }
         Text(
             text = "${value}${unit}",
-            fontSize = fontSize.sp,
+            fontSize = fontSize.sp*multiplier,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colors.onPrimary,
             modifier = Modifier
@@ -49,11 +49,11 @@ fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: St
         IconButton(
             onClick = { onValueChanged(value+1)},
             modifier = Modifier
-                .size(70.dp)
+                .size(70.dp*multiplier)
         ) {
             Icon(
                 modifier = Modifier
-                    .size(70.dp),
+                    .size(70.dp*multiplier),
                 imageVector = Icons.Filled.Add,
                 tint = MaterialTheme.colors.onPrimary,
                 contentDescription = "content description"

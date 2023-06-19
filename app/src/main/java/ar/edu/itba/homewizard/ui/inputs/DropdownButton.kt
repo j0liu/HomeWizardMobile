@@ -25,6 +25,7 @@ fun DropdownButton (
     titleSize : Int,
     options : Array<String>,
     initialValue: String,
+    multiplier : Float = 1f,
     onOptionSelected: (value: String) -> Unit
 ){
     var expanded by remember { mutableStateOf(false) }
@@ -32,11 +33,11 @@ fun DropdownButton (
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = 20.dp*multiplier)
     ){
         Text(
             text = title,
-            fontSize = titleSize.sp,
+            fontSize = titleSize.sp*multiplier,
             textAlign = TextAlign.Start,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colors.onPrimary,
@@ -45,11 +46,11 @@ fun DropdownButton (
         )
         Column (
             modifier = Modifier
-                .padding(10.dp)
-                .clip(RoundedCornerShape(50.dp))
-                .width(150.dp)
+                .padding(10.dp*multiplier)
+                .clip(RoundedCornerShape(50.dp*multiplier))
+                .width(150.dp*multiplier)
                 .background(color = MaterialTheme.colors.surface)
-                .height(45.dp)
+                .height(45.dp*multiplier)
                 .pointerInput(Unit) {
                     detectTapGestures {
                         expanded = true
@@ -61,10 +62,10 @@ fun DropdownButton (
         ) {
             Text(
                 text = options[selectedIndex],
-                fontSize = 18.sp,
+                fontSize = 18.sp*multiplier,
                 color = MaterialTheme.colors.onSurface,
                 modifier = Modifier
-                    .padding(10.dp)
+                    .padding(10.dp*multiplier)
             )
             DropdownMenu(
                 expanded = expanded,

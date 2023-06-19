@@ -9,6 +9,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.AC
+import ar.edu.itba.homewizard.ui.constants.ScreenSize
+import ar.edu.itba.homewizard.ui.devices.lamp.LampInfoHorizontal
+import ar.edu.itba.homewizard.ui.devices.lamp.LampInfoVertical
 import ar.edu.itba.homewizard.ui.inputs.CustomToggle
 import ar.edu.itba.homewizard.ui.inputs.DropdownButton
 import ar.edu.itba.homewizard.ui.inputs.NumericController
@@ -26,12 +29,12 @@ fun ACInfo(
     var selected by remember { mutableStateOf(AC.modeNames.indexOf(ac.mode)) }
 
     BoxWithConstraints {
-        if(maxWidth < maxHeight){
-            ACInfoVertical(devicesViewModel, ac, options)
-        } else {
-            ACInfoHorizontal(devicesViewModel, ac, options)
-        }
+        if (maxWidth < maxHeight)
+            ACInfoVertical(devicesViewModel, ac, options, if (maxHeight > ScreenSize.tabletHeight) 1.8f else 1f)
+        else
+            ACInfoHorizontal(devicesViewModel, ac, options, if (maxWidth > ScreenSize.tabletWidth) 1.8f else 1f)
     }
+
 }
 
 
