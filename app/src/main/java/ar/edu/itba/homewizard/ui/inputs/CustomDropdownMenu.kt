@@ -9,8 +9,8 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CustomDropdownMenu(elements: List<String>, modifier: Modifier = Modifier, onSelected: (String) -> Unit, title: String = "") {
-    var selectedText by remember { mutableStateOf(elements[0]) }
+fun CustomDropdownMenu(elements: List<String>, modifier: Modifier = Modifier, onSelected: (String) -> Unit, title: String = "", initialValue : String ) {
+    var selectedText by remember { mutableStateOf(initialValue) }
     var expanded by remember { mutableStateOf(false) }
 
     ExposedDropdownMenuBox(

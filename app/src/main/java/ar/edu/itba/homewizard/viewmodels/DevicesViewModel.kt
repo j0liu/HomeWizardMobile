@@ -110,4 +110,19 @@ class DevicesViewModel @Inject constructor(
     fun executeAction(action: Action) {
         return executeActionWithResult<Any>(action)
     }
+
+    fun updateDevice (id : String,  onSuccess : suspend (Device) -> Unit = {}){
+        viewModelScope.launch {
+            runCatching {
+                _uiState.update {
+                    it.copy(isLoading = true)
+                }
+                val res = deviceRepository.getDevice(id)
+                onSuccess(res)
+                _uiState.update {
+                    it.copy(isLoading = false)
+                }
+            }
+        }
+    }
 }

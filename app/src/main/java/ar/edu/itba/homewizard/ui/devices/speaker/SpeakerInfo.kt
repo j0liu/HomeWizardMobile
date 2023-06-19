@@ -12,35 +12,41 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.data.models.devices.Speaker
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
+import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.SpeakerViewModel
 @Composable
-fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
-    val devicesUiState by speakerViewModel.uiState.collectAsState()
+fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
+//    val devicesUiState by speakerViewModel.uiState.collectAsState()
     // list of genres
+
+    val devicesUiState by devicesViewModel.uiState.collectAsState()
+    val speaker = devicesUiState.currentDevice as Speaker
 
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Memories",
+            text = speaker.songName,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colors.surface,
             modifier = Modifier
         )
         Text(
-            text = "Maroon 5",
+            text = speaker.song.artist,
             fontSize = 20.sp,
             color = MaterialTheme.colors.surface,
             modifier = Modifier
         )
         Text(
-            text = "Memories",
+            text = speaker.song.album,
             fontSize = 15.sp,
             color = MaterialTheme.colors.surface,
             modifier = Modifier.padding(bottom = 15.dp)
@@ -52,17 +58,16 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
             horizontalArrangement = Arrangement.Center
 
         ){
-            LinearProgressIndicator(
-                modifier = Modifier.padding(end = 20.dp),
-                color = MaterialTheme.colors.surface,
-                progress = devicesUiState.songProgress
-            )
+//            LinearProgressIndicator(
+//                modifier = Modifier.padding(end = 20.dp),
+//                color = MaterialTheme.colors.surface,
+//                progress = 1.0
+//            )
             Text(
-                text = "1:20/3:20",
+                text = "${speaker.song.progress}/${speaker.song.duration}",
                 fontSize = 15.sp,
                 color = MaterialTheme.colors.surface,
                 modifier = Modifier,
-
                 )
         }
         Row(
@@ -73,7 +78,7 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
             Button(
-                onClick = { speakerViewModel.prev() },
+                onClick = { speaker.prevSong(devicesViewModel) },
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp)
             ) {
@@ -86,7 +91,7 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
                 )
             }
             Button(
-                onClick = { speakerViewModel.togglePlay() },
+                onClick = { speaker.toggle(devicesViewModel) },
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp)
             ) {
@@ -94,14 +99,14 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
                     modifier = Modifier
                         .size(60.dp),
                     imageVector =
-                    if (devicesUiState.playing) ImageVector.vectorResource(id = R.drawable.play)
-                    else ImageVector.vectorResource(id = R.drawable.pause),
+                    if (speaker.status) ImageVector.vectorResource(id = R.drawable.pause)
+                    else ImageVector.vectorResource(id = R.drawable.play),
                     tint = Color.Black,
                     contentDescription = "content description"
                 )
             }
             Button(
-                onClick = { speakerViewModel.next() },
+                onClick = { speaker.nextSong(devicesViewModel) },
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp)
             ) {
@@ -116,7 +121,7 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
         }
         //todo ver si podemos cambiarlo por eventos de los botones
         CustomSlider(
-            value = devicesUiState.volume,
+            value = speaker.volume.toFloat(),
 //            onValueChange = {  speakerViewModel.setVolume(it) },
             valueRange = 0f..100f,
             onValueChangeFinished = { },
@@ -128,13 +133,14 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
         )
         // exposed dropdown menu
         CustomDropdownMenu(
+            initialValue = speaker.genre,
             modifier = Modifier
                 .padding(horizontal = 10.dp)
                 .padding(bottom = 25.dp),
 //                .fillMaxSize(),
             title = "Géneros",
             elements = listOf( "clasica", "country", "dance", "latina", "pop", "rock"),
-            onSelected = { speakerViewModel.setGenre(it) },
+            onSelected = { speaker.setGenre(devicesViewModel, it) },
         )
         Card (
             modifier = Modifier
@@ -150,14 +156,14 @@ fun SpeakerInfo(speakerViewModel: SpeakerViewModel = viewModel()) {
                     .height(180.dp)
                     .padding(start = 15.dp)
             ) {
-                devicesUiState.playlist.forEach {song ->
-                    Text(
-                        text = song,
-                        fontSize = 12.sp,
-                        color = Color.Black,
-//                        modifier = Modifier.padding(bottom = 10.dp)
-                    )
-                }
+//                devicesUiState.playlist.forEach {song ->
+//                    Text(
+//                        text = song,
+//                        fontSize = 12.sp,
+//                        color = Color.Black,
+////                        modifier = Modifier.padding(bottom = 10.dp)
+//                    )
+//                }
             }
         }
     }
