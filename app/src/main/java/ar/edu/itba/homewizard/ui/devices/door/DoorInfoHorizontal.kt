@@ -20,23 +20,23 @@ import ar.edu.itba.homewizard.R
 
 
 @Composable
-fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door){
+fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door, multiplier: Float = 1f){
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
 //                verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxSize()
-            .padding(top = 40.dp)
+            .padding(top = 40.dp*multiplier)
     ) {
         Button(
             onClick = { door.toggleLock(devicesViewModel) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-            shape = RoundedCornerShape(20.dp)
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+            shape = RoundedCornerShape(20.dp*multiplier)
         ) {
             Icon(
                 modifier = Modifier
-                    .size(120.dp),
+                    .size(120.dp*multiplier),
                 imageVector =
                 if (door.lock) ImageVector.vectorResource(id = R.drawable.lock)
                 else ImageVector.vectorResource(id = R.drawable.lock_open),
@@ -46,12 +46,12 @@ fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door){
         }
         Button(
             onClick = { door.toggleOpenClose(devicesViewModel) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-            shape = RoundedCornerShape(20.dp)
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+            shape = RoundedCornerShape(20.dp*multiplier)
         ) {
             Icon(
                 modifier = Modifier
-                    .size(120.dp),
+                    .size(120.dp*multiplier),
                 imageVector =
                 if (door.status) ImageVector.vectorResource(id = R.drawable.door_closed)
                 else ImageVector.vectorResource(id = R.drawable.door_open),
