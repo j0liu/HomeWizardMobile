@@ -20,20 +20,29 @@ import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.SpeakerViewModel
+import kotlinx.coroutines.delay
+
 @Composable
 fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
 //    val devicesUiState by speakerViewModel.uiState.collectAsState()
     // list of genres
-
+    val scope  = rememberCoroutineScope()
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val speaker = devicesUiState.currentDevice as Speaker
+
+    LaunchedEffect(Unit) {
+        while(true) {
+            devicesViewModel.updateDevice(speaker.id, scope)
+            delay(500)
+        }
+    }
 
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = speaker.songName,
+            text = speaker.song.title,
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colors.surface,
@@ -78,7 +87,7 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
             Button(
-                onClick = { speaker.prevSong(devicesViewModel) },
+                onClick = { speaker.prevSong(devicesViewModel, scope) },
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp)
             ) {
@@ -106,7 +115,7 @@ fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
                 )
             }
             Button(
-                onClick = { speaker.nextSong(devicesViewModel) },
+                onClick = { speaker.nextSong(devicesViewModel, scope) },
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp)
             ) {

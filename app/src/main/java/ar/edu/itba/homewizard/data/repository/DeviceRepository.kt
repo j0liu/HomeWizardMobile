@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.network.DeviceRemoteDataSource
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -31,6 +32,16 @@ class DeviceRepository @Inject constructor (
         }
         return deviceRemoteDataSource.getDevice(deviceId).result.toDevice()
     }
+
+    suspend fun updateDevice(deviceId : String) {
+        val newDevice : Device = deviceRemoteDataSource.getDevice(deviceId).result.toDevice()
+        val oldCache = (devicesCache.value as List<Device>).filter {
+            it.id != deviceId
+        }
+        devicesCache.postValue(oldCache.plus(newDevice))
+    }
+
+
 
     suspend fun <T> executeAction(deviceId: String, actionName: String, params: List<Any>) : T {
         return deviceRemoteDataSource.executeAction<T>(deviceId, actionName, params).result

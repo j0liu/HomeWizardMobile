@@ -15,6 +15,7 @@ import ar.edu.itba.homewizard.ui.devices.DevicesUiState
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -121,6 +122,18 @@ class DevicesViewModel @Inject constructor(
 
     fun executeAction(action: Action) {
         return executeActionWithResult<Any>(action)
+    }
+
+    fun updateDevices(scope: CoroutineScope){
+        scope.launch {
+            deviceRepository.updateDevices()
+        }
+    }
+
+    fun updateDevice(id : String, scope: CoroutineScope){
+        scope.launch {
+            deviceRepository.updateDevice(id)
+        }
     }
 
     fun updateDevice (id : String,  onSuccess : suspend (Device) -> Unit = {}){

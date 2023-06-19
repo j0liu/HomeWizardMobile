@@ -6,6 +6,7 @@ import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceState
 import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class Speaker (
@@ -21,7 +22,6 @@ class Speaker (
     var volume: Int = 5
     var genre: String = ""
     var song : SpeakerSong = SpeakerSong(title = "", artist = "", album = "", duration = "", progress = "")
-    var songName: String = ""
 
     init {
         val speakerState = this.state as SpeakerState
@@ -29,24 +29,28 @@ class Speaker (
         this.volume = speakerState.volume
         this.genre = speakerState.genre
         this.song = speakerState.song
-        this.songName = speakerState.song.title
     }
 
-    fun prevSong(devicesViewModel: DevicesViewModel) {
+    fun prevSong(devicesViewModel: DevicesViewModel, scope: CoroutineScope) {
         devicesViewModel.executeAction(Action("previousSong", this, listOf()))
-        devicesViewModel.updateDevice(id) {
+
+//        devicesViewModel.updateDevice(id) {
 //            this.song = (it as Speaker).song
 //            this.song.copy((it as Speaker).song.title, (it as Speaker).song.artist, (it as Speaker).song.album, (it as Speaker).song.duration, (it as Speaker).song.progress)
-            this.songName = (it as Speaker).song.title
-        }
+//            this.songName = (it as Speaker).song.title
+//        }
     }
 
-    fun nextSong(devicesViewModel: DevicesViewModel) {
+    fun nextSong(devicesViewModel: DevicesViewModel, scope: CoroutineScope) {
         devicesViewModel.executeAction(Action("nextSong", this, listOf()))
-        devicesViewModel.updateDevice(id) {
+
+//        devicesViewModel.updateDevices(scope, this)
+
+
+//        devicesViewModel.updateDevice(id) {
 //            this.song.copy((it as Speaker).song.title, (it as Speaker).song.artist, (it as Speaker).song.album, (it as Speaker).song.duration, (it as Speaker).song.progress)
-            this.songName = (it as Speaker).song.title
-        }
+//            this.songName = (it as Speaker).song.title
+//        }
     }
 
     fun setGenre(devicesViewModel: DevicesViewModel, genre: String) {
@@ -74,7 +78,7 @@ class Speaker (
             this.resume(devicesViewModel)
         }
 
-        this.status = !this.status
+//        this.status = !this.status
     }
 
 
