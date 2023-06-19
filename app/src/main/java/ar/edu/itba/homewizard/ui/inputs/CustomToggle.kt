@@ -17,11 +17,11 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CustomToggle(options : List<Int>, selected : Int, modifier: Modifier = Modifier, onSelectedChange : (Int) -> Unit) {
+fun CustomToggle(options : List<Int>, selected : Int, modifier: Modifier = Modifier, multiplier : Float = 1f, onSelectedChange : (Int) -> Unit) {
     Row (
         modifier = Modifier.then(modifier)
-            .border(1.dp, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(50.dp))
-            .clip(RoundedCornerShape(50.dp)),
+            .border(1.dp*multiplier, color = MaterialTheme.colors.primary, shape = RoundedCornerShape(50.dp*multiplier))
+            .clip(RoundedCornerShape(50.dp*multiplier)),
         horizontalArrangement = Arrangement.SpaceEvenly,
     ){
         options.forEachIndexed { index, icon ->
@@ -39,7 +39,7 @@ fun CustomToggle(options : List<Int>, selected : Int, modifier: Modifier = Modif
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(40.dp),
+                        .size(40.dp * multiplier),
                     imageVector = ImageVector.vectorResource(id = icon),
 //                        tint = if (selected == index) lightSurface else Background,
                     contentDescription = "content description"
