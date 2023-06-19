@@ -20,7 +20,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel

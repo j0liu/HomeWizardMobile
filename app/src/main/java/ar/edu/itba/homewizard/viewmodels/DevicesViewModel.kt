@@ -8,7 +8,6 @@ import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

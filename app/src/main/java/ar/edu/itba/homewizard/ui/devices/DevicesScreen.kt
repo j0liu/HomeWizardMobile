@@ -1,18 +1,13 @@
 package ar.edu.itba.homewizard.ui.devices
 
 import android.annotation.SuppressLint
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
-import kotlinx.coroutines.launch
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -34,6 +29,7 @@ fun DevicesScreen(
     devicesViewModel: DevicesViewModel = hiltViewModel()
 ) {
     val mainUiState by mainViewModel.uiState.collectAsState()
+    val devicesUiState by devicesViewModel.uiState.collectAsState()
     mainViewModel.setAfterCollapseBottomSheetAction {
         devicesViewModel.setCurrentDevice(null)
     }
@@ -48,7 +44,7 @@ fun DevicesScreen(
         BottomSheetScaffold(
             topBar = {DevicesTopBar(devicesViewModel = devicesViewModel, devicesUiState = devicesUiState)},
             sheetShape = RoundedCornerShape(15.dp, 15.dp, 0.dp, 0.dp),
-            scaffoldState = devicesUiState.scaffoldState,
+            scaffoldState = mainUiState.scaffoldState,
             sheetContent = {
                 DeviceInfo(devicesViewModel = devicesViewModel, mainViewModel = mainViewModel)
             }

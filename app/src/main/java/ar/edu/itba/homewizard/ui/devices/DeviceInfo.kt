@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
-import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterialApi::class)

@@ -13,15 +13,6 @@ data class DevicesUiState @OptIn(ExperimentalMaterialApi::class) constructor(
 
     // UI
     var isLoading: Boolean = false,
-    var scaffoldState: BottomSheetScaffoldState = BottomSheetScaffoldState(
-        DrawerState(DrawerValue.Closed),
-        BottomSheetState(BottomSheetValue.Collapsed, confirmValueChange = {
-            if (it.equals(BottomSheetValue.Collapsed))
-                collapseBottomSheet()
-            true
-        }),
-        SnackbarHostState()
-    ),
     var overflowExpanded: Boolean = false,
     var filterDialogIsOpen : Boolean = false,
     var filterType : DeviceType? = null,
