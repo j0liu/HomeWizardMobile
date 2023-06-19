@@ -22,7 +22,7 @@ class Lamp (
         val lampState = this.state as LampState
         this.status = lampState.status == "on"
         this.brightness = lampState.brightness.toInt()
-        this.color = "#FF" + lampState.color.replace("#", "")
+        this.color = "FF" + lampState.color.replace("#", "")
     }
 
     fun turnOn(devicesViewModel: DevicesViewModel) {
@@ -34,7 +34,9 @@ class Lamp (
     }
 
     fun changeColor(devicesViewModel: DevicesViewModel, color: String) {
-        devicesViewModel.executeAction(Action("setColor", this, listOf(color.replace("#", "").substring(2))))
+        println("colorcinto" + color)
+        println("colorcinto substringueado" + color.substring(2))
+        devicesViewModel.executeAction(Action("setColor", this, listOf(color.substring(2))))
         this.color = color
     }
 
