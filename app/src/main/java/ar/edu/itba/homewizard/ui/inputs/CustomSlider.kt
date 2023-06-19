@@ -20,21 +20,18 @@ fun CustomSlider(
     onValueChangeFinished: (Float) -> Unit = {},
     unit: String,
     icon: Int,
+    multiplier: Float = 1f
 ) {
     var currentValue by remember { mutableStateOf(value) }
 
-    Column(
-        modifier = Modifier
-            .padding(start = 10.dp)
-    )
-    {
+    Column() {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.height(20.dp).fillMaxWidth()
+            modifier = Modifier.height(20.dp*multiplier).fillMaxWidth()
         ) {
             Text(
                 text = title,
-                fontSize = 18.sp,
+                fontSize = 18.sp*multiplier,
                 color = MaterialTheme.colors.onPrimary
             )
         }
@@ -46,7 +43,8 @@ fun CustomSlider(
         ) {
             Slider(
                 modifier = Modifier
-                    .weight(0.8f),
+                    .weight(0.8f)
+                    .padding(start = 10.dp*multiplier, top = 10.dp*multiplier),
                 value = currentValue,
                 onValueChange = { currentValue = it },
                 valueRange = valueRange,
@@ -60,7 +58,8 @@ fun CustomSlider(
             )
             Icon(
                 modifier = Modifier
-                    .weight(0.1f),
+                    .weight(0.1f)
+                    .size(20.dp*multiplier),
                 imageVector = ImageVector.vectorResource(id = icon),
                 contentDescription = "content description",
                 tint = MaterialTheme.colors.onPrimary
@@ -70,7 +69,7 @@ fun CustomSlider(
                     .weight(0.1f),
                 maxLines = 1,
                 text = "${value.toInt()}${unit}",
-                fontSize = 18.sp,
+                fontSize = 18.sp*multiplier,
                 color = MaterialTheme.colors.onPrimary
             )
         }

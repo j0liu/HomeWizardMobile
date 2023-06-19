@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.ui.devices.lamp
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -19,7 +20,7 @@ import com.github.skydoves.colorpicker.compose.ColorPickerController
 import com.github.skydoves.colorpicker.compose.HsvColorPicker
 
 @Composable
-fun LampInfoHorizontal(devicesViewModel: DevicesViewModel, lamp: Lamp, controller: ColorPickerController) {
+fun LampInfoHorizontal(devicesViewModel: DevicesViewModel, lamp: Lamp, controller: ColorPickerController, multiplier : Float = 1f) {
     Row {
         Column(
             modifier = Modifier
@@ -30,8 +31,8 @@ fun LampInfoHorizontal(devicesViewModel: DevicesViewModel, lamp: Lamp, controlle
         ) {
             PowerButton(
                 selected = lamp.status,
-                modifier = Modifier
-                    .size(150.dp)
+                modifier = Modifier,
+                multiplier = multiplier
             ) {
                 lamp.toggle(devicesViewModel)
             }
@@ -42,6 +43,7 @@ fun LampInfoHorizontal(devicesViewModel: DevicesViewModel, lamp: Lamp, controlle
                 title = "Intensidad",
                 unit = "",
                 icon = R.drawable.lightbulb_on_10,
+                multiplier = multiplier
             )
         }
         Column(
@@ -52,7 +54,7 @@ fun LampInfoHorizontal(devicesViewModel: DevicesViewModel, lamp: Lamp, controlle
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             HsvColorPicker(
-                modifier = Modifier.size(200.dp).padding(top = 15.dp),
+                modifier = Modifier.size(180.dp* multiplier),
                 initialColor = Color(android.graphics.Color.parseColor("#" + lamp.color)),
                 controller = controller,
                 onColorChanged = { color ->
@@ -62,8 +64,8 @@ fun LampInfoHorizontal(devicesViewModel: DevicesViewModel, lamp: Lamp, controlle
             )
             Surface(
                 modifier = Modifier
-                    .size(80.dp)
-                    .padding(top = 15.dp),
+                    .height(40.dp* multiplier)
+                    .width(80.dp* multiplier),
                 shape = MaterialTheme.shapes.small,
                 color = Color(android.graphics.Color.parseColor("#" + lamp.color))
             ) {}
