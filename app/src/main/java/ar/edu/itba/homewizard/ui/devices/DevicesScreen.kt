@@ -2,6 +2,9 @@ package ar.edu.itba.homewizard.ui.devices
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -16,9 +19,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
+import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.theme.*
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
+import kotlinx.coroutines.launch
 
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -50,10 +55,24 @@ fun DevicesScreen(
             }
         ) {
             BoxWithConstraints {
-                if(maxWidth < maxHeight) {
-                    DevicesVertical(mainViewModel = mainViewModel, devicesViewModel = devicesViewModel)
-                } else {
-                    DevicesHorizontal(mainViewModel = mainViewModel, devicesViewModel = devicesViewModel)
+                LazyVerticalGrid (
+                    columns = GridCells.Fixed(if(maxWidth < maxHeight) 1 else 2),
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp)
+                ) {
+                    items(devicesUiState.devices.toMutableList(), key = { device: Device -> device.id }) { device : Device ->
+                        DeviceCard(
+                            device = device,
+                            onClick = { deviceSelected ->
+                                devicesViewModel.setCurrentDevice(deviceSelected)
+                                mainViewModel.setBottomBarVisibility(false)
+                                scope.launch {
+                                    mainUiState.scaffoldState.bottomSheetState.expand()
+                                }
+                            }
+                        )
+                    }
                 }
             }
 
