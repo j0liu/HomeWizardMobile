@@ -37,7 +37,6 @@ fun ACInfoVertical(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int
                     ac.toggle(devicesViewModel)
                 }}
         }
-
         CustomToggle(options = options, selected = selected, modifier = Modifier.padding(16.dp*multiplier).height(64.dp*multiplier), multiplier = multiplier, onSelectedChange = {
             selected = it
             ac.setMode(devicesViewModel, selected)

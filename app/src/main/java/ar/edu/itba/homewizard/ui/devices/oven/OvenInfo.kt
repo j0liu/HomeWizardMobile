@@ -17,6 +17,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.AC
 import ar.edu.itba.homewizard.data.models.devices.Oven
+import ar.edu.itba.homewizard.ui.constants.ScreenSize
+import ar.edu.itba.homewizard.ui.devices.ac.ACInfoHorizontal
+import ar.edu.itba.homewizard.ui.devices.ac.ACInfoVertical
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
 import ar.edu.itba.homewizard.ui.inputs.DropdownButton
 import ar.edu.itba.homewizard.ui.inputs.PowerButton
@@ -28,11 +31,10 @@ fun OvenInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
     val oven = devicesUiState.currentDevice as Oven
 
     BoxWithConstraints {
-        if (maxWidth < maxHeight){
-            OvenInfoVertical(devicesViewModel, oven)
-        } else {
-            OvenInfoHorizontal(devicesViewModel, oven)
-        }
+        if (maxWidth < maxHeight)
+            OvenInfoVertical(devicesViewModel, oven, if (maxHeight > ScreenSize.tabletHeight) 1.8f else 1f)
+        else
+            OvenInfoHorizontal(devicesViewModel, oven, if (maxWidth > ScreenSize.tabletWidth) 1.8f else 1f)
     }
 
 

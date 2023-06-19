@@ -1,9 +1,6 @@
 package ar.edu.itba.homewizard.ui.devices.oven
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,7 +13,7 @@ import ar.edu.itba.homewizard.ui.inputs.PowerButton
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @Composable
-fun OvenInfoVertical(devicesViewModel: DevicesViewModel, oven : Oven){
+fun OvenInfoVertical(devicesViewModel: DevicesViewModel, oven : Oven, multiplier: Float = 1f){
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -26,10 +23,15 @@ fun OvenInfoVertical(devicesViewModel: DevicesViewModel, oven : Oven){
             modifier = Modifier
                 .padding(8.dp),
         ) {
-            PowerButton(
-                selected = oven.status,
-            ) {
-                oven.toggle(devicesViewModel)
+            Box(modifier = Modifier.padding(vertical = 15.dp*multiplier)){
+
+                PowerButton(
+                    selected = oven.status,
+                    modifier = Modifier,
+                    multiplier = multiplier
+                ) {
+                    oven.toggle(devicesViewModel)
+                }
             }
         }
         Row(
@@ -43,20 +45,23 @@ fun OvenInfoVertical(devicesViewModel: DevicesViewModel, oven : Oven){
                 onValueChangeFinished = { oven.setTemperature(devicesViewModel, it.toInt()) },
                 title = "Temperatura",
                 unit = "°",
-                icon = R.drawable.baseline_thermostat_24
+                icon = R.drawable.baseline_thermostat_24,
+                multiplier = multiplier
             )
         }
         Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
         ) {
-            DropdownButton(modifier = Modifier, "Heat", 24, Oven.heatModes, oven.heat) {
+            DropdownButton(modifier = Modifier, "Heat", 24, Oven.heatModes, oven.heat, multiplier) {
                 oven.setHeat(devicesViewModel, it)
             }
-            DropdownButton(modifier = Modifier, "Grill", 24, Oven.grillModes, oven.grill) {
-                oven.setGrill(devicesViewModel, it)
+            Box(modifier = Modifier.padding(vertical = 20.dp*multiplier)){
+                DropdownButton(modifier = Modifier, "Grill", 24, Oven.grillModes, oven.grill, multiplier) {
+                    oven.setGrill(devicesViewModel, it)
+                }
             }
-            DropdownButton(modifier = Modifier, "Convection", 24, Oven.convectionModes, oven.convection) {
+            DropdownButton(modifier = Modifier, "Convection", 24, Oven.convectionModes, oven.convection, multiplier) {
                 oven.setConvection(devicesViewModel, it)
             }
         }

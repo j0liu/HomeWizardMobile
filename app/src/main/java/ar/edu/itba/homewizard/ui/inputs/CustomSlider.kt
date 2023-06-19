@@ -27,7 +27,7 @@ fun CustomSlider(
     Column() {
         Box(
             contentAlignment = Alignment.Center,
-            modifier = Modifier.height(20.dp*multiplier).fillMaxWidth()
+            modifier = Modifier.height(22.dp*multiplier).fillMaxWidth()
         ) {
             Text(
                 text = title,
@@ -44,7 +44,7 @@ fun CustomSlider(
             Slider(
                 modifier = Modifier
                     .weight(0.8f)
-                    .padding(start = 10.dp*multiplier, top = 10.dp*multiplier),
+                    .padding(start = 10.dp*multiplier, top = 5.dp*multiplier),
                 value = currentValue,
                 onValueChange = { currentValue = it },
                 valueRange = valueRange,
