@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.bridges.SnackbarBridge
+import ar.edu.itba.homewizard.bridges.SnackbarType
 import ar.edu.itba.homewizard.ui.MainUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -20,18 +21,24 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalMaterialApi::class)
 @HiltViewModel
-class MainViewModel @Inject constructor(mainBridge: SnackbarBridge) : ViewModel() {
+class MainViewModel @Inject constructor(snackbarBridge: SnackbarBridge) : ViewModel() {
     private val _uiState = MutableStateFlow(MainUiState(collapseBottomSheet = { collapseBottomSheet() }))
     var uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
 
     init {
-        mainBridge.subscribe { message, isError ->
+        snackbarBridge.subscribe { message, type ->
             println("Message received: $message")
             viewModelScope.launch {
+                val duration = when (type) {
+                    SnackbarType.INFO -> SnackbarDuration.Short
+                    SnackbarType.ERROR -> SnackbarDuration.Long
+                    SnackbarType.PANIC -> SnackbarDuration.Indefinite
+                }
+                val buttonText = if (type == SnackbarType.PANIC) null else "OK"
                 _uiState.value.scaffoldState.snackbarHostState.showSnackbar(
                     message,
-                   if (isError) null else "",
-                    SnackbarDuration.Short
+                    buttonText,
+                    duration,
                 )
             }
         }

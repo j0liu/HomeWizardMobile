@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.bridges.SnackbarBridge
+import ar.edu.itba.homewizard.bridges.SnackbarType
 import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
@@ -160,7 +161,7 @@ class DevicesViewModel @Inject constructor(
         }
     }
 
-    fun putSnackbar(message: String, isError: Boolean) {
-        bridge.sendMessage(message, isError)
+    fun putSnackbar(message: String, type: SnackbarType = SnackbarType.INFO) {
+        bridge.sendMessage(message, type)
     }
 }

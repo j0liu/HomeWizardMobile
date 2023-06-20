@@ -11,16 +11,19 @@ class SnackbarBridge @Inject constructor() {
         MutableLiveData<StatusMessage>()
     }
 
-    fun sendMessage(message: String, isError: Boolean = false) {
-        latestMessages.postValue(StatusMessage(message, isError))
+    fun sendMessage(message: String, type: SnackbarType = SnackbarType.INFO) {
+        latestMessages.postValue(StatusMessage(message, type))
     }
 
-    fun subscribe(subscriberFun : (String, Boolean) -> Unit) {
+    fun subscribe(subscriberFun : (String, SnackbarType) -> Unit) {
         return latestMessages.observeForever { data ->
             if (data.message != "")
-                subscriberFun(data.message, data.isError)
+                subscriberFun(data.message, data.type)
         }
     }
 }
 
-data class StatusMessage(val message: String, val isError: Boolean = false)
+enum class SnackbarType {
+    ERROR, INFO, PANIC
+}
+data class StatusMessage(val message: String, val type: SnackbarType = SnackbarType.INFO)

@@ -98,6 +98,7 @@ fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier
 
             PasswordInput(label = "Código", text = code, onValueChange = { code = it }, modifier = passwordInputModifier, multiplier)
             CustomToggle(options, selected, modifier = Modifier.fillMaxWidth().padding(16.dp*multiplier).height(64.dp*multiplier), multiplier){
+                focusManager.clearFocus()
                 alarm.setStatus(devicesViewModel, Alarm.statusValues[it], code.text) {
                     selected = it
                 }

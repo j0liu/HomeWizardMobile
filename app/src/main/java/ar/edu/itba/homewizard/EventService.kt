@@ -4,7 +4,8 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
-import ar.edu.itba.homewizard.data.repository.DeviceRepository
+import ar.edu.itba.homewizard.bridges.SnackbarBridge
+import ar.edu.itba.homewizard.bridges.SnackbarType
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +17,10 @@ import java.net.URL
 import javax.inject.Inject
 
 
+@AndroidEntryPoint
 class EventService : Service() {
+    @Inject
+    lateinit var snackbarBridge: SnackbarBridge
 
     companion object {
         private const val TAG = "EventService"
@@ -31,19 +35,23 @@ class EventService : Service() {
         Log.d(TAG, "Starting service")
 
         job = GlobalScope.launch(Dispatchers.IO) {
-            while (true) {
-                val events = fetchEvents()
-                events?.forEach {
-                    Log.d(TAG, "Broadcasting send notification intent (${it.deviceId})")
-                    val intent2 = Intent().apply {
-                        action = MyIntent.SHOW_NOTIFICATION
-                        `package` = MyIntent.PACKAGE
-                        putExtra(MyIntent.UPDATE_DEVICE, it.deviceId)
+                try {
+                    while (true) {
+                        val events = fetchEvents()
+                        events?.forEach {
+                            Log.d(TAG, "Broadcasting send notification intent (${it.deviceId})")
+                            val intent2 = Intent().apply {
+                                action = MyIntent.SHOW_NOTIFICATION
+                                `package` = MyIntent.PACKAGE
+                                putExtra(MyIntent.UPDATE_DEVICE, it.deviceId)
+                            }
+                            sendOrderedBroadcast(intent2, null)
+                        }
+                        delay(DELAY_MILLIS)
                     }
-                    sendOrderedBroadcast(intent2, null)
+                } catch (e: Exception) {
+                    snackbarBridge.sendMessage("Fatal network error", SnackbarType.PANIC)
                 }
-                delay(DELAY_MILLIS)
-            }
         }
 
         return START_STICKY
