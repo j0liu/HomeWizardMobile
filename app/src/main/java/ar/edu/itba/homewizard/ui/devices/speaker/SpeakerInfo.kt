@@ -19,11 +19,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.Speaker
-import ar.edu.itba.homewizard.ui.constants.ScreenSize
 import ar.edu.itba.homewizard.ui.devices.oven.OvenInfoHorizontal
 import ar.edu.itba.homewizard.ui.devices.oven.OvenInfoVertical
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
 import ar.edu.itba.homewizard.ui.inputs.CustomSlider
+import ar.edu.itba.homewizard.ui.utils.ScreenSize
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.SpeakerViewModel
 import com.google.gson.internal.LinkedTreeMap
@@ -32,9 +32,6 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun SpeakerInfo(devicesViewModel: DevicesViewModel = hiltViewModel()) {
-//    val devicesUiState by speakerViewModel.uiState.collectAsState()
-    // list of genres
-    val scope  = rememberCoroutineScope()
     val devicesUiState by devicesViewModel.uiState.collectAsState()
     val speaker = devicesUiState.currentDevice as Speaker
 
