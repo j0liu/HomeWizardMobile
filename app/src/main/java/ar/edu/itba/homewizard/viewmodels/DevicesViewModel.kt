@@ -142,7 +142,7 @@ class DevicesViewModel @Inject constructor(
         _uiState.update {
             it.copy(filteredDevices = it.filterDevices())
         }
-        bridge.sendMessage("Filtrando por tipo ${deviceType?.name}") // TODO: Move to strings
+//        bridge.sendMessage("Filtrando por tipo ${deviceType?.name}") // TODO: Move to strings
     }
 
     fun setFilterType(name : String) {
