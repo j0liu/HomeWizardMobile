@@ -159,4 +159,8 @@ class DevicesViewModel @Inject constructor(
             )
         }
     }
+
+    fun putSnackbar(message: String, isError: Boolean) {
+        bridge.sendMessage(message, isError)
+    }
 }

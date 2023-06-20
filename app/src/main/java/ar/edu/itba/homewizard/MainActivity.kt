@@ -27,7 +27,6 @@ class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter", "PermissionLaunchedDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        actionBar?.hide() // TODO: Sacar
         setContent {
             HomeWizardMobileTheme {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

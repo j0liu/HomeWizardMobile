@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -21,11 +22,12 @@ import ar.edu.itba.homewizard.ui.inputs.CustomToggle
 import ar.edu.itba.homewizard.ui.inputs.PasswordInput
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
-
+// TODO: Pasar mensajes a strings
 @Composable
 fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier: Float){
     var changingCode by remember{ mutableStateOf(false) }
     val passwordInputModifier = Modifier.fillMaxWidth().padding(bottom=16.dp*multiplier).height(80.dp*multiplier).padding(top = 16.dp*multiplier)
+    val focusManager = LocalFocusManager.current
 
     Column(
         modifier = Modifier.padding(start = 30.dp * multiplier, end = 30.dp*multiplier),
@@ -60,8 +62,10 @@ fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier
                 Button(
                     modifier = Modifier.padding(16.dp*multiplier),
                     onClick = {
-                        alarm.changeSecurityCode(devicesViewModel, oldCode.text, newCode.text)
-                        changingCode = false
+                        focusManager.clearFocus()
+                        alarm.changeSecurityCode(devicesViewModel, oldCode.text, newCode.text) {
+                            changingCode = false
+                        }
                     },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = MaterialTheme.colors.secondary,

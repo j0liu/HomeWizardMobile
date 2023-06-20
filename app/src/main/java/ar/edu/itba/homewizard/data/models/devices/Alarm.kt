@@ -35,14 +35,20 @@ class Alarm(
             if (result) {
                 this.status = status
                 changeStatus()
+            } else {
+                devicesViewModel.putSnackbar("Incorrect password", true) // TODO: Add message to strings
             }
         }
     }
 
-    fun changeSecurityCode(devicesViewModel : DevicesViewModel, oldSecurityCode : String, newSecurityCode : String) {
+    fun changeSecurityCode(devicesViewModel : DevicesViewModel, oldSecurityCode : String, newSecurityCode : String, changeSecurityCode: () -> Unit) {
         devicesViewModel.executeActionWithResult<Boolean>(Action("changeSecurityCode", this, listOf(oldSecurityCode, newSecurityCode))) { result ->
-            if (result)
-                println("cambiada satisfactoriamente") //TODO: ver si poner snackbar o que para los errores
+            if (result) {
+                devicesViewModel.putSnackbar("Security code changed successfully", false) // TODO: Add message to strings
+                changeSecurityCode()
+            }
+            else
+                devicesViewModel.putSnackbar("Invalid old password", true) // TODO: Add message to strings
         }
 
     }
