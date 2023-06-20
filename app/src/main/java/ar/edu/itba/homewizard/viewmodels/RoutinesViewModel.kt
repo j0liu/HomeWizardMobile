@@ -3,6 +3,7 @@ package ar.edu.itba.homewizard.viewmodels
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.itba.homewizard.bridges.SnackbarBridge
 import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.data.repository.RoutineRepository
 import ar.edu.itba.homewizard.ui.routines.RoutinesUiState
@@ -16,6 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RoutinesViewModel @Inject constructor(
+    private val snackbarBridge: SnackbarBridge,
     private val routineRepository : RoutineRepository
 ) : ViewModel() {
 
@@ -45,6 +47,7 @@ class RoutinesViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 routineRepository.executeRoutine(routine.id)
+                snackbarBridge.sendMessage("Routine executed") // TODO: Change message
             }
         }
 
