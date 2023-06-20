@@ -12,14 +12,14 @@ data class NetworkRoutine(
     @SerializedName("actions")
     var actions: List<NetworkAction>? = null,
     @SerializedName("meta")
-    var meta: Any? = null
+    var meta: NetworkMeta? = null
 ){
     fun toRoutine(): Routine {
         return Routine(
             id = this.id!!,
             name = this.name!!,
             actions = this.actions!!.map { it.toAction()},
-            meta = this.meta!!
+            meta = this.meta!!.toMeta()
         )
     }
 }

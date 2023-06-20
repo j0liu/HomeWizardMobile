@@ -1,7 +1,6 @@
 package ar.edu.itba.homewizard.viewmodels
 
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.data.models.Routine
@@ -15,7 +14,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@OptIn(ExperimentalMaterialApi::class)
 @HiltViewModel
 class RoutinesViewModel @Inject constructor(
     private val routineRepository : RoutineRepository
@@ -71,5 +69,31 @@ class RoutinesViewModel @Inject constructor(
             currentRoutine = null,
             currentPage = 0
         ) }
+    }
+
+    fun sortRoutines() {
+        _uiState.update {
+            it.copy(
+                sortCriteria = Routine.orderCriterias[it.sortCriteriaName]!!
+            )
+        }
+        _uiState.update {
+            it.copy(routines = it.sortRoutines())
+        }
+    }
+
+    fun setSortDialogOpen(isOpen: Boolean) {
+        _uiState.update {
+            it.copy(
+                sortDialogIsOpen = isOpen
+            )
+        }
+    }
+    fun setOrderCriteria(name : String) {
+        _uiState.update {
+            it.copy(
+                sortCriteriaName = name
+            )
+        }
     }
 }

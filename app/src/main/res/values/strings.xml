@@ -94,7 +94,8 @@
 
     <string name="schedule">Schedule</string>
     <string name="device_changes">Changes in device detected</string>
-    <string name="orderby">Order By</string>
+    <string name="orderby">Sort By</string>
+    <string name="order">Sort</string>
     <string name="name">Name</string>
     <string name="uses">Uses</string>
     <string name="type">Type</string>

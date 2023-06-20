@@ -136,27 +136,12 @@ class DevicesViewModel @Inject constructor(
             deviceRepository.updateDevice(id)
         }
     }
-
-    fun updateDevice (id : String,  onSuccess : suspend (Device) -> Unit = {}){
-        viewModelScope.launch {
-            runCatching {
-                _uiState.update {
-                    it.copy(isLoading = true)
-                }
-                val res = deviceRepository.getDevice(id)
-                onSuccess(res)
-                _uiState.update {
-                    it.copy(isLoading = false)
-                }
-            }
-        }
-    }
     
     fun filterByType(deviceType : DeviceType?) {
         _uiState.update {
             it.copy(
                 filterType = deviceType,
-                orderCriteria = Device.orderCriterias[it.orderCriteriaName]!!
+                sortCriteria = Device.orderCriterias[it.sortCriteriaName]!!
             )
         }
         _uiState.update {
@@ -175,7 +160,7 @@ class DevicesViewModel @Inject constructor(
     fun setOrderCriteria(name : String) {
         _uiState.update {
             it.copy(
-                orderCriteriaName = name
+                sortCriteriaName = name
             )
         }
     }

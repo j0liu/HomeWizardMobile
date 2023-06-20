@@ -137,7 +137,6 @@ private fun DevicesTopBar( devicesViewModel: DevicesViewModel, devicesUiState : 
                     Column(
                         modifier = Modifier.background(color = MaterialTheme.colors.primary)
                     ) {
-                        //TODO: change dropdown to toggle group
                         CustomDropdownMenu(
                             modifier = Modifier.padding(bottom = 16.dp).background(color = MaterialTheme.colors.surface, shape = RectangleShape),
                             elements = listOf(listOf("all"), DeviceType.deviceTypesByName.keys).flatten(),
@@ -149,7 +148,7 @@ private fun DevicesTopBar( devicesViewModel: DevicesViewModel, devicesUiState : 
                             modifier = Modifier.background(color = MaterialTheme.colors.surface, shape = RectangleShape),
                             elements = Device.orderCriteriaNames,
                             title = stringResource(R.string.orderby),
-                            selected = devicesUiState.orderCriteriaName
+                            selected = devicesUiState.sortCriteriaName
                         ){devicesViewModel.setOrderCriteria(it)}
                     }
                 }

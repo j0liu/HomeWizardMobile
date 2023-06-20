@@ -12,9 +12,8 @@ data class DevicesUiState constructor(
     var filterType : DeviceType? = null,
     val filteredDevices : List<Device> = listOf(),
 
-    val orderCriteria : Comparator<Device> = Device.orderCriterias["Alphabetical"]!!,
-    val orderCriteriaName : String = "Alphabetical",
-    val ascendantOrder : Boolean = true,
+    val sortCriteria : Comparator<Device> = Device.orderCriterias["Alphabetical"]!!,
+    val sortCriteriaName : String = "Alphabetical",
 
     // UI
     var isLoading: Boolean = true,
@@ -22,8 +21,8 @@ data class DevicesUiState constructor(
     var filterDialogIsOpen : Boolean = false,
 
     ) {
-    fun filterDevices(devices : List<Device> = this.devices, filterType: DeviceType? = this.filterType) : List<Device> {
+    fun filterDevices() : List<Device> {
         val filteredDevices = if (filterType != null) devices.filter {it.type == filterType} else devices
-        return filteredDevices.sortedWith(orderCriteria)
+        return filteredDevices.sortedWith(sortCriteria)
     }
 }
