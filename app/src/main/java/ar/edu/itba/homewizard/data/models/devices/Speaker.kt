@@ -27,7 +27,7 @@ class Speaker (
     var status: Boolean = false
     var volume: Int = 5
     var genre: String = ""
-    var song : SpeakerSong = SpeakerSong(title = "", artist = "", album = "", duration = "", progress = "")
+    var song : SpeakerSong? = SpeakerSong(title = "", artist = "", album = "", duration = "", progress = "")
 
 
 

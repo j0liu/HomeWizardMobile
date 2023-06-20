@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -12,6 +13,7 @@ import androidx.compose.ui.unit.sp
 fun CustomDropdownMenu(modifier: Modifier = Modifier, elements: List<String>, selected : String = elements[0], title: String = "", onSelected: (String) -> Unit) {
     var selectedText by remember { mutableStateOf(if (selected in elements) selected else elements[0]) }
     var expanded by remember { mutableStateOf(false) }
+    val mContext = LocalContext.current
 
     ExposedDropdownMenuBox(
         modifier = modifier,
@@ -20,8 +22,10 @@ fun CustomDropdownMenu(modifier: Modifier = Modifier, elements: List<String>, se
             expanded = !expanded
         }
     ) {
+        val selectedId = mContext.resources.getIdentifier(selectedText, "string",mContext.packageName)
+        val selected = mContext.resources.getString(selectedId)
         TextField(
-            value = selectedText,
+            value = selected,
             onValueChange = {},
             readOnly = true,
             label = { Text(text = title, color = MaterialTheme.colors.onSurface, fontSize = 11.sp) },
@@ -43,7 +47,9 @@ fun CustomDropdownMenu(modifier: Modifier = Modifier, elements: List<String>, se
                     expanded = false
                     onSelected(item)
                 }) {
-                    Text(text = item)
+                    val textId = mContext.resources.getIdentifier(item, "string",mContext.packageName)
+                    val text = mContext.resources.getString(textId)
+                    Text(text = text)
                 }
             }
         }

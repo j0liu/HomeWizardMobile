@@ -21,10 +21,11 @@
     <string name="genre">Genre</string>
     <string name="country">Country</string>
     <string name="classical">Classical</string>
-    <string name="dance">Baile</string>
+    <string name="dance">Dance</string>
     <string name="latina">Latina</string>
     <string name="pop">Pop</string>
     <string name="rock">Rock</string>
+    <string name="NoSong">No Song</string>
 
     <string name="blind">Blind</string>
     <string name="open">Open</string>

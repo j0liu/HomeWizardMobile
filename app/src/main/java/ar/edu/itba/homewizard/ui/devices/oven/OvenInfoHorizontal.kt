@@ -52,7 +52,7 @@ fun OvenInfoHorizontal(devicesViewModel: DevicesViewModel, oven : Oven, multipli
                     title = "Temperatura",
                     unit = "°",
                     icon = R.drawable.baseline_thermostat_24,
-                    multiplier = multiplier
+                    multiplier = multiplier,
                 )
             }
 

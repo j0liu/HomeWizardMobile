@@ -25,6 +25,7 @@
     <string name="latina">Latina</string>
     <string name="pop">Pop</string>
     <string name="rock">Rock</string>
+    <string name="NoSong">No hay cancion</string>
 
     <string name="blind">Persiana</string>
     <string name="open">Abrir</string>
