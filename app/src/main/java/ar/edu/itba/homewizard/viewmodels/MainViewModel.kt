@@ -27,7 +27,6 @@ class MainViewModel @Inject constructor(snackbarBridge: SnackbarBridge) : ViewMo
 
     init {
         snackbarBridge.subscribe { message, type ->
-            println("Message received: $message")
             viewModelScope.launch {
                 val duration = when (type) {
                     SnackbarType.INFO -> SnackbarDuration.Short
@@ -78,6 +77,5 @@ class MainViewModel @Inject constructor(snackbarBridge: SnackbarBridge) : ViewMo
                 displayBottomBar = visible
             )
         }
-        println("New displayBottomBar: ${_uiState.value.displayBottomBar}")
     }
 }

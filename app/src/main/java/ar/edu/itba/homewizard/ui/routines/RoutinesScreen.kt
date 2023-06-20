@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Routine
-import ar.edu.itba.homewizard.ui.constants.ScreenSize
+import ar.edu.itba.homewizard.ui.utils.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
 import ar.edu.itba.homewizard.viewmodels.MainViewModel

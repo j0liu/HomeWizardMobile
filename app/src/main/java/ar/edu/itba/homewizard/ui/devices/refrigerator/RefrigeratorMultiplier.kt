@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.Fridge
@@ -26,7 +27,7 @@ fun RefrigeratorMultiplier(devicesViewModel: DevicesViewModel, fridge: Fridge, m
                 value = fridge.temperature.toFloat(),
                 valueRange = 2f..8f,
                 onValueChangeFinished = {fridge.changeTemperature(devicesViewModel, it.toInt())},
-                title = "Temperatura heladera",
+                title = stringResource(R.string.fridge_temperature),
                 unit = "°",
                 icon = R.drawable.thermometer_low,
                 multiplier = multiplier
@@ -39,7 +40,7 @@ fun RefrigeratorMultiplier(devicesViewModel: DevicesViewModel, fridge: Fridge, m
                 value = fridge.freezerTemperature.toFloat(),
                 valueRange = -20f..-8f,
                 onValueChangeFinished = { fridge.changeFreezerTemperature(devicesViewModel, it.toInt()) },
-                title = "Temperatura freezer",
+                title = stringResource(R.string.freezer_temperature),
                 unit = "°",
                 icon = R.drawable.snowflake_thermometer,
                 multiplier = multiplier

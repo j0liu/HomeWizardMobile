@@ -11,6 +11,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.data.models.devices.Door
@@ -21,7 +22,6 @@ import ar.edu.itba.homewizard.R
 
 @Composable
 fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door, multiplier: Float = 1f){
-    val devicesUiState by devicesViewModel.uiState.collectAsState()
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
 //                verticalAlignment = Alignment.CenterVertically,
@@ -41,7 +41,7 @@ fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door, multipli
                 if (door.lock) ImageVector.vectorResource(id = R.drawable.lock)
                 else ImageVector.vectorResource(id = R.drawable.lock_open),
                 tint = MaterialTheme.colors.onSurface,
-                contentDescription = "content description"
+                contentDescription = stringResource(R.string.lock)
             )
         }
         Button(
@@ -56,7 +56,7 @@ fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door, multipli
                 if (door.status) ImageVector.vectorResource(id = R.drawable.door_closed)
                 else ImageVector.vectorResource(id = R.drawable.door_open),
                 tint = MaterialTheme.colors.onSurface,
-                contentDescription = "content description"
+                contentDescription = stringResource(R.string.door)
             )
         }
     }

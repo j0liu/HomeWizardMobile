@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
@@ -26,7 +27,7 @@ fun PaginationArrows(currentPage: Int, maxPage: Int, modifier: Modifier = Modifi
                     .size(50.dp),
                 imageVector = ImageVector.vectorResource(id = R.drawable.chevron_left) ,
                 tint = if(currentPage > 0) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onPrimary.copy(alpha = 0.5f),
-                contentDescription = "content description",
+                contentDescription = stringResource(R.string.minus)
             )
         }
         IconButton(
@@ -40,7 +41,7 @@ fun PaginationArrows(currentPage: Int, maxPage: Int, modifier: Modifier = Modifi
                     .size(50.dp),
                 imageVector = ImageVector.vectorResource(id = R.drawable.chevron_right),
                 tint = if(currentPage < maxPage) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onPrimary.copy(alpha = 0.5f),
-                contentDescription = "content description"
+                contentDescription = stringResource(R.string.plus)
             )
         }
     }

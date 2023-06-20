@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.ui.inputs
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
@@ -11,12 +12,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.ui.theme.*
+import ar.edu.itba.homewizard.ui.utils.Translate
 
+@SuppressLint("DiscouragedApi")
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DropdownButton (
@@ -30,6 +34,8 @@ fun DropdownButton (
 ){
     var expanded by remember { mutableStateOf(false) }
     var selectedIndex by remember { mutableStateOf(options.indexOf(initialValue)) }
+    val context = LocalContext.current
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -61,7 +67,7 @@ fun DropdownButton (
 
         ) {
             Text(
-                text = options[selectedIndex],
+                text = Translate(context, options[selectedIndex]),
                 fontSize = 18.sp*multiplier,
                 color = MaterialTheme.colors.onSurface,
                 modifier = Modifier
@@ -73,13 +79,13 @@ fun DropdownButton (
                 modifier = Modifier
                     .background(color = MaterialTheme.colors.surface)
             ) {
-                options.forEachIndexed { index, s ->
+                options.forEachIndexed { index, _ ->
                     DropdownMenuItem(onClick = {
                         selectedIndex = index
                         expanded = false
                         onOptionSelected(options[index])
                     }) {
-                        Text(text = s, textAlign = TextAlign.Center)
+                        Text(text = Translate(context, options[index]), textAlign = TextAlign.Center)
                     }
                 }
             }

@@ -1,5 +1,6 @@
 package ar.edu.itba.homewizard.data.models.devices
 
+import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.bridges.SnackbarType
 import ar.edu.itba.homewizard.data.models.*
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
@@ -23,7 +24,7 @@ class Alarm(
             get() = actionNames.keys.toTypedArray()
     }
     data class AlarmState (
-        val status: String, // TODO: Enum?
+        val status: String,
     ) : DeviceState
 
     var status: String = ""
@@ -37,7 +38,7 @@ class Alarm(
                 this.status = status
                 changeStatus()
             } else {
-                devicesViewModel.putSnackbar("Incorrect password", SnackbarType.ERROR) // TODO: Add message to strings
+                devicesViewModel.putSnackbar(R.string.incorrect_code, SnackbarType.ERROR)
             }
         }
     }
@@ -45,11 +46,11 @@ class Alarm(
     fun changeSecurityCode(devicesViewModel : DevicesViewModel, oldSecurityCode : String, newSecurityCode : String, changeSecurityCode: () -> Unit) {
         devicesViewModel.executeActionWithResult<Boolean>(Action("changeSecurityCode", this, listOf(oldSecurityCode, newSecurityCode))) { result ->
             if (result) {
-                devicesViewModel.putSnackbar("Security code changed successfully") // TODO: Add message to strings
+                devicesViewModel.putSnackbar(R.string.change_code_successfully)
                 changeSecurityCode()
             }
             else
-                devicesViewModel.putSnackbar("Invalid old password", SnackbarType.ERROR) // TODO: Add message to strings
+                devicesViewModel.putSnackbar(R.string.incorrect_old_code, SnackbarType.ERROR)
         }
 
     }

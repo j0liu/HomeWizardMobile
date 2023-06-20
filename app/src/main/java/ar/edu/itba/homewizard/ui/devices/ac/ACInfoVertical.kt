@@ -4,7 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.AC
 import ar.edu.itba.homewizard.ui.inputs.CustomToggle
 import ar.edu.itba.homewizard.ui.inputs.DropdownButton
@@ -44,13 +46,13 @@ fun ACInfoVertical(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
         ) {
-            DropdownButton(modifier = Modifier, "Velocidad ventilador", 20, AC.fanSpeedValues, ac.fanSpeed, multiplier) {
+            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.fan_speed), " "), 20, AC.fanSpeedValues, ac.fanSpeed, multiplier) {
                 ac.setFanSpeed(devicesViewModel, it)
             }
-            DropdownButton(modifier = Modifier, "Aspas verticales", 20, AC.verticalSwingValues, ac.verticalSwing, multiplier) {
+            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.vertical_blades), " "), 20, AC.verticalSwingValues, ac.verticalSwing, multiplier) {
                 ac.setVerticalSwing(devicesViewModel, it)
             }
-            DropdownButton(modifier = Modifier, "Aspas horizontales", 20, AC.horizontalSwingValues, ac.horizontalSwing, multiplier) {
+            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.horizontal_blades), " "), 20, AC.horizontalSwingValues, ac.horizontalSwing, multiplier) {
                 ac.setHorizontalSwing(devicesViewModel, it)
             }
         }

@@ -13,8 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import ar.edu.itba.homewizard.R
 
 @Composable
 fun CustomToggle(options : List<Int>, selected : Int, modifier: Modifier = Modifier, multiplier : Float = 1f, onSelectedChange : (Int) -> Unit) {
@@ -42,7 +44,7 @@ fun CustomToggle(options : List<Int>, selected : Int, modifier: Modifier = Modif
                         .size(40.dp * multiplier),
                     imageVector = ImageVector.vectorResource(id = icon),
                         tint = MaterialTheme.colors.onSurface,
-                    contentDescription = "content description"
+                    contentDescription = stringResource(R.string.icon)
                 )
             }
         }

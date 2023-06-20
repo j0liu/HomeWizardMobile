@@ -6,9 +6,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ar.edu.itba.homewizard.R
 
 @Composable
 fun CustomSlider(
@@ -61,7 +63,7 @@ fun CustomSlider(
                     .weight(0.1f)
                     .size(20.dp*multiplier),
                 imageVector = ImageVector.vectorResource(id = icon),
-                contentDescription = "content description",
+                contentDescription = stringResource(R.string.icon),
                 tint = MaterialTheme.colors.onPrimary
             )
             Text(

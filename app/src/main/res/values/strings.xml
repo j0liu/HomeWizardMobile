@@ -101,4 +101,51 @@
     <string name="uses">Uses</string>
     <string name="type">Type</string>
 
+    <string name="validation_timer">The number must be between 1 and 60</string>
+    <string name="down">Down</string>
+    <string name="clock">Clock</string>
+
+    <string name="fan_speed">Fan%1$sspeed</string>
+    <string name="vertical_blades">Vertical%1$sblades</string>
+    <string name="horizontal_blades">Horizontal%1$sBlades</string>
+
+    <string name="fridge_temperature">Fridge temperature</string>
+    <string name="freezer_temperature">Freezer temperature</string>
+
+    <string name="old_code">Previous code</string>
+    <string name="new_code">New code</string>
+    <string name="code">Code</string>
+    <string name="update">Update</string>
+    <string name="go_back">Back</string>
+
+    <string name="four_digits">The code must have 4 digits</string>
+    <string name="numeric">The code must be numeric</string>
+
+    <string name="enter_new_code">Enter new code</string>
+
+    <string name="auto">auto</string>
+    <string name="blind_level">Blind level</string>
+    <string name="current_level">Current level</string>
+    <string name="icon">Ícono</string>
+
+    <string name="plus">Plus</string>
+    <string name="minus">Minus</string>
+
+    <string name="visibility_eye">Eye of visibility</string>
+    <string name="power_button">Power button</string>
+
+    <string name="execute_routine">Execute routine</string>
+    <string name="executed_routine">Routine executed</string>
+
+    <string name="opening">opening</string>
+    <string name="opened">opened</string>
+    <string name="closing">closing</string>
+    <string name="closed">closed</string>
+
+    <string name="change_code_successfully">"Security code changed successfully"</string>
+    <string name="incorrect_old_code">Incorrect previous code</string>
+    <string name="incorrect_code">Incorrect code</string>
+
+    <string name="fatal_network_error">Fatal network error</string>
+
 </resources>

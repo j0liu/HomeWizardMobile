@@ -1,4 +1,4 @@
-package ar.edu.itba.homewizard.ui.constants
+package ar.edu.itba.homewizard.ui.utils
 
 import androidx.compose.ui.unit.dp
 

@@ -5,7 +5,6 @@ import android.content.res.Configuration
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import android.os.Handler
 import android.os.Looper
-import android.view.accessibility.AccessibilityNodeInfo.CollectionInfo
 import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -27,9 +26,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
-import ar.edu.itba.homewizard.data.models.Action
-import ar.edu.itba.homewizard.data.models.Routine
-import ar.edu.itba.homewizard.ui.constants.ScreenSize
+import ar.edu.itba.homewizard.ui.utils.ScreenSize
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.inputs.PaginationArrows
@@ -57,6 +54,7 @@ fun RoutineInfo(
     var orientation by remember { mutableStateOf(Configuration.ORIENTATION_PORTRAIT) }
 
     val configuration = LocalConfiguration.current
+    val validationTimerString = stringResource(R.string.validation_timer)
 
 // If our configuration changes then this will launch a new coroutine scope for it
     LaunchedEffect(configuration) {
@@ -81,14 +79,14 @@ fun RoutineInfo(
                     routinesViewModel.executeRoutine(routine!!)
                 }, text.toLong() * 1000)
             } else {
-                Toast.makeText(mContext, "The number must be between 1 and 60", Toast.LENGTH_SHORT).show() // TODO: Change message
+                Toast.makeText(mContext, validationTimerString, Toast.LENGTH_SHORT).show()
             }
             submit
         }
     ) {
         Column() {
             TextField(value = text, onValueChange = { text = it }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
-            Text( stringResource(R.string.schedule_message))
+            Text(stringResource(R.string.schedule_message))
         }
     }
     Scaffold(
@@ -117,7 +115,7 @@ fun RoutineInfo(
                         Icon(
                             modifier = Modifier.size(30.dp, 30.dp),
                             imageVector = ImageVector.vectorResource(R.drawable.chevron_down),
-                            contentDescription = "Back",
+                            contentDescription = stringResource(R.string.down),
                             tint = MaterialTheme.colors.onPrimary
                         )
                     }
@@ -133,9 +131,8 @@ fun RoutineInfo(
                         Icon(
                             modifier = Modifier.size(30.dp, 30.dp),
                             imageVector = ImageVector.vectorResource(R.drawable.clock_outline),
-                            contentDescription = "Back",
+                            contentDescription = stringResource(R.string.clock),
                             tint = MaterialTheme.colors.onPrimary
-
                         )
                     }
                 }
@@ -159,7 +156,7 @@ fun RoutineInfo(
                     Icon(
                         modifier = Modifier.size(80.dp),
                         imageVector = ImageVector.vectorResource(id = R.drawable.play),
-                        contentDescription = "content description",
+                        contentDescription = stringResource(R.string.execute_routine),
                     )
                 }
 

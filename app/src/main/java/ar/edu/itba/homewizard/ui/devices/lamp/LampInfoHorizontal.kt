@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
@@ -40,7 +41,7 @@ fun LampInfoHorizontal(devicesViewModel: DevicesViewModel, lamp: Lamp, controlle
                 value = lamp.brightness.toFloat(),
                 valueRange = 0f..100f,
                 onValueChangeFinished = { lamp.changeBrightness(devicesViewModel, it.toInt()) },
-                title = "Intensidad",
+                title = stringResource(R.string.brightness),
                 unit = "",
                 icon = R.drawable.lightbulb_on_10,
                 multiplier = multiplier

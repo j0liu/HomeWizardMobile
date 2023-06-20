@@ -102,4 +102,54 @@
     <string name="uses">Usos</string>
     <string name="type">Tipo</string>
 
+    <string name="validation_timer">El número debe estar entre 1 y 60</string>
+    <string name="down">Abajo</string>
+    <string name="clock">Reloj</string>
+
+    <string name="fan_speed">Velocidad%1$sventilador</string>
+    <string name="vertical_blades">Aspas%1$sverticales</string>
+    <string name="horizontal_blades">Aspas%1$shorizontales</string>
+
+    <string name="fridge_temperature">Temperatura heladera</string>
+    <string name="freezer_temperature">Temperatura freezer</string>
+
+    <string name="old_code">Código anterior</string>
+    <string name="new_code">Código nuevo</string>
+    <string name="code">Código</string>
+    <string name="update">Actualizar</string>
+    <string name="go_back">Volver</string>
+
+    <string name="four_digits">El código debe tener 4 dígitos</string>
+    <string name="numeric">El código debe ser numérico</string>
+
+    <string name="enter_new_code">Ingresar nuevo código</string>
+
+    <string name="auto">auto</string>
+    <string name="blind_level">Nivel de la persiana</string>
+    <string name="current_level">Nivel actual</string>
+    <string name="icon">Icon</string>
+
+    <string name="plus">Más</string>
+    <string name="minus">Menos</string>
+
+    <string name="visibility_eye">Ojo de visibilidad</string>
+    <string name="power_button">Botón de encendido</string>
+
+    <string name="execute_routine">Ejecutar rutina</string>
+
+    <string name="executed_routine">Rutina ejecutada</string>
+
+    <string name="opening">abriendo</string>
+    <string name="opened">abierto</string>
+    <string name="closing">cerrando</string>
+    <string name="closed">cerrado</string>
+
+    <string name="change_code_successfully">Código de seguridad modificado exitosamente</string>
+
+    <string name="incorrect_old_code">Código anterior incorrecto</string>
+    <string name="incorrect_code">Código incorrecto</string>
+
+    <string name="fatal_network_error">Error fatal de conexión con la API</string>
+
+
 </resources>

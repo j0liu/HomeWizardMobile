@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.Lamp
@@ -36,7 +37,7 @@ fun LampInfoVertical(devicesViewModel: DevicesViewModel, lamp: Lamp, controller:
             value = lamp.brightness.toFloat(),
             valueRange = 0f..100f,
             onValueChangeFinished = { lamp.changeBrightness(devicesViewModel, it.toInt()) },
-            title = "Intensidad",
+            title = stringResource(R.string.brightness),
             unit = "",
             icon = R.drawable.lightbulb_on_10,
             multiplier = multiplier

@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,7 @@ fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: St
                     .size(60.dp*multiplier),
                 imageVector = ImageVector.vectorResource(id = R.drawable.baseline_horizontal_rule_24) ,
                 tint = if(value > startLimit) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onPrimary.copy(alpha = 0.5f),
-                contentDescription = "content description"
+                contentDescription = stringResource(R.string.minus)
             )
         }
         Text(
@@ -58,7 +59,7 @@ fun NumericController(value: Int, onValueChanged: (value: Int) -> Unit, unit: St
                     .size(70.dp*multiplier),
                 imageVector = Icons.Filled.Add,
                 tint = if(value < endLimit) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onPrimary.copy(alpha = 0.5f),
-                contentDescription = "content description"
+                contentDescription = stringResource(R.string.plus)
             )
         }
     }

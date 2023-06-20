@@ -36,7 +36,6 @@ class DevicesViewModel @Inject constructor(
                 _uiState.update { it.copy(isLoading = true) }
                 val devices = deviceRepository.getDevices()
                 devices.observeForever { dl ->
-                    println("Observing...")
                     _uiState.update {
                         it.copy(
                             devices = dl,
@@ -60,7 +59,6 @@ class DevicesViewModel @Inject constructor(
     }
 
 
-    // TODO: Move names to constants
     val DEVICE_SP_KEY = "ar.edu.itba.homewizard.devices.notifications"
     fun setCurrentDevice(device: Device?) {
         _uiState.update { it.copy(isLoading = true) }
@@ -71,12 +69,16 @@ class DevicesViewModel @Inject constructor(
                 .getBoolean(device.id, false)
         }
 
-        _uiState.update {
-            it.copy(
-                currentDevice = device,
-                currentNotificationsEnabled = notificationsEnabled,
-                isLoading = false
-            )
+        viewModelScope.launch {
+            runCatching {
+                _uiState.update {
+                    it.copy(
+                        currentDevice = if (device == null) null else deviceRepository.getDevice(deviceId = device!!.id),
+                        currentNotificationsEnabled = notificationsEnabled,
+                        isLoading = false
+                    )
+                }
+            }
         }
     }
 
@@ -120,12 +122,6 @@ class DevicesViewModel @Inject constructor(
         return executeActionWithResult<Any>(action)
     }
 
-    fun updateDevices(scope: CoroutineScope){
-        scope.launch {
-            deviceRepository.updateDevices()
-        }
-    }
-
     fun updateDevice(id : String, scope: CoroutineScope){
         scope.launch {
             deviceRepository.updateDevice(id)
@@ -142,7 +138,6 @@ class DevicesViewModel @Inject constructor(
         _uiState.update {
             it.copy(filteredDevices = it.filterDevices())
         }
-//        bridge.sendMessage("Filtrando por tipo ${deviceType?.name}") // TODO: Move to strings
     }
 
     fun setFilterType(name : String) {
@@ -161,7 +156,7 @@ class DevicesViewModel @Inject constructor(
         }
     }
 
-    fun putSnackbar(message: String, type: SnackbarType = SnackbarType.INFO) {
-        bridge.sendMessage(message, type)
+    fun putSnackbar(message: Int, type: SnackbarType = SnackbarType.INFO) {
+        bridge.sendMessage(context.getString(message), type)
     }
 }

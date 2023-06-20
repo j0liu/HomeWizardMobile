@@ -2,20 +2,11 @@ package ar.edu.itba.homewizard.ui.devices.ac
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.AC
-import ar.edu.itba.homewizard.ui.constants.ScreenSize
-import ar.edu.itba.homewizard.ui.devices.lamp.LampInfoHorizontal
-import ar.edu.itba.homewizard.ui.devices.lamp.LampInfoVertical
-import ar.edu.itba.homewizard.ui.inputs.CustomToggle
-import ar.edu.itba.homewizard.ui.inputs.DropdownButton
-import ar.edu.itba.homewizard.ui.inputs.NumericController
-import ar.edu.itba.homewizard.ui.inputs.PowerButton
+import ar.edu.itba.homewizard.ui.utils.ScreenSize
 import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 
 @OptIn(ExperimentalComposeUiApi::class)

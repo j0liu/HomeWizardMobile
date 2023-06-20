@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
@@ -28,7 +29,7 @@ fun PowerButton(modifier: Modifier = Modifier, selected: Boolean, multiplier: Fl
                 .size(100.dp * multiplier),
             imageVector = ImageVector.vectorResource(id = R.drawable.baseline_power_settings_new_24),
             tint = MaterialTheme.colors.onSurface,
-            contentDescription = "content description"
+            contentDescription = stringResource(R.string.power_button)
         )
     }
 }

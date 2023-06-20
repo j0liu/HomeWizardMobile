@@ -1,6 +1,7 @@
 package ar.edu.itba.homewizard
 
 import android.app.Service
+import android.content.Context
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
@@ -9,6 +10,7 @@ import ar.edu.itba.homewizard.bridges.SnackbarType
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.*
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -19,6 +21,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class EventService : Service() {
+    @Inject
+    @ApplicationContext lateinit var context : Context
+
     @Inject
     lateinit var snackbarBridge: SnackbarBridge
 
@@ -50,7 +55,7 @@ class EventService : Service() {
                         delay(DELAY_MILLIS)
                     }
                 } catch (e: Exception) {
-                    snackbarBridge.sendMessage("Fatal network error", SnackbarType.PANIC)
+                    snackbarBridge.sendMessage(context.getString(R.string.fatal_network_error), SnackbarType.PANIC)
                 }
         }
 

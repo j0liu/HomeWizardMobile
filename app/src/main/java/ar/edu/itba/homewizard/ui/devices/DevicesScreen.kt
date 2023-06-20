@@ -24,7 +24,7 @@ import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.ui.LoadingAnimation
-import ar.edu.itba.homewizard.ui.constants.ScreenSize
+import ar.edu.itba.homewizard.ui.utils.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
 import ar.edu.itba.homewizard.ui.theme.*
@@ -41,10 +41,12 @@ fun DevicesScreen(
 ) {
     val mainUiState by mainViewModel.uiState.collectAsState()
     val devicesUiState by devicesViewModel.uiState.collectAsState()
+    val scope = rememberCoroutineScope()
+
     mainViewModel.setAfterCollapseBottomSheetAction {
         devicesViewModel.setCurrentDevice(null)
     }
-    val scope = rememberCoroutineScope()
+
     mainViewModel.setBackHandler(scope)
 
     Column(

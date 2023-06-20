@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.devices.Oven
@@ -43,7 +44,7 @@ fun OvenInfoVertical(devicesViewModel: DevicesViewModel, oven : Oven, multiplier
 //            onValueChange = { lamp.brightness = it.toInt() },
                 valueRange = 90f..230f,
                 onValueChangeFinished = { oven.setTemperature(devicesViewModel, it.toInt()) },
-                title = "Temperatura",
+                title = stringResource(R.string.temperature),
                 unit = "°",
                 icon = R.drawable.baseline_thermostat_24,
                 multiplier = multiplier
@@ -53,15 +54,15 @@ fun OvenInfoVertical(devicesViewModel: DevicesViewModel, oven : Oven, multiplier
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
         ) {
-            DropdownButton(modifier = Modifier, "Heat", 24, Oven.heatModes, oven.heat, multiplier) {
+            DropdownButton(modifier = Modifier, stringResource(R.string.heat), 24, Oven.heatModes, oven.heat, multiplier) {
                 oven.setHeat(devicesViewModel, it)
             }
             Box(modifier = Modifier.padding(vertical = 20.dp*multiplier)){
-                DropdownButton(modifier = Modifier, "Grill", 24, Oven.grillModes, oven.grill, multiplier) {
+                DropdownButton(modifier = Modifier, stringResource(R.string.grill), 24, Oven.grillModes, oven.grill, multiplier) {
                     oven.setGrill(devicesViewModel, it)
                 }
             }
-            DropdownButton(modifier = Modifier, "Convection", 24, Oven.convectionModes, oven.convection, multiplier) {
+            DropdownButton(modifier = Modifier, stringResource(R.string.convection), 24, Oven.convectionModes, oven.convection, multiplier) {
                 oven.setConvection(devicesViewModel, it)
             }
         }
