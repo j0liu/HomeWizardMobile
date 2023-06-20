@@ -40,6 +40,11 @@ class DevicesViewModel @Inject constructor(
                         it.copy(
                             devices = dl,
                             currentDevice = dl.find { d -> d.id == it.currentDevice?.id },
+                        )
+                    }
+                    _uiState.update {
+                        it.copy(
+                            filteredDevices = it.filterDevices(),
                             isLoading = false
                         )
                     }
@@ -50,7 +55,7 @@ class DevicesViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(
                         filteredDevices = it.filterDevices(),
-//                        isLoading = true
+                        isLoading = false
                     )
                 }
             }
@@ -110,6 +115,9 @@ class DevicesViewModel @Inject constructor(
                 }
                 val response = deviceRepository.executeAction<T>(action.device.id, action.actionName, action.params)
                 onSuccess(response)
+                action.device.qtyUses++
+                deviceRepository.updateDevice(action.device)
+
                 _uiState.update {
                     it.copy(isLoading = false)
                 }

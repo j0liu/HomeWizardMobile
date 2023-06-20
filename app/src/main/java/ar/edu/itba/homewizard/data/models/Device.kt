@@ -22,7 +22,7 @@ open class Device(
 ) {
     var qtyUses : Int
         get() = (meta.qtyUses?:0) as Int
-        set(value) {  }
+        set(value) { meta.qtyUses = value }
 
     companion object {
         val orderCriterias: HashMap<String, Comparator<Device>> = hashMapOf(

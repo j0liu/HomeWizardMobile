@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.network.DeviceRemoteDataSource
-import java.util.*
+import ar.edu.itba.homewizard.data.network.models.NetworkDeviceUpdate
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -45,5 +45,10 @@ class DeviceRepository @Inject constructor (
 
     suspend fun <T> executeAction(deviceId: String, actionName: String, params: List<Any>) : T {
         return deviceRemoteDataSource.executeAction<T>(deviceId, actionName, params).result
+    }
+
+    suspend fun updateDevice(device: Device) {
+        deviceRemoteDataSource.updateDevice(device.id, NetworkDeviceUpdate(device))
+        updateDevice(device.id)
     }
 }
