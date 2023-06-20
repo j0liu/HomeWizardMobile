@@ -3,9 +3,11 @@ package ar.edu.itba.homewizard.viewmodels
 import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.SnackbarDuration
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.itba.homewizard.bridges.SnackbarBridge
 import ar.edu.itba.homewizard.ui.MainUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -18,9 +20,22 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalMaterialApi::class)
 @HiltViewModel
-class MainViewModel @Inject constructor() : ViewModel() {
+class MainViewModel @Inject constructor(mainBridge: SnackbarBridge) : ViewModel() {
     private val _uiState = MutableStateFlow(MainUiState(collapseBottomSheet = { collapseBottomSheet() }))
     var uiState: StateFlow<MainUiState> = _uiState.asStateFlow()
+
+    init {
+        mainBridge.subscribe { message, isError ->
+            println("Message received: $message")
+            viewModelScope.launch {
+                _uiState.value.scaffoldState.snackbarHostState.showSnackbar(
+                    message,
+                   if (isError) null else "",
+                    SnackbarDuration.Short
+                )
+            }
+        }
+    }
 
     fun collapseBottomSheet(scope: CoroutineScope? = null) {
         scope?.launch {

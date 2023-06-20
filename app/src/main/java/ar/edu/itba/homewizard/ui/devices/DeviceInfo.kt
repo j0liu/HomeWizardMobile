@@ -19,7 +19,6 @@ import ar.edu.itba.homewizard.viewmodels.DevicesViewModel
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun DeviceInfo(mainViewModel: MainViewModel, devicesViewModel: DevicesViewModel) {
     val devicesUiState by devicesViewModel.uiState.collectAsState()
@@ -59,28 +58,6 @@ fun DeviceInfo(mainViewModel: MainViewModel, devicesViewModel: DevicesViewModel)
                             imageVector =  if (!devicesUiState.currentNotificationsEnabled) ImageVector.vectorResource(R.drawable.bell_cancel_outline) else ImageVector.vectorResource(R.drawable.bell_outline),
                             contentDescription = "Back"
                         )
-                    }
-                    IconButton(onClick = {
-                        devicesViewModel.setOverflowMenuVisibility(true)
-                    }) {
-                        Icon(
-                            modifier = Modifier.size(30.dp, 30.dp),
-                            imageVector =  ImageVector.vectorResource(R.drawable.dots_horizontal),
-                            contentDescription = "Back"
-                        )
-                    }
-                    if (devicesUiState.currentDevice != null) {
-                        DropdownMenu(
-                            expanded = devicesUiState.overflowExpanded,
-                            onDismissRequest = { devicesViewModel.setOverflowMenuVisibility(false) },
-                        ) {
-                            DropdownMenuItem(onClick = { /*TODO*/ }) {
-                                Text("Edit")
-                            }
-                            DropdownMenuItem(onClick = { /*TODO*/ }) {
-                                Text("Delete")
-                            }
-                        }
                     }
                 }
             )

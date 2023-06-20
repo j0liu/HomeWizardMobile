@@ -17,7 +17,6 @@ data class DevicesUiState constructor(
 
     // UI
     var isLoading: Boolean = true,
-    var overflowExpanded: Boolean = false,
     var filterDialogIsOpen : Boolean = false,
 
     ) {

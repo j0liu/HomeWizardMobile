@@ -3,6 +3,7 @@ package ar.edu.itba.homewizard.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.itba.homewizard.bridges.SnackbarBridge
 import ar.edu.itba.homewizard.data.models.Action
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
@@ -22,6 +23,7 @@ import javax.inject.Inject
 @HiltViewModel
 class DevicesViewModel @Inject constructor(
     @ApplicationContext private val context : Context,
+    private val bridge: SnackbarBridge,
     private val deviceRepository : DeviceRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(DevicesUiState())
@@ -90,14 +92,6 @@ class DevicesViewModel @Inject constructor(
         }
     }
 
-    fun setOverflowMenuVisibility(expanded: Boolean) {
-        _uiState.update {
-            it.copy(
-                overflowExpanded = expanded
-            )
-        }
-    }
-
     fun setFilterDialogOpen(isOpen: Boolean) {
         _uiState.update {
             it.copy(
@@ -147,6 +141,7 @@ class DevicesViewModel @Inject constructor(
         _uiState.update {
             it.copy(filteredDevices = it.filterDevices())
         }
+        bridge.sendMessage("Filtrando por tipo ${deviceType?.name}") // TODO: Move to strings
     }
 
     fun setFilterType(name : String) {
