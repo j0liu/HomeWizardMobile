@@ -41,7 +41,7 @@ fun CustomToggle(options : List<Int>, selected : Int, modifier: Modifier = Modif
                     modifier = Modifier
                         .size(40.dp * multiplier),
                     imageVector = ImageVector.vectorResource(id = icon),
-//                        tint = if (selected == index) lightSurface else Background,
+                        tint = MaterialTheme.colors.onSurface,
                     contentDescription = "content description"
                 )
             }

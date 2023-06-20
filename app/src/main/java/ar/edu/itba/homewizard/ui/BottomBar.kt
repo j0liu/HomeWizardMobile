@@ -27,6 +27,7 @@ fun BottomBar(navController: NavController, mainViewModel: MainViewModel = hiltV
 
     if (devicesUiState.displayBottomBar) {
         BottomNavigation(
+            backgroundColor = MaterialTheme.colors.primary,
             modifier = Modifier.zIndex(1f)
         ) {
             val navBackStackEntry by navController.currentBackStackEntryAsState()

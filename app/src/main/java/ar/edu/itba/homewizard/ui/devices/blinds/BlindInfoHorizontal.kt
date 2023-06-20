@@ -33,7 +33,7 @@ fun BlindInfoHorizontal(devicesViewModel: DevicesViewModel, blind : Blind, multi
             Button(
                 onClick = { blind.open(devicesViewModel) },
                 modifier= Modifier.padding(bottom = 10.dp*multiplier),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp*multiplier),
             ) {
                 Icon(
@@ -45,7 +45,7 @@ fun BlindInfoHorizontal(devicesViewModel: DevicesViewModel, blind : Blind, multi
             Button(
                 onClick = { blind.close(devicesViewModel) },
                 modifier= Modifier.padding(bottom = 10.dp*multiplier),
-                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+                colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                 shape = RoundedCornerShape(20.dp*multiplier),
             ) {
                 Icon(

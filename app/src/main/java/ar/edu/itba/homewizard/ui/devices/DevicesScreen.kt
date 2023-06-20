@@ -115,6 +115,7 @@ private fun DevicesTopBar( devicesViewModel: DevicesViewModel, devicesUiState : 
                 modifier = Modifier.fillMaxWidth()
             )
         },
+        backgroundColor = MaterialTheme.colors.primary,
         navigationIcon = {},
         actions = {
             IconButton(onClick = {

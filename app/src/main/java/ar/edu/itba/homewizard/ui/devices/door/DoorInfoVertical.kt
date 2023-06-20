@@ -32,7 +32,7 @@ fun DoorInfoVertical(devicesViewModel: DevicesViewModel, door: Door, multiplier:
         Button(
             onClick = { door.toggleLock(devicesViewModel) },
             Modifier.padding(bottom = 40.dp*multiplier),
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
             shape = RoundedCornerShape(20.dp*multiplier)
         ) {
             Icon(
@@ -47,7 +47,7 @@ fun DoorInfoVertical(devicesViewModel: DevicesViewModel, door: Door, multiplier:
         }
         Button(
             onClick = { door.toggleOpenClose(devicesViewModel) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
             shape = RoundedCornerShape(20.dp*multiplier)
         ) {
             Icon(

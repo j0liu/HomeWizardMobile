@@ -31,7 +31,7 @@ fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door, multipli
     ) {
         Button(
             onClick = { door.toggleLock(devicesViewModel) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
             shape = RoundedCornerShape(20.dp*multiplier)
         ) {
             Icon(
@@ -46,7 +46,7 @@ fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door, multipli
         }
         Button(
             onClick = { door.toggleOpenClose(devicesViewModel) },
-            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+            colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
             shape = RoundedCornerShape(20.dp*multiplier)
         ) {
             Icon(

@@ -92,9 +92,10 @@ fun RoutineInfo(
         }
     }
     Scaffold(
-        modifier = Modifier.fillMaxHeight(0.95f),
+        modifier = Modifier.fillMaxHeight(0.99f),
         topBar = {
             TopAppBar(
+                backgroundColor = MaterialTheme.colors.primary,
                 elevation = 0.dp,
                 modifier = Modifier.fillMaxWidth(),
                 title = {
@@ -151,8 +152,8 @@ fun RoutineInfo(
             ){
                 Button(
                     onClick = { routinesViewModel.executeRoutine(routine!!) },
-                    modifier= Modifier.padding(bottom = 10.dp),
-                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.onPrimary),
+                    modifier= Modifier.padding(top = 20.dp, bottom = 10.dp),
+                    colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
                     shape = RoundedCornerShape(20.dp),
                 ) {
                     Icon(
@@ -166,7 +167,7 @@ fun RoutineInfo(
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(if(LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight || orientation == ORIENTATION_LANDSCAPE) 2 else 1),
                         modifier = Modifier
-                            .padding(start = 16.dp, end = 16.dp)
+                            .padding(end = 10.dp)
                     ) {
                         if(routine != null && routine.actions.toMutableList().size != 0){
                             items(

@@ -29,6 +29,7 @@ fun DeviceInfo(mainViewModel: MainViewModel, devicesViewModel: DevicesViewModel)
         modifier = Modifier.fillMaxHeight(0.99f),
         topBar = {
             TopAppBar (
+                backgroundColor = MaterialTheme.colors.primary,
                 elevation = 0.dp,
                 modifier = Modifier.fillMaxWidth(),
                 title = {

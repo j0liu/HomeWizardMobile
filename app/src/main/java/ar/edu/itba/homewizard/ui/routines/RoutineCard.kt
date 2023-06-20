@@ -43,7 +43,8 @@ fun RoutineCard(
             Row(
                 modifier = Modifier.background(MaterialTheme.colors.surface, shape = RoundedCornerShape(10.dp)).padding(4.dp),
             ) {
-                routine.actions.forEach { action ->
+                routine.actions.subList(0, routine.actions.size.coerceAtMost(7)).
+                forEach { action ->
                     Icon(
                         modifier = Modifier.padding(4.dp),
                         imageVector = ImageVector.vectorResource(action.device.type.icon),

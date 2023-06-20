@@ -20,7 +20,7 @@ fun PowerButton(modifier: Modifier = Modifier, selected: Boolean, multiplier: Fl
         onClick = { onClick() },
         modifier.then(modifier)
             .size(120.dp * multiplier),
-        colors = ButtonDefaults.buttonColors(backgroundColor = if (!selected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.secondary),
+        colors = ButtonDefaults.buttonColors(backgroundColor = if (!selected) MaterialTheme.colors.surface else MaterialTheme.colors.secondary),
         shape = RoundedCornerShape(20.dp * multiplier),
     ) {
         Icon(
