@@ -121,7 +121,6 @@ class DevicesViewModel @Inject constructor(
                 _uiState.update {
                     it.copy(isLoading = false)
                 }
-
             }
         }
     }

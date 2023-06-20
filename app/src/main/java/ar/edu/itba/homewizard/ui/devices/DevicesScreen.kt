@@ -28,6 +28,7 @@ import ar.edu.itba.homewizard.ui.utils.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
 import ar.edu.itba.homewizard.ui.theme.*
+import ar.edu.itba.homewizard.ui.utils.SortingCriterias
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -149,7 +150,7 @@ private fun DevicesTopBar( devicesViewModel: DevicesViewModel, devicesUiState : 
 
                         CustomDropdownMenu(
                             modifier = Modifier.background(color = MaterialTheme.colors.surface, shape = RectangleShape),
-                            elements = Device.orderCriteriaNames,
+                            elements = SortingCriterias.sortingCriteriaNames,
                             title = stringResource(R.string.orderby),
                             selected = devicesUiState.sortCriteriaName
                         ){devicesViewModel.setOrderCriteria(it)}

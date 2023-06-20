@@ -97,9 +97,13 @@
     <string name="device_changes">Changes in device detected</string>
     <string name="orderby">Sort By</string>
     <string name="order">Sort</string>
+    <string name="all">All</string>
+
     <string name="name">Name</string>
-    <string name="uses">Uses</string>
+    <string name="usage">Usage</string>
     <string name="type">Type</string>
+    <string name="name_descending">Name Descending</string>
+    <string name="usage_ascending">Usage Ascending</string>
 
     <string name="validation_timer">The number must be between 1 and 60</string>
     <string name="down">Down</string>

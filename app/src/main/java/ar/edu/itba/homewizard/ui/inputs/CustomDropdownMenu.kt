@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ar.edu.itba.homewizard.ui.utils.Translate
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -22,10 +23,9 @@ fun CustomDropdownMenu(modifier: Modifier = Modifier, elements: List<String>, se
             expanded = !expanded
         }
     ) {
-        val selectedId = mContext.resources.getIdentifier(selectedText, "string",mContext.packageName)
-        val selected = mContext.resources.getString(selectedId)
+        val translatedText = Translate(mContext, selectedText)
         TextField(
-            value = selected,
+            value = translatedText,
             onValueChange = {},
             readOnly = true,
             label = { Text(text = title, color = MaterialTheme.colors.onSurface, fontSize = 11.sp) },
@@ -47,8 +47,7 @@ fun CustomDropdownMenu(modifier: Modifier = Modifier, elements: List<String>, se
                     expanded = false
                     onSelected(item)
                 }) {
-                    val textId = mContext.resources.getIdentifier(item, "string",mContext.packageName)
-                    val text = mContext.resources.getString(textId)
+                    val text = Translate(mContext, item)
                     Text(text = text)
                 }
             }

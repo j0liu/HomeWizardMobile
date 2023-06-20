@@ -25,6 +25,7 @@ import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.ui.utils.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
+import ar.edu.itba.homewizard.ui.utils.SortingCriterias
 import ar.edu.itba.homewizard.viewmodels.MainViewModel
 import ar.edu.itba.homewizard.viewmodels.RoutinesViewModel
 import kotlinx.coroutines.launch
@@ -127,7 +128,7 @@ private fun RoutinesTopBar(routinesViewModel: RoutinesViewModel, routinesUiState
                     ) {
                         CustomDropdownMenu(
                             modifier = Modifier.background(color = MaterialTheme.colors.surface, shape = RectangleShape),
-                            elements = Routine.orderCriteriaNames,
+                            elements = SortingCriterias.sortingCriteriaNames,
                             title = stringResource(R.string.orderby),
                             selected = routinesUiState.sortCriteriaName
                         ){routinesViewModel.setOrderCriteria(it)}

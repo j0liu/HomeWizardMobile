@@ -29,4 +29,7 @@ interface ApiService {
 
     @PUT("/api/routines/{routineId}/execute")
     suspend fun executeRoutine(@Path("routineId") routineId: String): Response<NetworkResponse<Any>>
+
+    @PUT("/api/routines/{routineId}")
+    suspend fun updateRoutine(@Path("routineId") routineId: String, @Body body: NetworkRoutineUpdate): Response<NetworkResponse<Boolean>>
 }

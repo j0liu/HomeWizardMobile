@@ -98,8 +98,12 @@
     <string name="device_changes">Se han detectado cambios en el dispositivo</string>
     <string name="orderby">Ordenar Por</string>
     <string name="order">Ordenar</string>
+    <string name="all">Todos</string>
+
     <string name="name">Nombre</string>
-    <string name="uses">Usos</string>
+    <string name="usage">Usos</string>
+    <string name="name_descending">Nombre Descendentemente</string>
+    <string name="usage_ascending">Usos Ascendentemente</string>
     <string name="type">Tipo</string>
 
     <string name="validation_timer">El número debe estar entre 1 y 60</string>

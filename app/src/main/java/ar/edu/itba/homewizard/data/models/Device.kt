@@ -11,6 +11,7 @@ import ar.edu.itba.homewizard.ui.devices.lamp.LampInfo
 import ar.edu.itba.homewizard.ui.devices.oven.OvenInfo
 import ar.edu.itba.homewizard.ui.devices.refrigerator.RefrigeratorInfo
 import ar.edu.itba.homewizard.ui.devices.speaker.SpeakerInfo
+import ar.edu.itba.homewizard.ui.utils.SortingCriterias
 import kotlin.reflect.KClass
 
 open class Device(
@@ -26,12 +27,11 @@ open class Device(
 
     companion object {
         val orderCriterias: HashMap<String, Comparator<Device>> = hashMapOf(
-            "Alphabetical" to compareBy { it.name },
-            "Alphabetical Descending" to compareByDescending { it.name },
-            "Uses" to compareByDescending { it.qtyUses },
-            "Uses Ascending" to compareBy { it.qtyUses },
+            SortingCriterias.BY_NAME to compareBy { it.name },
+            SortingCriterias.BY_NAME_DESC to compareByDescending { it.name },
+            SortingCriterias.BY_USAGE to compareByDescending { it.qtyUses },
+            SortingCriterias.BY_USAGE_ASC to compareBy { it.qtyUses },
         )
-        val orderCriteriaNames = listOf("Alphabetical", "Alphabetical Descending", "Uses", "Uses Ascending")
     }
 }
 
@@ -62,8 +62,8 @@ class DeviceType(var id: String, var name: String, val infoScreen: ComposableFun
             "fridge" to FridgeType,
             "alarm" to AlarmType,
             "oven" to OvenType,
-            "ac" to ACType,
-            "blinds" to BlindsType,
+            "airConditioner" to ACType,
+            "blind" to BlindsType,
             "door" to DoorType,
             "speaker" to SpeakerType,
         )

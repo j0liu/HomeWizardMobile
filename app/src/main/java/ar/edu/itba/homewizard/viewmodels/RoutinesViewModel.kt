@@ -50,8 +50,16 @@ class RoutinesViewModel @Inject constructor(
     fun executeRoutine(routine: Routine) {
         viewModelScope.launch {
             runCatching {
+                _uiState.update {
+                    it.copy(isLoading = true)
+                }
                 routineRepository.executeRoutine(routine.id)
+                routine.qtyUses++
+                routineRepository.updateRoutine(routine)
                 snackbarBridge.sendMessage(context.getString(R.string.executed_routine))
+                _uiState.update {
+                    it.copy(isLoading = false)
+                }
             }
         }
 

@@ -2,6 +2,7 @@ package ar.edu.itba.homewizard.data.repository
 
 import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.data.network.RoutineRemoteDataSource
+import ar.edu.itba.homewizard.data.network.models.NetworkRoutineUpdate
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -21,4 +22,7 @@ class RoutineRepository @Inject constructor (
         return routineRemoteDataSource.executeRoutine(routineId).result
     }
 
+    suspend fun updateRoutine(routine: Routine) {
+        routineRemoteDataSource.updateRoutine(routine.id, NetworkRoutineUpdate(routine))
+    }
 }

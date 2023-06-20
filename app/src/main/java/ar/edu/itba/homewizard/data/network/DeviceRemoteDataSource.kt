@@ -3,8 +3,6 @@ package ar.edu.itba.homewizard.data.network
 import ar.edu.itba.homewizard.data.network.models.NetworkDevice
 import ar.edu.itba.homewizard.data.network.models.NetworkDeviceUpdate
 import ar.edu.itba.homewizard.data.network.models.NetworkResponse
-import retrofit2.http.Body
-import retrofit2.http.Path
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -29,7 +27,7 @@ class DeviceRemoteDataSource @Inject constructor(
         }
     }
 
-    suspend fun updateDevice(@Path("deviceId") deviceId: String, @Body body: NetworkDeviceUpdate): NetworkResponse<Boolean> {
+    suspend fun updateDevice(deviceId: String, body: NetworkDeviceUpdate): NetworkResponse<Boolean> {
         return handleApiResponse {
             apiService.updateDevice(deviceId, body)
         }

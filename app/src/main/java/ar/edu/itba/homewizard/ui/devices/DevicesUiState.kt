@@ -2,6 +2,7 @@ package ar.edu.itba.homewizard.ui.devices
 
 import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
+import ar.edu.itba.homewizard.ui.utils.SortingCriterias
 
 data class DevicesUiState constructor(
     var devices: List<Device> = listOf(),
@@ -12,8 +13,8 @@ data class DevicesUiState constructor(
     var filterType : DeviceType? = null,
     val filteredDevices : List<Device> = listOf(),
 
-    val sortCriteria : Comparator<Device> = Device.orderCriterias["Alphabetical"]!!,
-    val sortCriteriaName : String = "Alphabetical",
+    val sortCriteriaName : String = SortingCriterias.BY_NAME,
+    val sortCriteria : Comparator<Device> = Device.orderCriterias[sortCriteriaName]!!,
 
     // UI
     var isLoading: Boolean = true,
