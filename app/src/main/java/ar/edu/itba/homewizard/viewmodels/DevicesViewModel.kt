@@ -107,7 +107,7 @@ class DevicesViewModel @Inject constructor(
             )
         }
     }
-    fun <T> executeActionWithResult(action: Action, onSuccess : suspend (T) -> Unit = {}) {
+    fun <T> executeActionWithResult(action: Action, incrementUses: Boolean = true, onSuccess : suspend (T) -> Unit = {}) {
         viewModelScope.launch {
             runCatching {
                 _uiState.update {
@@ -115,8 +115,10 @@ class DevicesViewModel @Inject constructor(
                 }
                 val response = deviceRepository.executeAction<T>(action.device.id, action.actionName, action.params)
                 onSuccess(response)
-                action.device.qtyUses++
-                deviceRepository.updateDevice(action.device)
+                if (incrementUses) {
+                    action.device.qtyUses++
+                    deviceRepository.updateDevice(action.device)
+                }
 
                 _uiState.update {
                     it.copy(isLoading = false)
@@ -125,7 +127,7 @@ class DevicesViewModel @Inject constructor(
         }
     }
 
-    fun executeAction(action: Action) {
+    fun executeAction(action: Action, incrementUses : Boolean = true) {
         return executeActionWithResult<Any>(action)
     }
 

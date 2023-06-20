@@ -46,11 +46,11 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
         return MinSec[1].toInt()
     }
 
-    speaker.getPlaylist(devicesViewModel) {
-            list -> songList = list
-    }
     LaunchedEffect(Unit) {
         while(true) {
+            speaker.getPlaylist(devicesViewModel) {
+                    list -> songList = list
+            }
             devicesViewModel.updateDevice(speaker.id, scope)
             delay(800)
         }

@@ -41,28 +41,14 @@ class Speaker (
 
     fun prevSong(devicesViewModel: DevicesViewModel, scope: CoroutineScope) {
         devicesViewModel.executeAction(Action("previousSong", this, listOf()))
-
-//        devicesViewModel.updateDevice(id) {
-//            this.song = (it as Speaker).song
-//            this.song.copy((it as Speaker).song.title, (it as Speaker).song.artist, (it as Speaker).song.album, (it as Speaker).song.duration, (it as Speaker).song.progress)
-//            this.songName = (it as Speaker).song.title
-//        }
     }
 
     fun nextSong(devicesViewModel: DevicesViewModel, scope: CoroutineScope) {
         devicesViewModel.executeAction(Action("nextSong", this, listOf()))
-
-//        devicesViewModel.updateDevices(scope, this)
-
-
-//        devicesViewModel.updateDevice(id) {
-//            this.song.copy((it as Speaker).song.title, (it as Speaker).song.artist, (it as Speaker).song.album, (it as Speaker).song.duration, (it as Speaker).song.progress)
-//            this.songName = (it as Speaker).song.title
-//        }
     }
 
     fun getPlaylist(devicesViewModel: DevicesViewModel, onSuccess : suspend (List<LinkedTreeMap<String, String>>) -> Unit = {}){
-        devicesViewModel.executeActionWithResult(Action("getPlaylist", this, listOf()), onSuccess)
+        devicesViewModel.executeActionWithResult(Action("getPlaylist", this, listOf()), false, onSuccess)
     }
 
     fun setGenre(devicesViewModel: DevicesViewModel, genre: String) {
