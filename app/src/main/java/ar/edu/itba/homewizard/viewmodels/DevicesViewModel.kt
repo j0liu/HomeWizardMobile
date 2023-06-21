@@ -10,6 +10,8 @@ import ar.edu.itba.homewizard.data.models.Device
 import ar.edu.itba.homewizard.data.models.DeviceType
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
 import ar.edu.itba.homewizard.ui.devices.DevicesUiState
+import ar.edu.itba.homewizard.ui.utils.SharedPreferencesUtils
+import ar.edu.itba.homewizard.ui.utils.SortingCriterias
 import dagger.hilt.android.internal.Contexts.getApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -45,12 +47,18 @@ class DevicesViewModel @Inject constructor(
                     _uiState.update {
                         it.copy(
                             filteredDevices = it.filterDevices(),
-                            isLoading = false
+                            isLoading = false,
                         )
                     }
                 }
+                val sortCriteriaName = getApplication(context).getSharedPreferences(SharedPreferencesUtils.SORT_ORDER_KEY,
+                    Context.MODE_PRIVATE).getString(SharedPreferencesUtils.DEVICE_SORT_ORDER_KEY, SortingCriterias.BY_NAME)!!
                 _uiState.update {
-                    it.copy(devices = devices.value!!)
+                    it.copy(
+                        devices = devices.value!!,
+                        sortCriteriaName =  sortCriteriaName,
+                        sortCriteria = Device.orderCriterias[sortCriteriaName]!!
+                    )
                 }
                 _uiState.update {
                     it.copy(
@@ -63,14 +71,12 @@ class DevicesViewModel @Inject constructor(
 
     }
 
-
-    val DEVICE_SP_KEY = "ar.edu.itba.homewizard.devices.notifications"
     fun setCurrentDevice(device: Device?) {
         _uiState.update { it.copy(isLoading = true) }
         var notificationsEnabled = false
         if (device != null) {
             notificationsEnabled = getApplication(context)
-                .getSharedPreferences(DEVICE_SP_KEY, Context.MODE_PRIVATE)
+                .getSharedPreferences(SharedPreferencesUtils.DEVICE_SP_KEY, Context.MODE_PRIVATE)
                 .getBoolean(device.id, false)
         }
 
@@ -89,7 +95,7 @@ class DevicesViewModel @Inject constructor(
 
     fun toggleNotificationsForCurrentDevice() {
         getApplication(context)
-            .getSharedPreferences(DEVICE_SP_KEY, Context.MODE_PRIVATE)
+            .getSharedPreferences(SharedPreferencesUtils.DEVICE_SP_KEY, Context.MODE_PRIVATE)
             .edit()
             .putBoolean(uiState.value.currentDevice!!.id, !uiState.value.currentNotificationsEnabled)
             .apply()
@@ -158,6 +164,11 @@ class DevicesViewModel @Inject constructor(
     }
 
     fun setOrderCriteria(name : String) {
+        getApplication(context)
+            .getSharedPreferences(SharedPreferencesUtils.SORT_ORDER_KEY, Context.MODE_PRIVATE)
+            .edit()
+            .putString(SharedPreferencesUtils.DEVICE_SORT_ORDER_KEY, name)
+            .apply()
         _uiState.update {
             it.copy(
                 sortCriteriaName = name

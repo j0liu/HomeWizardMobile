@@ -1,7 +1,6 @@
 package ar.edu.itba.homewizard.viewmodels
 
 import android.content.Context
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ar.edu.itba.homewizard.R
@@ -9,6 +8,9 @@ import ar.edu.itba.homewizard.bridges.SnackbarBridge
 import ar.edu.itba.homewizard.data.models.Routine
 import ar.edu.itba.homewizard.data.repository.RoutineRepository
 import ar.edu.itba.homewizard.ui.routines.RoutinesUiState
+import ar.edu.itba.homewizard.ui.utils.SharedPreferencesUtils
+import ar.edu.itba.homewizard.ui.utils.SortingCriterias
+import dagger.hilt.android.internal.Contexts
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,10 +34,20 @@ class RoutinesViewModel @Inject constructor(
         _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             runCatching {
-                _uiState.update { it.copy(
-                    routines = routineRepository.getRoutines(),
-                    isLoading = false
-                ) }
+                val sortCriteriaName = Contexts.getApplication(context).getSharedPreferences(
+                    SharedPreferencesUtils.SORT_ORDER_KEY,Context.MODE_PRIVATE)
+                    .getString(SharedPreferencesUtils.ROUTINE_SORT_ORDER_KEY, SortingCriterias.BY_USAGE)!!
+
+                _uiState.update {
+                    it.copy(
+                        routines = routineRepository.getRoutines(),
+                        sortCriteriaName = sortCriteriaName
+                    )
+                }
+                sortRoutines()
+                _uiState.update {
+                    it.copy(isLoading = false)
+                }
             }
         }
     }
@@ -108,6 +120,11 @@ class RoutinesViewModel @Inject constructor(
         }
     }
     fun setOrderCriteria(name : String) {
+        Contexts.getApplication(context)
+            .getSharedPreferences(SharedPreferencesUtils.SORT_ORDER_KEY, Context.MODE_PRIVATE)
+            .edit()
+            .putString(SharedPreferencesUtils.ROUTINE_SORT_ORDER_KEY, name)
+            .apply()
         _uiState.update {
             it.copy(
                 sortCriteriaName = name

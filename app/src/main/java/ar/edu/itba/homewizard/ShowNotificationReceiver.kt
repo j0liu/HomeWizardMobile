@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import ar.edu.itba.homewizard.data.repository.DeviceRepository
+import ar.edu.itba.homewizard.ui.utils.SharedPreferencesUtils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +29,7 @@ class ShowNotificationReceiver : BroadcastReceiver() {
             val deviceId: String? = intent.getStringExtra(MyIntent.UPDATE_DEVICE)
             Log.d(TAG, "Show notification intent received {$deviceId)")
 
-            val notificationsEnabled : Boolean = context.getSharedPreferences(DEVICE_SP_KEY, Context.MODE_PRIVATE).getBoolean(deviceId, false)
+            val notificationsEnabled : Boolean = context.getSharedPreferences(SharedPreferencesUtils.DEVICE_SP_KEY, Context.MODE_PRIVATE).getBoolean(deviceId, false)
             if (notificationsEnabled) {
                 GlobalScope.launch(Dispatchers.IO) {
                     showNotification(context, deviceId!!)
@@ -71,6 +72,5 @@ class ShowNotificationReceiver : BroadcastReceiver() {
 
     companion object {
         private const val TAG = "ShowNotificationReceiver"
-        private const val DEVICE_SP_KEY = "ar.edu.itba.homewizard.devices.notifications"
     }
 }
