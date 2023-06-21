@@ -65,7 +65,7 @@ fun RoutineInfo(
 
     routinesViewModel.setItemsPerPage(
         if(orientation == ORIENTATION_LANDSCAPE)
-            if (LocalConfiguration.current.screenWidthDp.dp > ScreenSize.tabletWidth) 10 else 4
+            if (LocalConfiguration.current.screenWidthDp.dp > ScreenSize.tabletWidth) 10 else 2
         else
             if (LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight) 20 else 4
     )
