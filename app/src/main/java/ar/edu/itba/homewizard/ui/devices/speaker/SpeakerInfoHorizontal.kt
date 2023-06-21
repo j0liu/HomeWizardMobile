@@ -33,10 +33,7 @@ import kotlinx.coroutines.delay
 @SuppressLint("DiscouragedApi")
 @Composable
 fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, multiplier : Float = 1f) {
-//    val devicesUiState by speakerViewModel.uiState.collectAsState()
-    // list of genres
     val scope  = rememberCoroutineScope()
-    val mContext = LocalContext.current
     var songList by remember { mutableStateOf(listOf<LinkedTreeMap<String, String>>())}
     val genres = listOf("pop", "classical", "country", "dance", "latina", "rock")
     fun getTime(time : String) : Int {
@@ -47,13 +44,13 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
         return MinSec[1].toInt()
     }
 
-    speaker.getPlaylist(devicesViewModel) {
-            list -> songList = list
-    }
     LaunchedEffect(Unit) {
         while(true) {
             devicesViewModel.updateDevice(speaker.id, scope)
-            delay(500) //CAMBIAR A MENOS DE UN SEGUNDO !!
+            speaker.getPlaylist(devicesViewModel) {
+                    list -> songList = list
+            }
+            delay(800)
         }
     }
 
@@ -165,10 +162,9 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                     )
                 }
             }
-            //todo ver si podemos cambiarlo por eventos de los botones
+
             CustomSlider(
                 value = speaker.volume.toFloat(),
-//            onValueChange = {  speakerViewModel.setVolume(it) },
                 valueRange = 0f..10f,
                 onValueChangeFinished = { speaker.setVolume(devicesViewModel, it.toInt()) },
                 title = "",
@@ -179,7 +175,6 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                     .padding(horizontal = 25.dp*multiplier)
             )
         }
-        // exposed dropdown menu
 
         Column (
             modifier = Modifier.weight(0.5f),
@@ -198,12 +193,9 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                 elements = genres,
                 onSelected = {
                     speaker.setGenre(devicesViewModel, it)
-                    speaker.getPlaylist(devicesViewModel) { list ->
-                        songList = list
-                    }
                 },
             )
-            if (!songList.isEmpty() && speaker.song != null) {
+            if (songList.isNotEmpty() && speaker.song != null) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -212,7 +204,6 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                 )
                 {
                     Column(
-//                horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceEvenly,
                         modifier = Modifier
                             .height(180.dp*multiplier)
@@ -222,9 +213,9 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
 
                         songList.forEach() { song ->
                             Text(
-                                song.get("title")!!,
+                                song["title"]!!,
                                 fontSize = 15.sp*multiplier,
-                                fontWeight = if (speaker.song!!.title == song.get("title")!!) FontWeight.Bold else FontWeight.Normal
+                                fontWeight = if (speaker.song!!.title == song["title"]!!) FontWeight.Bold else FontWeight.Normal
                             )
                         }
                     }

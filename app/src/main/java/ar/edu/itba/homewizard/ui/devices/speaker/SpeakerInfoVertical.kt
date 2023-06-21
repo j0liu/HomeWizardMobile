@@ -33,10 +33,7 @@ import kotlinx.coroutines.delay
 @SuppressLint("DiscouragedApi")
 @Composable
 fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, multiplier : Float = 1f) {
-//    val devicesUiState by speakerViewModel.uiState.collectAsState()
-    // list of genres
     val scope  = rememberCoroutineScope()
-    val mContext = LocalContext.current
     var songList by remember { mutableStateOf(listOf<LinkedTreeMap<String, String>>())}
     val genres = listOf("pop", "classical", "country", "dance", "latina", "rock")
 
@@ -164,7 +161,6 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
         //todo ver si podemos cambiarlo por eventos de los botones
         CustomSlider(
             value = speaker.volume.toFloat(),
-//            onValueChange = {  speakerViewModel.setVolume(it) },
             valueRange = 0f..10f,
             onValueChangeFinished = {speaker.setVolume(devicesViewModel, it.toInt()) },
             title = "",
@@ -174,7 +170,6 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
                 .padding(horizontal = 20.dp),
             multiplier = multiplier
         )
-        // exposed dropdown menu
 
         CustomDropdownMenu(
             selected = speaker.genre,
@@ -185,9 +180,6 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
             elements = genres,
             onSelected = {
                 speaker.setGenre(devicesViewModel, it)
-                speaker.getPlaylist(devicesViewModel) {
-                        list -> songList = list
-                }
             },
         )
         if (songList.isNotEmpty() && speaker.song != null) {
@@ -209,9 +201,9 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
 
                     songList.forEach() { song ->
                         Text(
-                            song.get("title")!!,
+                            song["title"]!!,
                             fontSize = (multiplier * 15).sp,
-                            fontWeight = if (speaker.song!!.title == song.get("title")!!) FontWeight.Bold else FontWeight.Normal
+                            fontWeight = if (speaker.song!!.title == song["title"]!!) FontWeight.Bold else FontWeight.Normal
                         )
                     }
                 }
