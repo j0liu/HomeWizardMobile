@@ -29,6 +29,7 @@ class RoutinesViewModel @Inject constructor(
     val uiState : StateFlow<RoutinesUiState> = _uiState.asStateFlow()
 
     init {
+        _uiState.update { it.copy(isLoading = true) }
         viewModelScope.launch {
             runCatching {
                 _uiState.update { it.copy(
@@ -40,9 +41,11 @@ class RoutinesViewModel @Inject constructor(
     }
 
     fun setCurrentRoutine(routine : Routine) {
+        _uiState.update { it.copy(isLoading = true) }
         _uiState.update {
             it.copy(
-                currentRoutine = routine
+                currentRoutine = routine,
+                isLoading = false
             )
         }
     }

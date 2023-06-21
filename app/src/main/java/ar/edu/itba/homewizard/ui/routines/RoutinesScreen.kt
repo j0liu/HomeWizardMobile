@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.data.models.Routine
+import ar.edu.itba.homewizard.ui.LoadingAnimation
 import ar.edu.itba.homewizard.ui.utils.ScreenSize
 import ar.edu.itba.homewizard.ui.inputs.CustomDialog
 import ar.edu.itba.homewizard.ui.inputs.CustomDropdownMenu
@@ -55,34 +56,44 @@ fun RoutinesScreen(
             sheetContent = {
                 RoutineInfo(routinesViewModel = routinesViewModel, mainViewModel = mainViewModel)
             }) {
-
-            BoxWithConstraints {
-                LazyVerticalGrid(
-                    columns = GridCells.Fixed(
-                        if(maxWidth < maxHeight) {
-                            if(maxHeight > ScreenSize.tabletHeight) 2 else 1
-                        }
-                        else {
-                            if(maxWidth > ScreenSize.tabletWidth) 3 else 2
-                        }
-                    ),
+            if (routinesUiState.isLoading) {
+                Column(
                     modifier = Modifier
-                        .fillMaxSize()
-                        .padding(start = 16.dp, end = 16.dp, bottom = 56.dp)
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    items(
-                        routinesUiState.routines.toMutableList(),
-                        key = { routine: Routine -> routine.id }) { routine: Routine ->
-                        RoutineCard(
-                            routine = routine,
-                            onClick = { selectedRoutine ->
-                                routinesViewModel.setCurrentRoutine(selectedRoutine)
-                                mainViewModel.setBottomBarVisibility(false)
-                                scope.launch {
-                                    mainUiState.scaffoldState.bottomSheetState.expand()
-                                }
+                    LoadingAnimation()
+                }
+            } else {
+                BoxWithConstraints {
+                    LazyVerticalGrid(
+                        columns = GridCells.Fixed(
+                            if(maxWidth < maxHeight) {
+                                if(maxHeight > ScreenSize.tabletHeight) 2 else 1
                             }
-                        )
+                            else {
+                                if(maxWidth > ScreenSize.tabletWidth) 3 else 2
+                            }
+                        ),
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(start = 16.dp, end = 16.dp, bottom = 56.dp)
+                    ) {
+                        items(
+                            routinesUiState.routines.toMutableList(),
+                            key = { routine: Routine -> routine.id }) { routine: Routine ->
+                            RoutineCard(
+                                routine = routine,
+                                onClick = { selectedRoutine ->
+                                    routinesViewModel.setCurrentRoutine(selectedRoutine)
+                                    mainViewModel.setBottomBarVisibility(false)
+                                    scope.launch {
+                                        mainUiState.scaffoldState.bottomSheetState.expand()
+                                    }
+                                }
+                            )
+                        }
                     }
                 }
             }
