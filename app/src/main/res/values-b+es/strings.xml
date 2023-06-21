@@ -154,6 +154,7 @@
     <string name="incorrect_code">Código incorrecto</string>
 
     <string name="fatal_network_error">Error fatal de conexión con la API</string>
+    <string name="genres">Géneros</string>
 
 
 </resources>

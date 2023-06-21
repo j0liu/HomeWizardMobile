@@ -67,7 +67,7 @@ fun RoutineInfo(
         if(orientation == ORIENTATION_LANDSCAPE)
             if (LocalConfiguration.current.screenWidthDp.dp > ScreenSize.tabletWidth) 10 else 4
         else
-            if (LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight) 20 else 5
+            if (LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight) 20 else 4
     )
 
     CustomDialog(openDialog = openDialog.value, onClosureRequest = {openDialog.value = false},
@@ -84,8 +84,12 @@ fun RoutineInfo(
             submit
         }
     ) {
-        Column() {
-            TextField(value = text, onValueChange = { text = it }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number))
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            TextField(modifier = Modifier.background(MaterialTheme.colors.onPrimary), colors = TextFieldDefaults.textFieldColors(MaterialTheme.colors.onSurface), value = text, onValueChange = { text = it }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number), singleLine = true)
             Text(stringResource(R.string.schedule_message))
         }
     }
@@ -162,7 +166,12 @@ fun RoutineInfo(
 
                 BoxWithConstraints {
                     LazyVerticalGrid(
-                        columns = GridCells.Fixed(if(LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight || orientation == ORIENTATION_LANDSCAPE) 2 else 1),
+                        columns = GridCells.Fixed(
+                            if(orientation == ORIENTATION_LANDSCAPE)
+                                if (LocalConfiguration.current.screenWidthDp.dp > ScreenSize.tabletWidth) 3 else 2
+                            else
+                                if (LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight) 2 else 1
+                        ),
                         modifier = Modifier
                             .padding(end = 10.dp)
                     ) {
@@ -173,7 +182,7 @@ fun RoutineInfo(
                                     ((routineUiState.currentPage + 1) * routineUiState.itemsPerPage).coerceAtMost(routine.actions.size)
                                 )
                             ){ action ->
-                                ActionCard(action = action)
+                                ActionCard(action = action, multiplier = if(maxHeight > ScreenSize.tabletHeight && maxWidth > ScreenSize.tabletWidth) 1.8f else 1.3f)
                             }
                         }
                     }

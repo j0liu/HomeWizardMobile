@@ -1,6 +1,7 @@
 package ar.edu.itba.homewizard.ui.devices.speaker
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -29,6 +30,7 @@ import com.google.gson.internal.LinkedTreeMap
 import kotlinx.coroutines.delay
 
 
+@SuppressLint("DiscouragedApi")
 @Composable
 fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, multiplier : Float = 1f) {
 //    val devicesUiState by speakerViewModel.uiState.collectAsState()
@@ -56,12 +58,10 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
         }
     }
 
-
     Column(
         modifier = Modifier.fillMaxSize().fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-
 
         Text(
             text = if (speaker.song?.title != null) speaker.song!!.title else stringResource(R.string.NoSong),
@@ -86,7 +86,7 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
             text = if (speaker.song?.album != null) speaker.song!!.album else "",
             fontSize = (multiplier * 10).sp,
             color = MaterialTheme.colors.surface,
-            modifier = Modifier.padding(bottom = 15.dp),
+            modifier = Modifier.padding(bottom = 15.dp*multiplier),
             textAlign = TextAlign.Center,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1
@@ -100,7 +100,7 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
         ){
             if (speaker.song != null) {
                 LinearProgressIndicator(
-                    modifier = Modifier.padding(end = 20.dp).height((multiplier * 4).dp).fillMaxWidth(0.7f),
+                    modifier = Modifier.padding(end = 20.dp*multiplier).height((multiplier * 4).dp).fillMaxWidth(0.7f),
                     color = MaterialTheme.colors.surface,
                     progress = getTime(speaker.song!!.progress) / getTime(speaker.song!!.duration).toFloat(),
                 )
@@ -115,18 +115,18 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 25.dp),
+                .padding(top = 25.dp*multiplier),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceEvenly
         ){
             Button(
                 onClick = { speaker.prevSong(devicesViewModel, scope) },
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(20.dp*multiplier)
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(60.dp),
+                        .size(60.dp*multiplier),
                     imageVector =ImageVector.vectorResource(id = R.drawable.skip_previous),
                     tint = Color.Black,
                     contentDescription = "content description"
@@ -135,11 +135,11 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
             Button(
                 onClick = { speaker.toggle(devicesViewModel) },
                 colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-                shape = RoundedCornerShape(20.dp)
+                shape = RoundedCornerShape(20.dp*multiplier)
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(60.dp),
+                        .size(60.dp*multiplier),
                     imageVector =
                     if (speaker.status) ImageVector.vectorResource(id = R.drawable.pause)
                     else ImageVector.vectorResource(id = R.drawable.play),
@@ -154,7 +154,7 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(60.dp),
+                        .size(60.dp*multiplier),
                     imageVector =ImageVector.vectorResource(id = R.drawable.skip_next),
                     tint = Color.Black,
                     contentDescription = "content description"
@@ -176,19 +176,12 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
         )
         // exposed dropdown menu
 
-        val selectedId = mContext.resources.getIdentifier(speaker.genre, "string",mContext.packageName)
-        val selected = mContext.resources.getString(selectedId)
-
         CustomDropdownMenu(
-            selected = selected,
+            selected = speaker.genre,
             modifier = Modifier
-                .padding(horizontal = 10.dp)
-                .padding(bottom = 25.dp)
-                ,
-
-//                .fillMaxSize(),
-            title = "Géneros",
-
+                .padding(horizontal = 10.dp*multiplier, vertical = 25.dp*multiplier),
+            title = stringResource(R.string.genres),
+            multiplier = multiplier,
             elements = genres,
             onSelected = {
                 speaker.setGenre(devicesViewModel, it)
@@ -197,11 +190,11 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
                 }
             },
         )
-        if (!songList.isEmpty() && speaker.song != null) {
+        if (songList.isNotEmpty() && speaker.song != null) {
             Card (
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 25.dp),
+                    .padding(horizontal = 25.dp*multiplier),
                 backgroundColor = MaterialTheme.colors.surface
             )
             {
@@ -209,14 +202,15 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
 //                horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceEvenly,
                     modifier = Modifier
-                        .height(180.dp)
-                        .padding(start = 15.dp)
+                        .height(180.dp*multiplier)
+                        .padding(start = 15.dp*multiplier)
                 ) {
 
 
                     songList.forEach() { song ->
                         Text(
                             song.get("title")!!,
+                            fontSize = (multiplier * 15).sp,
                             fontWeight = if (speaker.song!!.title == song.get("title")!!) FontWeight.Bold else FontWeight.Normal
                         )
                     }

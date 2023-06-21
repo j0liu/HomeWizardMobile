@@ -18,32 +18,33 @@ import ar.edu.itba.homewizard.data.models.Routine
 fun RoutineCard(
     modifier : Modifier = Modifier,
     routine : Routine,
+    multiplier : Float = 1f,
     onClick : (Routine) -> Unit
 ) {
     Card(
         modifier = modifier
-            .padding(10.dp)
-            .height(100.dp)
+            .padding(10.dp*multiplier)
+            .height(80.dp*multiplier)
             .fillMaxWidth(),
         backgroundColor = MaterialTheme.colors.primaryVariant,
         contentColor = MaterialTheme.colors.onSurface,
-        shape = RoundedCornerShape(15.dp),
+        shape = RoundedCornerShape(15.dp*multiplier),
         elevation = 10.dp,
         onClick = { onClick(routine) }
     ) {
         Column(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier.padding(8.dp*multiplier),
             verticalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                modifier = Modifier.padding(bottom = 8.dp),
+                modifier = Modifier.padding(bottom = 8.dp*multiplier),
                 text = routine.name,
-                fontSize = 16.sp
+                fontSize = 14.sp*multiplier
             )
             Row(
-                modifier = Modifier.background(MaterialTheme.colors.surface, shape = RoundedCornerShape(10.dp)).padding(4.dp),
+                modifier = Modifier.background(MaterialTheme.colors.surface, shape = RoundedCornerShape(10.dp*multiplier)).padding(4.dp*multiplier),
             ) {
-                routine.actions.subList(0, routine.actions.size.coerceAtMost(7)).
+                routine.actions.subList(0, routine.actions.size.coerceAtMost(6)).
                 forEach { action ->
                     Icon(
                         modifier = Modifier.padding(4.dp),

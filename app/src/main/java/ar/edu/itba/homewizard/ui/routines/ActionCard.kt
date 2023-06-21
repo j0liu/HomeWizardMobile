@@ -16,21 +16,22 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.data.models.Action
 
 
 @Composable
 fun ActionCard(
     modifier : Modifier = Modifier,
+    multiplier: Float = 1f,
     action : Action
 ) {
     val mContext = LocalContext.current
     Card(
         modifier = modifier
             .padding(10.dp)
-            .height(60.dp)
-            .fillMaxWidth()
-            ,
+            .height(60.dp*multiplier)
+            .fillMaxWidth(),
         backgroundColor = MaterialTheme.colors.primaryVariant,
         contentColor = MaterialTheme.colors.onPrimary,
         shape = RoundedCornerShape(15.dp),
@@ -57,17 +58,18 @@ fun ActionCard(
                 )
             }
             Column {
-                Text(text = action.device.name, color = MaterialTheme.colors.onSurface)
+                Text(text = action.device.name, color = MaterialTheme.colors.onSurface, fontSize = 16.sp*multiplier)
                 Row {
 
                     val aux = mContext.resources.getIdentifier(action.actionName, "string",mContext.packageName)
                     val keyStr = mContext.resources.getString(aux)
 
-                    Text(text = keyStr, color = MaterialTheme.colors.onSurface)
+                    Text(text = keyStr, color = MaterialTheme.colors.onSurface, fontSize = 14.sp*multiplier)
                     action.params.forEach {x ->
                         Text(
                             modifier = Modifier.padding(start = 10.dp),
                             text = x.toString(),
+                            fontSize = 14.sp*multiplier,
                             color = MaterialTheme.colors.onSurface
                         )
                     }

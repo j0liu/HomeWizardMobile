@@ -89,6 +89,7 @@ fun DevicesScreen(
                         items(devicesUiState.filteredDevices, key = { device: Device -> device.id }) { device : Device ->
                             DeviceCard(
                                 device = device,
+                                multiplier = if(maxHeight > ScreenSize.tabletHeight && maxWidth > ScreenSize.tabletWidth) 1.8f else 1.3f,
                                 onClick = { deviceSelected ->
                                     devicesViewModel.setCurrentDevice(deviceSelected)
                                     mainViewModel.setBottomBarVisibility(false)
@@ -139,12 +140,15 @@ private fun DevicesTopBar( devicesViewModel: DevicesViewModel, devicesUiState : 
                     }
                 ) {
                     Column(
-                        modifier = Modifier.background(color = MaterialTheme.colors.primary)
+                        modifier = Modifier.background(color = MaterialTheme.colors.primary).fillMaxWidth(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         CustomDropdownMenu(
                             modifier = Modifier.padding(bottom = 16.dp).background(color = MaterialTheme.colors.surface, shape = RectangleShape),
                             elements = listOf(listOf("all"), DeviceType.deviceTypesByName.keys).flatten(),
                             title = stringResource(R.string.type),
+                            multiplier = 1f,
                             selected = devicesUiState.filterTypeName
                         ){devicesViewModel.setFilterType(it)}
 
@@ -152,6 +156,7 @@ private fun DevicesTopBar( devicesViewModel: DevicesViewModel, devicesUiState : 
                             modifier = Modifier.background(color = MaterialTheme.colors.surface, shape = RectangleShape),
                             elements = SortingCriterias.sortingCriteriaNames,
                             title = stringResource(R.string.orderby),
+                            multiplier = 1f,
                             selected = devicesUiState.sortCriteriaName
                         ){devicesViewModel.setOrderCriteria(it)}
                     }

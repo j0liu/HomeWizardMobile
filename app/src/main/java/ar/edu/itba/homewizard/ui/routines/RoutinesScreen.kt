@@ -85,14 +85,14 @@ fun RoutinesScreen(
                             key = { routine: Routine -> routine.id }) { routine: Routine ->
                             RoutineCard(
                                 routine = routine,
+                                multiplier = if(maxHeight > ScreenSize.tabletHeight && maxWidth > ScreenSize.tabletWidth) 2f else 1.3f,
                                 onClick = { selectedRoutine ->
                                     routinesViewModel.setCurrentRoutine(selectedRoutine)
                                     mainViewModel.setBottomBarVisibility(false)
                                     scope.launch {
                                         mainUiState.scaffoldState.bottomSheetState.expand()
                                     }
-                                }
-                            )
+                                })
                         }
                     }
                 }
@@ -135,7 +135,10 @@ private fun RoutinesTopBar(routinesViewModel: RoutinesViewModel, routinesUiState
                     }
                 ) {
                     Column(
-                        modifier = Modifier.background(color = MaterialTheme.colors.primary)
+                        modifier = Modifier.background(color = MaterialTheme.colors.primary).fillMaxWidth(),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+
                     ) {
                         CustomDropdownMenu(
                             modifier = Modifier.background(color = MaterialTheme.colors.surface, shape = RectangleShape),

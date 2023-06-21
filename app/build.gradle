@@ -27,13 +27,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", "API_BASE_URL",
-                      '"http://192.168.86.48:8080/"' // Cambiar IP por la IP local donde corra la API
-//                    '"http://10.0.2.2:8080/"'      // IP para correrlo de forma local desde un emulador
+//                      '"http://192.168.86.48:8080/"' // Cambiar IP por la IP local donde corra la API
+                    '"http://10.0.2.2:8080/"'      // IP para correrlo de forma local desde un emulador
         }
         debug {
             buildConfigField "String", "API_BASE_URL",
-                    '"http://192.168.86.48:8080/"' // Cambiar IP por la IP local donde corra la API
-//                  '"http://10.0.2.2:8080/"'      // IP para correrlo de forma local desde un emulador
+//                    '"http://192.168.86.48:8080/"' // Cambiar IP por la IP local donde corra la API
+                  '"http://10.0.2.2:8080/"'      // IP para correrlo de forma local desde un emulador
         }
     }
     compileOptions {

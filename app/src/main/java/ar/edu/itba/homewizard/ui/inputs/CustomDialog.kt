@@ -1,7 +1,6 @@
 package ar.edu.itba.homewizard.ui.inputs
 
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
@@ -12,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.R
 
-@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CustomDialog(openDialog : Boolean, onClosureRequest : () -> Unit, title : String, dismissText: String = stringResource(R.string.cancel), submitText : String, onSubmit : () -> Boolean = {true}, content :@Composable () -> Unit) {
 
@@ -30,20 +28,23 @@ fun CustomDialog(openDialog : Boolean, onClosureRequest : () -> Unit, title : St
             buttons = {
                 Row(
                     modifier = Modifier.padding(all = 8.dp).fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
-                    TextButton(
+                    Button(
                         onClick = onClosureRequest,
                         colors = ButtonDefaults.textButtonColors(
-                            contentColor = MaterialTheme.colors.onPrimary
+                            contentColor = MaterialTheme.colors.onPrimary,
+                            backgroundColor = MaterialTheme.colors.secondary
                         )
                     ) {
                         Text(dismissText.uppercase(), fontSize = 16.sp)
                     }
-                    TextButton(
+                    Button(
                         onClick = {if(onSubmit()) onClosureRequest()},
                         colors = ButtonDefaults.textButtonColors(
-                            contentColor = MaterialTheme.colors.onPrimary
+                            contentColor = MaterialTheme.colors.onPrimary,
+                            backgroundColor = MaterialTheme.colors.secondary
+
                         )
                     ) {
                         Text(submitText.uppercase(), fontSize = 16.sp)

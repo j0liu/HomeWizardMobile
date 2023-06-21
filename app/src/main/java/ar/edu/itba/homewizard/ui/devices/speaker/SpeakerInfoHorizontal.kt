@@ -1,6 +1,7 @@
 package ar.edu.itba.homewizard.ui.devices.speaker
 
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -29,6 +30,7 @@ import com.google.gson.internal.LinkedTreeMap
 import kotlinx.coroutines.delay
 
 
+@SuppressLint("DiscouragedApi")
 @Composable
 fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, multiplier : Float = 1f) {
 //    val devicesUiState by speakerViewModel.uiState.collectAsState()
@@ -57,22 +59,20 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
 
 
     Row(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().padding(top = 20.dp*multiplier),
     ) {
         Column (
-            modifier = Modifier.weight(0.5f),
+            modifier = Modifier.weight(0.5f)
+                .padding(horizontal = 15.dp*multiplier),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
-
-
             Text(
                 text = if (speaker.song?.title != null) speaker.song!!.title else stringResource(R.string.NoSong),
                 fontSize = (multiplier*20).sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.surface,
-                modifier = Modifier.padding(start = 4.dp),
+                modifier = Modifier.padding(start = 4.dp*multiplier),
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
@@ -81,7 +81,7 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                 text = if (speaker.song?.artist != null) speaker.song!!.artist else "",
                 fontSize = (multiplier*18).sp,
                 color = MaterialTheme.colors.surface,
-                modifier = Modifier.padding(start = 4.dp),
+                modifier = Modifier.padding(start = 4.dp*multiplier),
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
@@ -90,7 +90,7 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                 text = if (speaker.song?.album != null) speaker.song!!.album else "",
                 fontSize = (multiplier*15).sp,
                 color = MaterialTheme.colors.surface,
-                modifier = Modifier.padding(bottom = 15.dp, start = 4.dp),
+                modifier = Modifier.padding(bottom = 15.dp*multiplier, start = 4.dp*multiplier),
                 textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1
@@ -104,13 +104,13 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
             ) {
                 if (speaker.song != null) {
                     LinearProgressIndicator(
-                        modifier = Modifier.padding(end = 20.dp, start = 10.dp).height((multiplier * 4).dp),
+                        modifier = Modifier.padding(end = 20.dp*multiplier).height(4.dp*multiplier).fillMaxWidth(0.7f),
                         color = MaterialTheme.colors.surface,
                         progress = getTime(speaker.song!!.progress) / getTime(speaker.song!!.duration).toFloat()
                     )
                     Text(
                         text = "${speaker.song!!.progress}/${speaker.song!!.duration}",
-                        fontSize = 15.sp,
+                        fontSize = 15.sp*multiplier,
                         color = MaterialTheme.colors.surface,
                         modifier = Modifier,
                     )
@@ -119,18 +119,18 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 25.dp),
+                    .padding(top = 25.dp*multiplier),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
                 Button(
                     onClick = { speaker.prevSong(devicesViewModel, scope) },
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-                    shape = RoundedCornerShape(20.dp)
+                    shape = RoundedCornerShape(20.dp*multiplier)
                 ) {
                     Icon(
                         modifier = Modifier
-                            .size(60.dp),
+                            .size(60.dp*multiplier),
                         imageVector = ImageVector.vectorResource(id = R.drawable.skip_previous),
                         tint = Color.Black,
                         contentDescription = "content description"
@@ -139,11 +139,11 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                 Button(
                     onClick = { speaker.toggle(devicesViewModel) },
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-                    shape = RoundedCornerShape(20.dp)
+                    shape = RoundedCornerShape(20.dp*multiplier)
                 ) {
                     Icon(
                         modifier = Modifier
-                            .size(60.dp),
+                            .size(60.dp*multiplier),
                         imageVector =
                         if (speaker.status) ImageVector.vectorResource(id = R.drawable.pause)
                         else ImageVector.vectorResource(id = R.drawable.play),
@@ -154,11 +154,11 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                 Button(
                     onClick = { speaker.nextSong(devicesViewModel, scope) },
                     colors = ButtonDefaults.buttonColors(backgroundColor = MaterialTheme.colors.surface),
-                    shape = RoundedCornerShape(20.dp)
+                    shape = RoundedCornerShape(20.dp*multiplier)
                 ) {
                     Icon(
                         modifier = Modifier
-                            .size(60.dp),
+                            .size(60.dp*multiplier),
                         imageVector = ImageVector.vectorResource(id = R.drawable.skip_next),
                         tint = Color.Black,
                         contentDescription = "content description"
@@ -174,8 +174,9 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                 title = "",
                 unit = "",
                 icon = R.drawable.volume_high,
+                multiplier = multiplier,
                 modifier = Modifier
-                    .padding(horizontal = 25.dp)
+                    .padding(horizontal = 25.dp*multiplier)
             )
         }
         // exposed dropdown menu
@@ -186,18 +187,14 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            val selectedId = mContext.resources.getIdentifier(speaker.genre, "string", mContext.packageName)
-            val selected = mContext.resources.getString(selectedId)
-
 
             CustomDropdownMenu(
-                selected = selected,
+                selected = speaker.genre,
                 modifier = Modifier
-                    .padding(horizontal = 10.dp)
-                    .padding(bottom = 25.dp),
-//                .fillMaxSize(),
-                title = "Géneros",
-
+                    .padding(horizontal = 10.dp*multiplier)
+                    .padding(bottom = 25.dp*multiplier),
+                title = stringResource(R.string.genres),
+                multiplier = multiplier,
                 elements = genres,
                 onSelected = {
                     speaker.setGenre(devicesViewModel, it)
@@ -210,7 +207,7 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 25.dp),
+                        .padding(horizontal = 25.dp*multiplier),
                     backgroundColor = MaterialTheme.colors.surface
                 )
                 {
@@ -218,14 +215,15 @@ fun SpeakerInfoHorizontal(devicesViewModel: DevicesViewModel, speaker: Speaker, 
 //                horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceEvenly,
                         modifier = Modifier
-                            .height(180.dp)
-                            .padding(start = 15.dp)
+                            .height(180.dp*multiplier)
+                            .padding(start = 15.dp*multiplier)
                     ) {
 
 
                         songList.forEach() { song ->
                             Text(
                                 song.get("title")!!,
+                                fontSize = 15.sp*multiplier,
                                 fontWeight = if (speaker.song!!.title == song.get("title")!!) FontWeight.Bold else FontWeight.Normal
                             )
                         }

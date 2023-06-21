@@ -128,7 +128,7 @@ class DevicesViewModel @Inject constructor(
     }
 
     fun executeAction(action: Action, incrementUses : Boolean = true) {
-        return executeActionWithResult<Any>(action)
+        return executeActionWithResult<Any>(action, incrementUses)
     }
 
     fun updateDevice(id : String, scope: CoroutineScope){
