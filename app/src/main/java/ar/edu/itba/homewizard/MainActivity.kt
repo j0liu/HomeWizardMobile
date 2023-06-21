@@ -16,7 +16,9 @@ import com.google.accompanist.permissions.PermissionRequired
 import com.google.accompanist.permissions.PermissionState
 import com.google.accompanist.permissions.rememberPermissionState
 import android.Manifest
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresApi
+import androidx.compose.runtime.LaunchedEffect
 import ar.edu.itba.homewizard.ui.BottomBar
 
 @AndroidEntryPoint
@@ -32,8 +34,14 @@ class MainActivity : ComponentActivity() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     val permissionState =
                         rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
-                    NotificationPermission(permissionState = permissionState)
-                    permissionState.launchPermissionRequest()
+//                    NotificationPermission(permissionState = permissionState)
+//                    permissionState.launchPermissionRequest()
+                    if (!permissionState.hasPermission) {
+                        NotificationPermission(permissionState = permissionState)
+                        LaunchedEffect(true){
+                            permissionState.launchPermissionRequest()
+                        }
+                    }
                 }
 
                 val navController = rememberNavController()
