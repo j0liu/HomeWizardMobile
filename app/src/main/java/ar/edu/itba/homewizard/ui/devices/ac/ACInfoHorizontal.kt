@@ -54,15 +54,15 @@ fun ACInfoHorizontal(devicesViewModel: DevicesViewModel, ac: AC, options: List<I
                 .weight(0.5f)
                 .fillMaxHeight()
         ){
-            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.fan_speed), "\n"), 20, AC.fanSpeedValues, ac.fanSpeed, multiplier) {
+            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.fan_speed), "\n"), 18, AC.fanSpeedValues, ac.fanSpeed, multiplier) {
                 ac.setFanSpeed(devicesViewModel, it)
             }
             Box(modifier = Modifier.padding(vertical = 20.dp*multiplier)){
-                DropdownButton(modifier = Modifier, String.format(stringResource(R.string.vertical_blades), "\n"), 20, AC.verticalSwingValues, ac.verticalSwing, multiplier) {
+                DropdownButton(modifier = Modifier, String.format(stringResource(R.string.vertical_blades), "\n"), 18, AC.verticalSwingValues, ac.verticalSwing, multiplier) {
                     ac.setVerticalSwing(devicesViewModel, it)
                 }
             }
-            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.horizontal_blades), "\n"), 20, AC.horizontalSwingValues, ac.horizontalSwing, multiplier) {
+            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.horizontal_blades), "\n"), 18, AC.horizontalSwingValues, ac.horizontalSwing, multiplier) {
                 ac.setHorizontalSwing(devicesViewModel, it)
             }
         }

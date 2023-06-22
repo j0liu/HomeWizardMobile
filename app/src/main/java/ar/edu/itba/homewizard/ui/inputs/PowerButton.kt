@@ -28,7 +28,7 @@ fun PowerButton(modifier: Modifier = Modifier, selected: Boolean, multiplier: Fl
             modifier = Modifier
                 .size(100.dp * multiplier),
             imageVector = ImageVector.vectorResource(id = R.drawable.baseline_power_settings_new_24),
-            tint = MaterialTheme.colors.onSurface,
+            tint = if(selected) MaterialTheme.colors.onPrimary else MaterialTheme.colors.onSurface,
             contentDescription = stringResource(R.string.power_button)
         )
     }

@@ -46,13 +46,13 @@ fun ACInfoVertical(devicesViewModel: DevicesViewModel, ac: AC, options: List<Int
             horizontalAlignment = Alignment.Start,
             modifier = Modifier
         ) {
-            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.fan_speed), " "), 20, AC.fanSpeedValues, ac.fanSpeed, multiplier) {
+            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.fan_speed), " "), 18, AC.fanSpeedValues, ac.fanSpeed, multiplier) {
                 ac.setFanSpeed(devicesViewModel, it)
             }
-            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.vertical_blades), " "), 20, AC.verticalSwingValues, ac.verticalSwing, multiplier) {
+            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.vertical_blades), " "), 18, AC.verticalSwingValues, ac.verticalSwing, multiplier) {
                 ac.setVerticalSwing(devicesViewModel, it)
             }
-            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.horizontal_blades), " "), 20, AC.horizontalSwingValues, ac.horizontalSwing, multiplier) {
+            DropdownButton(modifier = Modifier, String.format(stringResource(R.string.horizontal_blades), " "), 18, AC.horizontalSwingValues, ac.horizontalSwing, multiplier) {
                 ac.setHorizontalSwing(devicesViewModel, it)
             }
         }

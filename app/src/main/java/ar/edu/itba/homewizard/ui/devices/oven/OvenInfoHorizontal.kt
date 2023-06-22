@@ -61,15 +61,15 @@ fun OvenInfoHorizontal(devicesViewModel: DevicesViewModel, oven : Oven, multipli
         Column(
             modifier = Modifier.weight(0.5f)
         ) {
-            DropdownButton(modifier = Modifier, stringResource(R.string.heat), 24, Oven.heatModes, oven.heat, multiplier) {
+            DropdownButton(modifier = Modifier, stringResource(R.string.heat), 18, Oven.heatModes, oven.heat, multiplier) {
                 oven.setHeat(devicesViewModel, it)
             }
             Box(modifier = Modifier.padding(vertical = 20.dp*multiplier)){
-                DropdownButton(modifier = Modifier,  stringResource(R.string.grill), 24, Oven.grillModes, oven.grill, multiplier) {
+                DropdownButton(modifier = Modifier,  stringResource(R.string.grill), 18, Oven.grillModes, oven.grill, multiplier) {
                     oven.setGrill(devicesViewModel, it)
                 }
             }
-            DropdownButton(modifier = Modifier, stringResource(R.string.convection), 24, Oven.convectionModes, oven.convection, multiplier) {
+            DropdownButton(modifier = Modifier, stringResource(R.string.convection), 18, Oven.convectionModes, oven.convection, multiplier) {
                 oven.setConvection(devicesViewModel, it)
             }
         }
