@@ -54,9 +54,6 @@ class ShowNotificationReceiver : BroadcastReceiver() {
             .setSmallIcon(device.type.icon)
             .setContentTitle(device.name)
             .setContentText(context.getString(R.string.device_changes))
-//            .setStyle(
-//                NotificationCompat.BigTextStyle()
-//                    .bigText(context.getString(R.string.cool)))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)

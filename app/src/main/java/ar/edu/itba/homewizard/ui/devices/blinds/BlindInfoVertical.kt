@@ -54,7 +54,7 @@ fun BlindInfoVertical(devicesViewModel: DevicesViewModel, blind : Blind, multipl
                 Icon(
                     modifier = Modifier.size(100.dp*multiplier),
                     imageVector = ImageVector.vectorResource(id = R.drawable.blinds_horizontal_closed),
-                    contentDescription = stringResource(R.string.close), // TODO: Cambiar
+                    contentDescription = stringResource(R.string.close),
                 )
             }
         }

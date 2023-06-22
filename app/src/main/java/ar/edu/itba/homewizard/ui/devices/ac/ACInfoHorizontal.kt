@@ -26,7 +26,7 @@ fun ACInfoHorizontal(devicesViewModel: DevicesViewModel, ac: AC, options: List<I
             .padding(top = 8.dp*multiplier)
     ){
         Column (
-//            verticalArrangement = Arrangement.Center,
+
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .weight(0.5f)

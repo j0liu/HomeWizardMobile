@@ -158,7 +158,6 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
                 )
             }
         }
-        //todo ver si podemos cambiarlo por eventos de los botones
         CustomSlider(
             value = speaker.volume.toFloat(),
             valueRange = 0f..10f,
@@ -191,7 +190,6 @@ fun SpeakerInfoVertical(devicesViewModel: DevicesViewModel, speaker: Speaker, mu
             )
             {
                 Column(
-//                horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.SpaceEvenly,
                     modifier = Modifier
                         .height(180.dp*multiplier)

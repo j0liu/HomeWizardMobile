@@ -24,7 +24,6 @@ import ar.edu.itba.homewizard.R
 fun DoorInfoHorizontal(devicesViewModel: DevicesViewModel, door : Door, multiplier: Float = 1f){
     Row(
         horizontalArrangement = Arrangement.SpaceEvenly,
-//                verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
             .fillMaxSize()
             .padding(top = 40.dp*multiplier)

@@ -30,8 +30,8 @@ class HomeWizardApplication : Application() {
     }
 
     private fun createNotificationChannel() {
-        val name = "test"// getString(R.string.channel_name)
-        val descriptionText = "test_description" // getString(R.string.channel_description)
+        val name = "test"
+        val descriptionText = "test_description"
         val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
             description = descriptionText

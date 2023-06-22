@@ -47,7 +47,6 @@ fun OvenInfoHorizontal(devicesViewModel: DevicesViewModel, oven : Oven, multipli
             ){
                 CustomSlider(
                     value = oven.temperature.toFloat(),
-//            onValueChange = { lamp.brightness = it.toInt() },
                     valueRange = 90f..230f,
                     onValueChangeFinished = { oven.setTemperature(devicesViewModel, it.toInt()) },
                     title = stringResource(R.string.temperature),

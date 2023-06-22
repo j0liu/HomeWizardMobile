@@ -81,7 +81,6 @@ class Speaker (
             this.resume(devicesViewModel)
         }
 
-//        this.status = !this.status
     }
 
         data class SpeakerState (

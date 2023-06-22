@@ -1,7 +1,6 @@
 package ar.edu.itba.homewizard.ui.devices.lamp
 
 
-//import android.graphics.Color
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi

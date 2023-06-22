@@ -82,7 +82,6 @@ fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier
                 }
                 Button(
                     modifier = Modifier.padding(16.dp*multiplier),
-//                    shape = RoundedCornerShape(10.dp*multiplier),
                     onClick = { changingCode = false },
                     colors = ButtonDefaults.buttonColors(
                         backgroundColor = MaterialTheme.colors.secondary,

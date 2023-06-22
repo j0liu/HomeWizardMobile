@@ -34,8 +34,6 @@ class MainActivity : ComponentActivity() {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                     val permissionState =
                         rememberPermissionState(permission = Manifest.permission.POST_NOTIFICATIONS)
-//                    NotificationPermission(permissionState = permissionState)
-//                    permissionState.launchPermissionRequest()
                     if (!permissionState.hasPermission) {
                         NotificationPermission(permissionState = permissionState)
                         LaunchedEffect(true){
