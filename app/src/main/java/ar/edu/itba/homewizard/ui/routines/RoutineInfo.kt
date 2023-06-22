@@ -64,9 +64,9 @@ fun RoutineInfo(
 
     routinesViewModel.setItemsPerPage(
         if(orientation == ORIENTATION_LANDSCAPE)
-            if (LocalConfiguration.current.screenWidthDp.dp > ScreenSize.tabletWidth) 10 else 2
+            if (LocalConfiguration.current.screenWidthDp.dp > ScreenSize.tabletWidth) 15 else 2
         else
-            if (LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight) 20 else 4
+            if (LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight) 18 else 4
     )
 
     CustomDialog(openDialog = openDialog.value, onClosureRequest = {openDialog.value = false},

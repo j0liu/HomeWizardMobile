@@ -31,8 +31,6 @@ class Lamp (
     }
 
     fun changeColor(devicesViewModel: DevicesViewModel, color: String) {
-        println("colorcinto" + color)
-        println("colorcinto substringueado" + color.substring(2))
         devicesViewModel.executeAction(Action("setColor", this, listOf(color.substring(2))))
         this.color = color
     }
