@@ -81,6 +81,7 @@
     <string name="newSecurityCode">Nuevo código de seguridad</string>
 
     <string name="armAway">Activar alarma fuera de casa</string>
+    <string name="armStay">Activar alarma dentro de casa</string>
     <string name="disarm">Desactivar alarma</string>
 
     <string name="fridge">Heladera</string>
