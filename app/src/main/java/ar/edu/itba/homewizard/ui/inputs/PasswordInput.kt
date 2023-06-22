@@ -24,7 +24,7 @@ import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.ui.devices.alarm.wrongPasswordMessage
 
 @Composable
-fun PasswordInput(label : String, text : TextFieldValue, onValueChange : (TextFieldValue) -> Unit, modifier : Modifier = Modifier, multiplier : Float = 1f){
+fun PasswordInput(label : String, placeholder: String = "", text : TextFieldValue, onValueChange : (TextFieldValue) -> Unit, modifier : Modifier = Modifier, multiplier : Float = 1f){
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val context = LocalContext.current
     Column {
@@ -33,7 +33,7 @@ fun PasswordInput(label : String, text : TextFieldValue, onValueChange : (TextFi
             onValueChange = onValueChange,
             modifier = Modifier.then(modifier),
             visualTransformation =  if(passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-            placeholder = { Text(label, fontSize = 15.sp*multiplier) },
+            placeholder = { Text(placeholder, fontSize = 15.sp*multiplier) },
             label = { Text(label, fontSize = 12.sp*multiplier, color = if(wrongPasswordMessage(text.text, context).isEmpty()) MaterialTheme.colors.onSurface else MaterialTheme.colors.onError) },
             singleLine = true,
             textStyle = (MaterialTheme.typography.body2).copy(fontSize = 16.sp*multiplier),

@@ -46,7 +46,6 @@ fun RoutineInfo(
     val scope = rememberCoroutineScope()
     val mContext = LocalContext.current
 
-    // TODO: Mover a estado
     val openDialog = remember { mutableStateOf(false) }
     var text by remember { mutableStateOf("") }
 
@@ -71,7 +70,7 @@ fun RoutineInfo(
     )
 
     CustomDialog(openDialog = openDialog.value, onClosureRequest = {openDialog.value = false},
-        title = "${stringResource(R.string.schedule)} ${stringResource(R.string.routine)}", submitText = stringResource(R.string.schedule),
+        title = "${stringResource(R.string.schedule)} ${stringResource(R.string.routine)} *", submitText = stringResource(R.string.schedule),
         onSubmit = {
             val submit = text.matches(Regex("^([0-5]?[0-9]|60)"))
             if(submit){

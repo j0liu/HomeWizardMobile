@@ -77,9 +77,9 @@
     <string name="alarm">Alarma</string>
     <string name="changeSecurityCode">Cambiar código de seguridad</string>
     <string name="securityCode">Código de seguridad</string>
-    <string name="oldSecurityCode">Anterior ódigo de seguridad</string>
+    <string name="oldSecurityCode">Anterior código de seguridad</string>
     <string name="newSecurityCode">Nuevo código de seguridad</string>
-    <string name="armStay">Activar alarma en casa</string>
+
     <string name="armAway">Activar alarma fuera de casa</string>
     <string name="disarm">Desactivar alarma</string>
 
@@ -117,9 +117,9 @@
     <string name="fridge_temperature">Temperatura heladera</string>
     <string name="freezer_temperature">Temperatura freezer</string>
 
-    <string name="old_code">Código anterior</string>
-    <string name="new_code">Código nuevo</string>
-    <string name="code">Código</string>
+    <string name="old_code">Código anterior *</string>
+    <string name="new_code">Nuevo código *</string>
+    <string name="code">Código *</string>
     <string name="update">Actualizar</string>
     <string name="go_back">Volver</string>
 

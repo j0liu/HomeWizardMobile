@@ -99,7 +99,7 @@ fun AlarmMultiplier(devicesViewModel: DevicesViewModel, alarm: Alarm, multiplier
             var selected by remember { mutableStateOf(Alarm.statusValues.indexOf(alarm.status)) }
             val options = listOf(R.drawable.home_account, R.drawable.home_alert, R.drawable.alarm_light_off)
 
-            PasswordInput(label = stringResource(R.string.code), text = code, onValueChange = { code = it }, modifier = passwordInputModifier, multiplier)
+            PasswordInput(label = stringResource(R.string.code), placeholder = "1234", text = code, onValueChange = { code = it }, modifier = passwordInputModifier, multiplier)
             CustomToggle(options, selected, modifier = Modifier.fillMaxWidth().padding(16.dp*multiplier).height(64.dp*multiplier), multiplier){
                 focusManager.clearFocus()
                 alarm.setStatus(devicesViewModel, Alarm.statusValues[it], code.text) {
