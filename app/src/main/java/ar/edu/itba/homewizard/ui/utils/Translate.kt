@@ -8,6 +8,11 @@ fun Translate(context: Context, value: String): String {
     if (value.toIntOrNull() != null){
         return value
     }
-    val textId = context.resources.getIdentifier(value, "string",context.packageName)
-    return context.resources.getString(textId)
+    return try{
+        val textId = context.resources.getIdentifier(value, "string",context.packageName)
+        context.resources.getString(textId)
+    }
+    catch (e: Exception){
+        value
+    }
 }

@@ -18,6 +18,7 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ar.edu.itba.homewizard.data.models.Action
+import ar.edu.itba.homewizard.ui.utils.Translate
 
 
 @Composable
@@ -61,14 +62,11 @@ fun ActionCard(
                 Text(text = action.device.name, color = MaterialTheme.colors.onSurface, fontSize = 16.sp*multiplier)
                 Row {
 
-                    val aux = mContext.resources.getIdentifier(action.actionName, "string",mContext.packageName)
-                    val keyStr = mContext.resources.getString(aux)
-
-                    Text(text = keyStr, color = MaterialTheme.colors.onSurface, fontSize = 14.sp*multiplier)
+                    Text(text = Translate(mContext, action.actionName) + if(action.params.isNotEmpty()) ":" else "", color = MaterialTheme.colors.onSurface, fontSize = 14.sp*multiplier)
                     action.params.forEach {x ->
                         Text(
-                            modifier = Modifier.padding(start = 10.dp),
-                            text = x.toString(),
+                            modifier = Modifier.padding(start = 5.dp),
+                            text = Translate(mContext, x.toString()).lowercase(),
                             fontSize = 14.sp*multiplier,
                             color = MaterialTheme.colors.onSurface
                         )
