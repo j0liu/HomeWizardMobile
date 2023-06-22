@@ -156,5 +156,7 @@
     <string name="fatal_network_error">Error fatal de conexión con la API</string>
     <string name="genres">Géneros</string>
 
+    <string name="notifications_enabled">Las notificaciones han sido habilitadas</string>
+    <string name="notifications_disabled">Las notificaciones han sido deshabilitadas</string>
 
 </resources>

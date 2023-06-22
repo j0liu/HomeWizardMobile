@@ -153,4 +153,7 @@
     <string name="fatal_network_error">Fatal network error</string>
     <string name="genres">Genres</string>
 
+    <string name="notifications_enabled">Notifications enabled</string>
+    <string name="notifications_disabled">Notifications disabled</string>
+
 </resources>

@@ -3,6 +3,7 @@ package ar.edu.itba.homewizard.viewmodels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ar.edu.itba.homewizard.R
 import ar.edu.itba.homewizard.bridges.SnackbarBridge
 import ar.edu.itba.homewizard.bridges.SnackbarType
 import ar.edu.itba.homewizard.data.models.Action
@@ -99,6 +100,8 @@ class DevicesViewModel @Inject constructor(
             .edit()
             .putBoolean(uiState.value.currentDevice!!.id, !uiState.value.currentNotificationsEnabled)
             .apply()
+        putSnackbar(
+            if (uiState.value.currentNotificationsEnabled) R.string.notifications_disabled else R.string.notifications_enabled)
         _uiState.update {
             it.copy(
                 currentNotificationsEnabled = !uiState.value.currentNotificationsEnabled
