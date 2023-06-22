@@ -172,7 +172,7 @@ fun RoutineInfo(
                                 if (LocalConfiguration.current.screenHeightDp.dp > ScreenSize.tabletHeight) 2 else 1
                         ),
                         modifier = Modifier
-                            .padding(end = 10.dp)
+                                .padding(horizontal = 20.dp)
                     ) {
                         if(routine != null && routine.actions.toMutableList().size != 0){
                             items(
